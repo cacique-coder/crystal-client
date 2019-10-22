@@ -2,19 +2,18 @@ require "uri"
 require "http/client"
 require "oauth2"
 require "json"
-require "./error"
-require "./api/*"
+require "./api/error"
+require "./api_wrapper/*"
 
 # Low-level wrapper for the ACAEngine API.
 #
 # Each method maps one-to-one with an API endpoint and returns the response that the API returns
-# with or raises an `ACAEngine::Client::Error`. It's possible to use this class directly if you
+# with or raises an `ACAEngine::API::Error`. It's possible to use this class directly if you
 # require the extra flexibility, however in most cases the abstractions provided by the
 # higher-level `ACAEngine::Client` may be the better choice.
-class ACAEngine::Client::Api
-  # :no_doc:
-  # Underlying HTTP connection - exposed for access from test framework only.
-  getter connection : HTTP::Client
+class ACAEngine::APIWrapper
+  # Underlying HTTP connection
+  private getter connection : HTTP::Client
 
   def initialize(base_url)
     uri = URI.parse base_url
@@ -35,7 +34,7 @@ class ACAEngine::Client::Api
     # unsuccessful.
     def {{method.id}}(path, headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil)
       response = connection.{{method.id}} path, headers, body
-      raise Error.from_response(response) unless response.success?
+      raise API::Error.from_response(response) unless response.success?
       response
     end
 

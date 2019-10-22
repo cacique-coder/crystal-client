@@ -1,6 +1,6 @@
 require "http/client/response"
 
-class ACAEngine::Client::Error < Exception
+class ACAEngine::API::Error < Exception
   def self.from_response(response : HTTP::Client::Response)
     if response.success?
       # Shouldn't ever be passed through here...
