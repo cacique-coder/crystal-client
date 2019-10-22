@@ -32,7 +32,7 @@ class ACAEngine::APIWrapper
     #
     # The response status will be automatically checked and a ACAEngine::Client::Error raised if
     # unsuccessful.
-    def {{method.id}}(path, headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil)
+    protected def {{method.id}}(path, headers : HTTP::Headers? = nil, body : HTTP::Client::BodyType? = nil)
       response = connection.{{method.id}} path, headers, body
       raise API::Error.from_response(response) unless response.success?
       response
@@ -40,14 +40,14 @@ class ACAEngine::APIWrapper
 
     # Executes a {{method.id.upcase}} request on the client connection with a JSON body formed from
     # the passed serializable object.
-    def {{method.id}}(path, body)
+    protected def {{method.id}}(path, body)
       headers = HTTP::Headers.new
       headers["Content-Type"] = "application/json"
       {{method.id}} path, headers, body.to_json
     end
 
     # :ditto:
-    def {{method.id}}(path, headers : HTTP::Headers, body : NamedTuple)
+    protected def {{method.id}}(path, headers : HTTP::Headers, body : NamedTuple)
       headers["Content-Type"] = "application/json"
       {{method.id}} path, headers, body.camelcase_keys.to_json
     end
