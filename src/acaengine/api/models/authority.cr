@@ -7,18 +7,35 @@ struct ACAEngine::API::Models::Authority
   @[JSON::Field]
   getter id : String
 
-  #  JSON.mapping({
-  #    # Foo
-  #    id: {setter: false, type: String},
-  #
-  #    # Bar
-  #    name:        {setter: false, type: String},
-  #    domain:      {setter: false, key: "dom", type: String},
-  #    description: {setter: false, type: String?},
-  #    login_url:   {setter: false, type: String},
-  #    logout_url:  {setter: false, type: String},
-  #    config:      {setter: false, type: ::JSON::Any},
-  #    session:     {setter: false, type: Bool},
-  #    production:  {setter: false, type: Bool},
-  #  })
+  # Human readable name
+  @[JSON::Field]
+  getter name : String
+
+  # FQDN or IP address this authority serves.
+  @[JSON::Field(key: "dom")]
+  getter domain : String
+
+  # Authority description (markdown).
+  @[JSON::Field]
+  getter description : String?
+
+  # Path that clients should use for initiating authentication.
+  @[JSON::Field]
+  getter login_url : String
+
+  # Path that clients should use for revoking authentication.
+  @[JSON::Field]
+  getter logout_url : String
+
+  # Additional configuration / context for clients.
+  @[JSON::Field]
+  getter config : ::JSON::Any
+
+  # Flag for if this client is currently authed.
+  @[JSON::Field]
+  getter session : Bool
+
+  # Flag for production status.
+  @[JSON::Field]
+  getter production : Bool
 end
