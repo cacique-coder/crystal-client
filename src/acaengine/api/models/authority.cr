@@ -1,5 +1,9 @@
 require "json"
 
+# Metadata about the ACAEngine instance connected to.
+#
+# This provides information that may be of relevance for authentication or
+# providing client-side configuration information.
 struct ACAEngine::API::Models::Authority
   include JSON::Serializable
 

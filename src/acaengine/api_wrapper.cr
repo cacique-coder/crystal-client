@@ -12,6 +12,8 @@ require "./api_wrapper/*"
 # require the extra flexibility, however in most cases the abstractions provided by the
 # higher-level `ACAEngine::Client` may be the better choice.
 class ACAEngine::APIWrapper
+  include API::Models
+
   # Underlying HTTP connection
   private getter connection : HTTP::Client
 
