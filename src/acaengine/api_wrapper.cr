@@ -47,9 +47,9 @@ class ACAEngine::APIWrapper
     end
 
     # :ditto:
-    protected def {{method.id}}(path, headers : HTTP::Headers, body : NamedTuple)
+    protected def {{method.id}}(path, headers : HTTP::Headers, body)
       headers["Content-Type"] = "application/json"
-      {{method.id}} path, headers, body.camelcase_keys.to_json
+      {{method.id}} path, headers, body.to_json
     end
   {% end %}
 end
