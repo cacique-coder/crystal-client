@@ -14,8 +14,8 @@ class ACAEngine::APIWrapper
   # `|`      | Matches either terms
   # `-`      | Negates a single token
   # `"`      | Wraps tokens to form a phrase
-  # `(`  `)` | Provide precedence
-  # `~N`     | Specifices edit distance (fuziness) after a word
+  # `(`  `)` | Provides precedence
+  # `~N`     | Specifies edit distance (fuzziness) after a word
   # `~N`     | Specifies slop amount (deviation) after a phrase
   #
   # Up to *limit* systems will be returned, with a paging based on *offset*.
