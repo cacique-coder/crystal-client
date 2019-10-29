@@ -12,6 +12,10 @@ struct ACAEngine::API::Models::System
   @[JSON::Field]
   getter id : String
 
+  # The engine node that this system operates from.
+  @[JSON::Field]
+  getter edge_id : String
+
   # A human readable identifier.
   @[JSON::Field]
   getter name : String
