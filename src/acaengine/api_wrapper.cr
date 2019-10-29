@@ -7,11 +7,12 @@ require "./api_wrapper/*"
 
 # Low-level wrapper for the ACAEngine API.
 #
-# Each method maps one-to-one with an API endpoint and returns the response that
-# the API returns with or raises an `ACAEngine::API::Error`. It's possible to
-# use this class directly if you require the extra flexibility, however in most
-# cases the abstractions provided by the higher-level `ACAEngine::Client` may be
-# the better choice.
+# Each method maps one-to-one with an API endpoint. All invocations will either
+# provide a type-safe response object, or raise an `ACAEngine::API::Error`.
+#
+# It's possible to use this class directly if you require the extra flexibility,
+# however in most cases the abstractions provided by the higher-level
+# `ACAEngine::Client` may be the better choice.
 class ACAEngine::APIWrapper
   include API::Models
 
