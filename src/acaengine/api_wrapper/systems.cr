@@ -15,9 +15,8 @@ class ACAEngine::APIWrapper
   # `~N`     | Specifies slop amount (deviation) after a phrase
   #
   # Up to *limit* systems will be returned, with a paging based on *offset*.
-  def systems(q : String? = nil, limit : Int? = nil, offset : Int? = nil)
-    response = get "/api/control/systems?#{params_from_args}"
-    QueryResult(System).from_json response.body
+  def systems(q : String? = nil, limit : Int = 20, offset : Int = 0)
+    get "/api/control/systems", params: from_args, as: QueryResult(System)
   end
 
   # Creates a new system.
@@ -36,7 +35,6 @@ class ACAEngine::APIWrapper
                     modules : Array(String) = [] of String,
                     settings : String? = nil,
                     support_url : String? = nil)
-    response = post "/api/control/systems", body: json_from_args
-    System.from_json response.body
+    post "/api/control/systems", body: from_args, as: System
   end
 end

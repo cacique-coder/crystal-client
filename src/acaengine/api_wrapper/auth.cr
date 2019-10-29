@@ -3,8 +3,7 @@ require "../api/models/authority"
 
 class ACAEngine::APIWrapper
   # Gets the authority metadata for the attached instance.
-  def authority : Authority
-    response = get "/api/auth/authority"
-    Authority.from_json response.body
+  def authority
+    get "/api/auth/authority", as: Authority
   end
 end
