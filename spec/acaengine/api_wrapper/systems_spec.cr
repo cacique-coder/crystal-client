@@ -130,4 +130,21 @@ describe ACAEngine::APIWrapper do
       result.results.first.name.should eq("Room 2")
     end
   end
+
+  describe "#create_system" do
+    it "posts to the systems endpoint" do
+      WebMock
+        .stub(:post, "aca.example.com/api/control/systems")
+        .with(
+          headers: {"Content-Type" => "application/json"},
+          body: {
+            name: "Foo",
+            zones: ["a", "b", "c"]
+          }.to_json
+        )
+        .to_return(body: systems.first)
+      result = api.create_system name: "Foo", zones: ["a", "b", "c"]
+      result.should be_a(ACAEngine::API::Models::System)
+    end
+  end
 end
