@@ -37,4 +37,40 @@ class ACAEngine::APIWrapper
                     support_url : String? = nil)
     post "/api/control/systems", body: from_args, as: System
   end
+
+  # Retrieves a system based on it's ID.
+  def system(id : String)
+    get "/api/control/systems/#{id}", as: System
+  end
+
+  # Requests a change to an existing system.
+  #
+  # In addition to specifying the ID of the system to update, you must reference
+  # the the current system metadata *version* for the update to be allowed. This
+  # must match the current version attribute of the system and will be
+  # incrememented following a successful update.
+  def update_system(id : String,
+                    version : Int,
+                    name : String? = nil,
+                    zones : Array(String)? = nil,
+                    edge_id : String? = nil,
+                    description : String? = nil,
+                    email : String? = nil,
+                    capacity : Int? = nil,
+                    bookable : Bool? = nil,
+                    installed_ui_devices : Int? = nil,
+                    modules : Array(String)? = nil,
+                    settings : String? = nil,
+                    support_url : String? = nil)
+    put "/api/control/systems/#{id}", body: from_args, as: System
+  end
+
+  # Deletes a system.
+  #
+  # This will also stop, and remove any modules that do not belong to other
+  # systems.
+  def remove_system(id : String)
+    delete "/api/control/systems/#{id}"
+    nil
+  end
 end

@@ -147,4 +147,37 @@ describe ACAEngine::APIWrapper do
       result.should be_a(ACAEngine::API::Models::System)
     end
   end
+
+  describe "#system" do
+    it "inspects a systems metadata" do
+      WebMock
+        .stub(:get, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7")
+        .to_return(body: systems.first)
+      result = api.system "sys-rJQQlR4Cn7"
+      result.should be_a(ACAEngine::API::Models::System)
+    end
+  end
+
+  describe "#update_system" do
+    it "send a put request to the systems endpoint" do
+      WebMock
+        .stub(:put, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7")
+        .with(
+          headers: {"Content-Type" => "application/json"},
+          body: { version: 2, name: "Foo" }.to_json
+        )
+        .to_return(body: systems.first)
+      result = api.update_system "sys-rJQQlR4Cn7", version: 2, name: "Foo"
+      result.should be_a(ACAEngine::API::Models::System)
+    end
+  end
+
+  describe "#remove_system" do
+    it "execs a delete request" do
+      WebMock
+        .stub(:delete, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7")
+      result = api.remove_system "sys-rJQQlR4Cn7"
+      result.should be_nil
+    end
+  end
 end
