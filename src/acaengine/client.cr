@@ -3,8 +3,9 @@ require "./api_wrapper"
 
 # Client for interfacing with ACAEngine.
 #
-# Provides API wrappers, models and abstractions over these for controlling, automating or
-# interacting with ACAEngine instances and the environments they interface with.
+# Provides API wrappers, models and abstractions over these for controlling,
+# automating or interacting with ACAEngine instances and the environments they
+# interface with.
 class ACAEngine::Client
   VERSION = `shards version`
 

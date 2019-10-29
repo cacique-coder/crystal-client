@@ -7,10 +7,11 @@ require "./api_wrapper/*"
 
 # Low-level wrapper for the ACAEngine API.
 #
-# Each method maps one-to-one with an API endpoint and returns the response that the API returns
-# with or raises an `ACAEngine::API::Error`. It's possible to use this class directly if you
-# require the extra flexibility, however in most cases the abstractions provided by the
-# higher-level `ACAEngine::Client` may be the better choice.
+# Each method maps one-to-one with an API endpoint and returns the response that
+# the API returns with or raises an `ACAEngine::API::Error`. It's possible to
+# use this class directly if you require the extra flexibility, however in most
+# cases the abstractions provided by the higher-level `ACAEngine::Client` may be
+# the better choice.
 class ACAEngine::APIWrapper
   include API::Models
 
@@ -24,7 +25,8 @@ class ACAEngine::APIWrapper
 
   # Sets the authentication used by the API client.
   #
-  # All client instances must be authenticated prior to interaction with protected endpoints.
+  # All client instances must be authenticated prior to interaction with
+  # protected endpoints.
   def auth=(token : OAuth2::AccessToken | OAuth2::Session)
     token_provider.authenticate connection
   end
@@ -91,6 +93,7 @@ class ACAEngine::APIWrapper
     {% except = [except] unless except.is_a? ArrayLiteral %}
     {% except = except.map &.id %}
     {% args = @def.args.reject { |arg| except.includes? arg.name } %}
+
     JSON.build do |json|
       json.object do
         {% for arg in args %}
