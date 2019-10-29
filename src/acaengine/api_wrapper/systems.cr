@@ -1,7 +1,3 @@
-require "json"
-require "../api/models/query_result"
-require "../api/models/system"
-
 class ACAEngine::APIWrapper
   # Retrieves systems.
   #
