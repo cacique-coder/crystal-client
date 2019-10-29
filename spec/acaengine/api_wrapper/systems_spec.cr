@@ -93,7 +93,9 @@ describe ACAEngine::APIWrapper do
         )
       result = api.systems
       result.total.should eq(3)
-      result.results.first.name.should eq("Room 1")
+      system = result.results.first
+      system.should be_a(ACAEngine::API::Models::System)
+      system.name.should eq("Room 1")
     end
 
     it "provides system search" do
