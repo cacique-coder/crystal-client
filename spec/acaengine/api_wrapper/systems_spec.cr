@@ -180,4 +180,36 @@ describe ACAEngine::APIWrapper do
       result.should be_nil
     end
   end
+
+  describe "#start_system" do
+    it "requests a system start" do
+      WebMock
+        .stub(:post, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7/start")
+      result = api.start_system "sys-rJQQlR4Cn7"
+      result.should be_nil
+    end
+  end
+
+  describe "#stop_system" do
+    it "requests a system stop" do
+      WebMock
+        .stub(:post, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7/stop")
+      result = api.stop_system "sys-rJQQlR4Cn7"
+      result.should be_nil
+    end
+  end
+
+  describe "#exec" do
+    it "requests a method execution within a system" do
+      WebMock
+        .stub(:post, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7/exec")
+        .with(
+          headers: {"Content-Type" => "application/json"},
+          body: %({"module":"Foo","index":1,"method":"test","args":[]})
+        )
+        .to_return(body: "[42]")
+      result = api.exec "sys-rJQQlR4Cn7", mod: "Foo", method: "test"
+      result.should eq(42)
+    end
+  end
 end

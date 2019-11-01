@@ -70,25 +70,31 @@ class ACAEngine::APIWrapper
         headers = {{headers}}
 
         # Build a body (if required)
-        {% if body == nil %}
-          body = nil
-        {% elsif body.id == :from_args.id %}
+        {% if body.is_a? NilLiteral || body.is_a? StringLiteral %}
+          body = {{body}}
+        {% else %}
           headers ||= HTTP::Headers.new
           headers["Content-Type"] = "application/json"
           body = JSON.build do |json|
             json.object do
-              {% for arg in @def.args.reject { |arg| arg.name == :id.id } %}
-                {% if arg.default_value.is_a? Nop %}
-                  json.field {{arg.name.stringify}}, {{arg.name}}
-                {% else %}
-                  json.field {{arg.name.stringify}}, {{arg.name}} \
-                    unless {{arg.name}} == {{arg.default_value}}
+              {% if body.id == :from_args.id %}
+                {% for arg in @def.args.reject { |arg| arg.name == :id.id } %}
+                  {% if arg.default_value.is_a? Nop %}
+                    json.field {{arg.name.stringify}}, {{arg.name}}
+                  {% else %}
+                    json.field {{arg.name.stringify}}, {{arg.name}} \
+                      unless {{arg.name}} == {{arg.default_value}}
+                  {% end %}
                 {% end %}
+              {% elsif body.is_a? NamedTupleLiteral || body.is_a? HashLiteral %}
+                {% for key, val in body %}
+                  json.field {{key.stringify}}, {{val}}
+                {% end %}
+              {% else %}
+                {{raise "unsupported body type"}}
               {% end %}
             end
           end
-        {% else %}
-          body = {{body}}
         {% end %}
       {% end %}
 

@@ -73,4 +73,32 @@ class ACAEngine::APIWrapper
     delete "/api/control/systems/#{id}"
     nil
   end
+
+  # Start all modules within a system.
+  def start_system(id : String)
+    post "/api/control/systems/#{id}/start"
+    nil
+  end
+
+  # Stops all modules within a system.
+  def stop_system(id : String)
+    post "/api/control/systems/#{id}/stop"
+    nil
+  end
+
+  # Executes an behaviour exposed by a driver within the passed system *id*.
+  def exec(id : String,
+           mod : String,
+           method : String,
+           index : Int = 1,
+           *args : Array(JSON::Any::Type))
+    response = post "/api/control/systems/#{id}/exec", body: {
+      module: mod,
+      index: index,
+      method: method,
+      args: args
+    }
+    # Responses are always wrapped in an outer array
+    JSON.parse(response.body)[0]?
+  end
 end
