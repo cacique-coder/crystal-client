@@ -1,7 +1,9 @@
 require "../../spec_helper"
 
 describe ACAEngine::APIWrapper do
-  api = ACAEngine::APIWrapper.new "http://aca.example.com"
+  domain = "http://aca.example.com"
+
+  api = ACAEngine::APIWrapper.new domain
 
   systems = [] of String
   systems << <<-JSON
@@ -83,7 +85,7 @@ describe ACAEngine::APIWrapper do
   describe "#systems" do
     it "enumerates all systems" do
       WebMock
-        .stub(:get, "aca.example.com/api/control/systems")
+        .stub(:get, "#{domain}/api/control/systems")
         .to_return(body: <<-JSON
           {
             "total": 3,
@@ -100,7 +102,7 @@ describe ACAEngine::APIWrapper do
 
     it "provides system search" do
       WebMock
-        .stub(:get, "aca.example.com/api/control/systems")
+        .stub(:get, "#{domain}/api/control/systems")
         .with(query: {"q" => "\"Room 1\""})
         .to_return(body: <<-JSON
           {
@@ -116,7 +118,7 @@ describe ACAEngine::APIWrapper do
 
     it "supports paging in system queries" do
       WebMock
-        .stub(:get, "aca.example.com/api/control/systems")
+        .stub(:get, "#{domain}/api/control/systems")
         .with(query: {"limit" => "1", "offset" => "1"})
         .to_return(body: <<-JSON
           {
@@ -134,7 +136,7 @@ describe ACAEngine::APIWrapper do
   describe "#create_system" do
     it "posts to the systems endpoint" do
       WebMock
-        .stub(:post, "aca.example.com/api/control/systems")
+        .stub(:post, "#{domain}/api/control/systems")
         .with(
           headers: {"Content-Type" => "application/json"},
           body: {
@@ -151,7 +153,7 @@ describe ACAEngine::APIWrapper do
   describe "#system" do
     it "inspects a systems metadata" do
       WebMock
-        .stub(:get, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7")
+        .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7")
         .to_return(body: systems.first)
       result = api.system "sys-rJQQlR4Cn7"
       result.should be_a(ACAEngine::API::Models::System)
@@ -161,7 +163,7 @@ describe ACAEngine::APIWrapper do
   describe "#update_system" do
     it "send a put request to the systems endpoint" do
       WebMock
-        .stub(:put, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7")
+        .stub(:put, "#{domain}/api/control/systems/sys-rJQQlR4Cn7")
         .with(
           headers: {"Content-Type" => "application/json"},
           body: { version: 2, name: "Foo" }.to_json
@@ -175,7 +177,7 @@ describe ACAEngine::APIWrapper do
   describe "#remove_system" do
     it "execs a delete request" do
       WebMock
-        .stub(:delete, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7")
+        .stub(:delete, "#{domain}/api/control/systems/sys-rJQQlR4Cn7")
       result = api.remove_system "sys-rJQQlR4Cn7"
       result.should be_nil
     end
@@ -184,7 +186,7 @@ describe ACAEngine::APIWrapper do
   describe "#start_system" do
     it "requests a system start" do
       WebMock
-        .stub(:post, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7/start")
+        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/start")
       result = api.start_system "sys-rJQQlR4Cn7"
       result.should be_nil
     end
@@ -193,7 +195,7 @@ describe ACAEngine::APIWrapper do
   describe "#stop_system" do
     it "requests a system stop" do
       WebMock
-        .stub(:post, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7/stop")
+        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/stop")
       result = api.stop_system "sys-rJQQlR4Cn7"
       result.should be_nil
     end
@@ -202,7 +204,7 @@ describe ACAEngine::APIWrapper do
   describe "#exec" do
     it "requests a method execution within a system" do
       WebMock
-        .stub(:post, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7/exec")
+        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/exec")
         .with(
           headers: {"Content-Type" => "application/json"},
           body: %({"module":"Foo","method":"test","index":2,"args":[]})
