@@ -102,13 +102,13 @@ class ACAEngine::APIWrapper
             mod : String,
             index : Int = 1,
             lookup : String? = nil)
-    post "/api/control/systems/#{id}/state", body: from_args
+    get "/api/control/systems/#{id}/state", params: from_args
   end
 
   # Query availble behaviour exposed by a module within the passed system *id*.
   def funcs(id : String,
            mod : String,
            index : Int = 1)
-    post "/api/control/systems/#{id}/funcs", body: from_args, as: Hash(String, Function)
+    get "/api/control/systems/#{id}/funcs", params: from_args, as: Hash(String, Function)
   end
 end

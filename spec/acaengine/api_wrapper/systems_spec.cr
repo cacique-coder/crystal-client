@@ -218,11 +218,8 @@ describe ACAEngine::APIWrapper do
   describe "#state" do
     it "requests full module state" do
       WebMock
-        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/state")
-        .with(
-          headers: {"Content-Type" => "application/json"},
-          body: %({"module":"Foo","index":2})
-        )
+        .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/state")
+        .with(query: {"module" => "Foo", "index" => "2"})
         .to_return(body: %({"a":1,"b":2,"c":3}))
       result = api.state "sys-rJQQlR4Cn7", mod: "Foo", index: 2
       result.should be_a(JSON::Any)
@@ -231,11 +228,8 @@ describe ACAEngine::APIWrapper do
 
     it "requests individual state keys" do
       WebMock
-        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/state")
-        .with(
-          headers: {"Content-Type" => "application/json"},
-          body: %({"module":"Foo","index":2,"lookup":"a"})
-        )
+        .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/state")
+        .with(query: {"module" => "Foo", "index" => "2", "lookup" => "a"})
         .to_return(body: "1")
       result = api.state "sys-rJQQlR4Cn7", mod: "Foo", index: 2, lookup: "a"
       result.should be_a(JSON::Any)
@@ -246,11 +240,8 @@ describe ACAEngine::APIWrapper do
   describe "#funcs" do
     it "requests available behaviours" do
       WebMock
-        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/funcs")
-        .with(
-          headers: {"Content-Type" => "application/json"},
-          body: %({"module":"Foo","index":2})
-        )
+        .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/funcs")
+        .with(query: {"module" => "Foo","index" => "2"})
         .to_return(body: <<-JSON
           {
             "function_name": {

@@ -53,11 +53,19 @@ class ACAEngine::APIWrapper
         {% elsif params.id == :from_args.id %}
           params = HTTP::Params.build do |param|
             {% for arg in @def.args.reject { |arg| arg.name == :id.id } %}
+              {%
+                # Module is a reserved word in crystal, remap mod -> module
+                name = if arg.name.id == :mod.id
+                         "module"
+                       else
+                         arg.name.stringify
+                       end
+              %}
               # Always include required args, the compiler doesn't like Nop's
               {% if arg.default_value.is_a? Nop %}
-                param.add {{arg.name.stringify}}, {{arg.name}}.to_s
+                param.add {{name}}, {{arg.name}}.to_s
               {% else %}
-                param.add {{arg.name.stringify}}, {{arg.name}}.to_s \
+                param.add {{name}}, {{arg.name}}.to_s \
                   unless {{arg.name}} == {{arg.default_value}}
               {% end %}
             {% end %}
