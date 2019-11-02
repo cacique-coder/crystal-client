@@ -92,13 +92,8 @@ class ACAEngine::APIWrapper
            method : String,
            index : Int = 1,
            *args : Array(JSON::Any::Type))
-    response = post "/api/control/systems/#{id}/exec", body: {
-      module: mod,
-      index: index,
-      method: method,
-      args: args
-    }
+    response = post "/api/control/systems/#{id}/exec", body: from_args
     # Responses are always wrapped in an outer array
-    JSON.parse(response.body)[0]?
+    response[0]?
   end
 end

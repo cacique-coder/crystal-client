@@ -205,10 +205,10 @@ describe ACAEngine::APIWrapper do
         .stub(:post, "aca.example.com/api/control/systems/sys-rJQQlR4Cn7/exec")
         .with(
           headers: {"Content-Type" => "application/json"},
-          body: %({"module":"Foo","index":1,"method":"test","args":[]})
+          body: %({"module":"Foo","method":"test","index":2,"args":[]})
         )
         .to_return(body: "[42]")
-      result = api.exec "sys-rJQQlR4Cn7", mod: "Foo", method: "test"
+      result = api.exec "sys-rJQQlR4Cn7", mod: "Foo", index: 2, method: "test"
       result.should eq(42)
     end
   end

@@ -44,7 +44,7 @@ class ACAEngine::APIWrapper
     # `from_args` to to either *params* or *body* for the magic to happen.
     #
     # Us *as* to specify a JSON parse-able model that the response should be
-    # piped into. If unspecified the raw `HTTP::Reponse` will be returned.
+    # piped into. If unspecified a `JSON::Any` will be returned.
     macro {{method.id}}(path, params = nil, headers = nil, body = nil, as model = nil)
       {% verbatim do %}
         # Append query params to the path
@@ -78,11 +78,21 @@ class ACAEngine::APIWrapper
           body = JSON.build do |json|
             json.object do
               {% if body.id == :from_args.id %}
+                # Map all non-default value args into the body, ignoring `id`
+                # as this is universally used within the query path.
                 {% for arg in @def.args.reject { |arg| arg.name == :id.id } %}
+                  {%
+                    # Module is a reserved word in crystal, remap mod -> module
+                    name = if arg.name.id == :mod.id
+                             "module"
+                           else
+                             arg.name.stringify
+                           end
+                  %}
                   {% if arg.default_value.is_a? Nop %}
-                    json.field {{arg.name.stringify}}, {{arg.name}}
+                    json.field {{name}}, {{arg.name}}
                   {% else %}
-                    json.field {{arg.name.stringify}}, {{arg.name}} \
+                    json.field {{name}}, {{arg.name}} \
                       unless {{arg.name}} == {{arg.default_value}}
                   {% end %}
                 {% end %}
@@ -104,7 +114,11 @@ class ACAEngine::APIWrapper
       \{% if model %}
         \{{model}}.from_json response.body
       \{% else %}
-        response
+         if response.body.empty?
+           JSON::Any.new nil
+         else
+           JSON.parse response.body
+         end
       \{% end %}
     end
   {% end %}
