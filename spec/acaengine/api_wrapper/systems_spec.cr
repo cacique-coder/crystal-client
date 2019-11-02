@@ -259,4 +259,25 @@ describe ACAEngine::APIWrapper do
       result.should be_a(Hash(String, ACAEngine::API::Models::Function))
     end
   end
+
+  describe "#count" do
+    it "requests module counts" do
+      WebMock
+        .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/count")
+        .with(query: {"module" => "Foo"})
+        .to_return(body: %({"count": 3}))
+      result = api.count "sys-rJQQlR4Cn7", mod: "Foo"
+      result.should eq(3)
+    end
+  end
+
+  describe "#types" do
+    it "requests module types" do
+      WebMock
+        .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/types")
+        .to_return(body: %({"Foo":3,"Bar":1,"Baz":5}))
+      result = api.types "sys-rJQQlR4Cn7"
+      result["Foo"].should eq(3)
+    end
+  end
 end

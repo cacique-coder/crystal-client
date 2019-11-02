@@ -107,8 +107,20 @@ class ACAEngine::APIWrapper
 
   # Query availble behaviour exposed by a module within the passed system *id*.
   def funcs(id : String,
-           mod : String,
-           index : Int = 1)
+            mod : String,
+            index : Int = 1)
     get "/api/control/systems/#{id}/funcs", params: from_args, as: Hash(String, Function)
+  end
+
+  # Gets the number of *mod* modules currently available in system *id*.
+  def count(id : String,
+            mod : String)
+    response = get "/api/control/systems/#{id}/count", params: from_args
+    response["count"].as_i
+  end
+
+  # Gets the module types available in system *id*.
+  def types(id : String)
+    get "/api/control/systems/#{id}/types", as: Hash(String, Int32)
   end
 end
