@@ -214,4 +214,58 @@ describe ACAEngine::APIWrapper do
       result.should eq(42)
     end
   end
+
+  describe "#state" do
+    it "requests full module state" do
+      WebMock
+        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/state")
+        .with(
+          headers: {"Content-Type" => "application/json"},
+          body: %({"module":"Foo","index":2})
+        )
+        .to_return(body: %({"a":1,"b":2,"c":3}))
+      result = api.state "sys-rJQQlR4Cn7", mod: "Foo", index: 2
+      result.should be_a(JSON::Any)
+      result["a"].as_i.should eq(1)
+    end
+
+    it "requests individual state keys" do
+      WebMock
+        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/state")
+        .with(
+          headers: {"Content-Type" => "application/json"},
+          body: %({"module":"Foo","index":2,"lookup":"a"})
+        )
+        .to_return(body: "1")
+      result = api.state "sys-rJQQlR4Cn7", mod: "Foo", index: 2, lookup: "a"
+      result.should be_a(JSON::Any)
+      result.as_i.should eq(1)
+    end
+  end
+
+  describe "#funcs" do
+    it "requests available behaviours" do
+      WebMock
+        .stub(:post, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/funcs")
+        .with(
+          headers: {"Content-Type" => "application/json"},
+          body: %({"module":"Foo","index":2})
+        )
+        .to_return(body: <<-JSON
+          {
+            "function_name": {
+              "arity": 3,
+              "params": [
+                ["req", "foo"],
+                ["opt", "bar"],
+                ["rest", "baz"]
+              ]
+            }
+          }
+        JSON
+        )
+      result = api.funcs "sys-rJQQlR4Cn7", mod: "Foo", index: 2
+      result.should be_a(Hash(String, ACAEngine::API::Models::Function))
+    end
+  end
 end

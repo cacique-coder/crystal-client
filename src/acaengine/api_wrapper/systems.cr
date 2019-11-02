@@ -96,4 +96,19 @@ class ACAEngine::APIWrapper
     # Responses are always wrapped in an outer array
     response[0]?
   end
+
+  # Query the state exposed by a module within the passed system *id*.
+  def state(id : String,
+            mod : String,
+            index : Int = 1,
+            lookup : String? = nil)
+    post "/api/control/systems/#{id}/state", body: from_args
+  end
+
+  # Query availble behaviour exposed by a module within the passed system *id*.
+  def funcs(id : String,
+           mod : String,
+           index : Int = 1)
+    post "/api/control/systems/#{id}/funcs", body: from_args, as: Hash(String, Function)
+  end
 end
