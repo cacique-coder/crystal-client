@@ -1,5 +1,5 @@
 class ACAEngine::APIWrapper
-  # Retrieves systems.
+  # Enumerate or search for systems.
   #
   # Results maybe filtered by specifying a query - *q* - to search across system
   # attributes. A small query language is supported within this:
@@ -86,7 +86,7 @@ class ACAEngine::APIWrapper
     nil
   end
 
-  # Executes an behaviour exposed by a driver within the passed system *id*.
+  # Executes an behaviour exposed by a module within the passed system *id*.
   def exec(id : String,
            mod : String,
            method : String,
