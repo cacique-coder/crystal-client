@@ -33,6 +33,19 @@ class ACAEngine::APIWrapper
     token_provider.authenticate connection
   end
 
+  # Yields a stringified key, reference and default value for arguments of
+  # interest from the enclosing method.
+  #
+  # Handles a few common mappings / exlusions.
+  private macro each_arg(&block)
+    # Ignore `id` as this it used exlusively in path params.
+    {% for arg in @def.args.reject(&.name.symbolize.== :id) %}
+      # `module` is a reserved word, remap mod -> module
+      {% key = arg.name.symbolize == :mod ? "module" : arg.name.stringify %}
+      {{ yield key, arg.name, arg.default_value }}
+    {% end %}
+  end
+
   {% for method in %w(get post put head delete patch options) %}
     # Executes a {{method.id.upcase}} request on the client connection.
     #
@@ -42,33 +55,19 @@ class ACAEngine::APIWrapper
     # Macro expansion allows this to obtain context from a surround method and
     # use method arguments to build an appropriate request structure. Pass
     # `from_args` to to either *params* or *body* for the magic to happen.
+    # Alternatively, you may specify a NamedTuple for the contents of either of
+    # these.
     #
     # Us *as* to specify a JSON parse-able model that the response should be
     # piped into. If unspecified a `JSON::Any` will be returned.
     macro {{method.id}}(path, params = nil, headers = nil, body = nil, as model = nil)
       {% verbatim do %}
         # Append query params to the path
-        {% if params == nil %}
-          path = {{path}}
-        {% elsif params.id == :from_args.id %}
+        {% if params.id.symbolize == :from_args %}
           params = HTTP::Params.build do |param|
-            {% for arg in @def.args.reject { |arg| arg.name == :id.id } %}
-              {%
-                # Module is a reserved word in crystal, remap mod -> module
-                name = if arg.name.id == :mod.id
-                         "module"
-                       else
-                         arg.name.stringify
-                       end
-              %}
-              # Always include required args, the compiler doesn't like Nop's
-              {% if arg.default_value.is_a? Nop %}
-                param.add {{name}}, {{arg.name}}.to_s
-              {% else %}
-                param.add {{name}}, {{arg.name}}.to_s \
-                  unless {{arg.name}} == {{arg.default_value}}
-              {% end %}
-            {% end %}
+            each_arg do |key, val, default|
+              param.add \{{key}}, \{{val}}.to_s unless \{{val}} == \{{default}}
+            end
           end
           path = "#{{{path}}}?#{params}"
         {% else %}
@@ -78,56 +77,43 @@ class ACAEngine::APIWrapper
         headers = {{headers}}
 
         # Build a body (if required)
-        {% if body.is_a? NilLiteral || body.is_a? StringLiteral %}
-          body = {{body}}
-        {% else %}
+        {% if body.id.symbolize == :from_args || body.is_a? NamedTupleLiteral %}
           headers ||= HTTP::Headers.new
           headers["Content-Type"] = "application/json"
           body = JSON.build do |json|
             json.object do
-              {% if body.id == :from_args.id %}
-                # Map all non-default value args into the body, ignoring `id`
-                # as this is universally used within the query path.
-                {% for arg in @def.args.reject { |arg| arg.name == :id.id } %}
-                  {%
-                    # Module is a reserved word in crystal, remap mod -> module
-                    name = if arg.name.id == :mod.id
-                             "module"
-                           else
-                             arg.name.stringify
-                           end
-                  %}
-                  {% if arg.default_value.is_a? Nop %}
-                    json.field {{name}}, {{arg.name}}
-                  {% else %}
-                    json.field {{name}}, {{arg.name}} \
-                      unless {{arg.name}} == {{arg.default_value}}
-                  {% end %}
+              {% if body.id.symbolize == :from_args %}
+                each_arg do |key, val, default|
+                  json.field \{{key}}, \{{val}} unless \{{val}} == \{{default}}
+                end
+              {% elsif body.is_a? NamedTupleLiteral %}
+                {% for key, value in body %}
+                  json.field {{key.stringify}}, {{value}}
                 {% end %}
-              {% elsif body.is_a? NamedTupleLiteral || body.is_a? HashLiteral %}
-                {% for key, val in body %}
-                  json.field {{key.stringify}}, {{val}}
-                {% end %}
-              {% else %}
-                {{raise "unsupported body type"}}
               {% end %}
             end
           end
+        {% else %}
+          body = {{body}}
         {% end %}
       {% end %}
 
       # Exec the request
       response = connection.{{method.id}} path, headers, body
       raise API::Error.from_response(response) unless response.success?
-      \{% if model %}
-        \{{model}}.from_json response.body
-      \{% else %}
-         if response.body.empty?
-           JSON::Any.new nil
-         else
-           JSON.parse response.body
-         end
-      \{% end %}
+
+      # Parse the response
+      {% verbatim do %}
+        {% if model %}
+          {{model}}.from_json response.body
+        {% else %}
+          if response.body.empty?
+            JSON::Any.new nil
+          else
+            JSON.parse response.body
+          end
+        {% end %}
+      {% end %}
     end
   {% end %}
 end
