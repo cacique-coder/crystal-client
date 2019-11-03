@@ -29,7 +29,7 @@ class ACAEngine::APIWrapper
   #
   # All client instances must be authenticated prior to interaction with
   # protected endpoints.
-  def auth=(token : OAuth2::AccessToken | OAuth2::Session)
+  def auth=(token_provider : OAuth2::AccessToken | OAuth2::Session)
     token_provider.authenticate connection
   end
 
