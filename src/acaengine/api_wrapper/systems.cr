@@ -1,5 +1,5 @@
 class ACAEngine::APIWrapper
-  # Enumerate or search for systems.
+  # List or search for systems.
   #
   # Results maybe filtered by specifying a query - *q* - to search across system
   # attributes. A small query language is supported within this:
@@ -38,7 +38,7 @@ class ACAEngine::APIWrapper
     post "/api/control/systems", body: from_args, as: System
   end
 
-  # Retrieves a system based on it's ID.
+  # Retrieves a system.
   def system(id : String)
     get "/api/control/systems/#{id}", as: System
   end
@@ -86,7 +86,7 @@ class ACAEngine::APIWrapper
     nil
   end
 
-  # Executes an behaviour exposed by a module within the passed system *id*.
+  # Executes a behaviour exposed by a module within the passed system *id*.
   def exec(id : String,
            mod : String,
            method : String,
@@ -97,7 +97,7 @@ class ACAEngine::APIWrapper
     response[0]?
   end
 
-  # Query the state exposed by a module within the passed system *id*.
+  # Queries the state exposed by a module within the passed system *id*.
   def state(id : String,
             mod : String,
             index : Int = 1,
@@ -105,21 +105,21 @@ class ACAEngine::APIWrapper
     get "/api/control/systems/#{id}/state", params: from_args
   end
 
-  # Query availble behaviour exposed by a module within the passed system *id*.
+  # Queries the behaviour exposed by a module within system *id*.
   def funcs(id : String,
             mod : String,
             index : Int = 1)
     get "/api/control/systems/#{id}/funcs", params: from_args, as: Hash(String, Function)
   end
 
-  # Gets the number of *mod* modules currently available in system *id*.
+  # Gets the number of *mod* instances available in system *id*.
   def count(id : String,
             mod : String)
     response = get "/api/control/systems/#{id}/count", params: from_args
     response["count"].as_i
   end
 
-  # Gets the module types available in system *id*.
+  # Queries the types of modules available in system *id*.
   def types(id : String)
     get "/api/control/systems/#{id}/types", as: Hash(String, Int32)
   end
