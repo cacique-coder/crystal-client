@@ -82,7 +82,7 @@ describe ACAEngine::APIWrapper do
     }
   JSON
 
-  describe "#systems" do
+  describe "#search_systems" do
     it "enumerates all systems" do
       WebMock
         .stub(:get, "#{domain}/api/control/systems")
@@ -93,7 +93,7 @@ describe ACAEngine::APIWrapper do
           }
           JSON
         )
-      result = api.systems
+      result = api.search_systems
       result.total.should eq(3)
       system = result.results.first
       system.should be_a(ACAEngine::API::Models::System)
@@ -111,7 +111,7 @@ describe ACAEngine::APIWrapper do
           }
           JSON
         )
-      result = api.systems "\"Room 1\""
+      result = api.search_systems "\"Room 1\""
       result.total.should eq(1)
       result.results.first.name.should eq("Room 1")
     end
@@ -127,7 +127,7 @@ describe ACAEngine::APIWrapper do
           }
           JSON
         )
-      result = api.systems limit: 1, offset: 1
+      result = api.search_systems limit: 1, offset: 1
       result.total.should eq(1)
       result.results.first.name.should eq("Room 2")
     end
@@ -150,12 +150,12 @@ describe ACAEngine::APIWrapper do
     end
   end
 
-  describe "#system" do
+  describe "#retrieve_system" do
     it "inspects a systems metadata" do
       WebMock
         .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7")
         .to_return(body: systems.first)
-      result = api.system "sys-rJQQlR4Cn7"
+      result = api.retrieve_system "sys-rJQQlR4Cn7"
       result.should be_a(ACAEngine::API::Models::System)
     end
   end
@@ -174,11 +174,11 @@ describe ACAEngine::APIWrapper do
     end
   end
 
-  describe "#remove_system" do
+  describe "#delete_system" do
     it "execs a delete request" do
       WebMock
         .stub(:delete, "#{domain}/api/control/systems/sys-rJQQlR4Cn7")
-      result = api.remove_system "sys-rJQQlR4Cn7"
+      result = api.delete_system "sys-rJQQlR4Cn7"
       result.should be_nil
     end
   end
