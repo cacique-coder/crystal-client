@@ -9,10 +9,10 @@ class ACAEngine::APIWrapper
                     edge_id : String? = nil,
                     description : String? = nil,
                     email : String? = nil,
-                    capacity : Int = 0,
-                    bookable : Bool = false,
-                    installed_ui_devices : Int = 0,
-                    modules : Array(String) = [] of String,
+                    capacity : Int? = nil,
+                    bookable : Bool? = nil,
+                    installed_ui_devices : Int? = nil,
+                    modules : Array(String)? = nil,
                     settings : String? = nil,
                     support_url : String? = nil)
     post "/api/control/systems", body: from_args, as: System
