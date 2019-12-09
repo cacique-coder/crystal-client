@@ -5,7 +5,6 @@ struct ACAEngine::API::Models::Function
   include JSON::Serializable
 
   # The number of parameters that the function accepts.
-  @[JSON::Field]
   getter arity : Int32
 
   # Possible parameter kinds.
@@ -24,6 +23,5 @@ struct ACAEngine::API::Models::Function
   alias Parameter = Tuple(ParameterKind, String)
 
   # Parameter information.
-  @[JSON::Field]
   getter params : Array(Parameter)
 end
