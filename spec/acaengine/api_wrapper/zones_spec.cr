@@ -59,7 +59,7 @@ describe ACAEngine::APIWrapper do
         .stub(:post, "#{domain}/api/control/zones")
         .with(
           headers: {"Content-Type" => "application/json"},
-          body: { name: "ACA", }.to_json
+          body: {name: "ACA"}.to_json
         )
         .to_return(body: zones.first)
       result = api.create_zone name: "ACA"
@@ -83,7 +83,7 @@ describe ACAEngine::APIWrapper do
         .stub(:put, "#{domain}/api/control/zones/zone-oOj2lGgsz")
         .with(
           headers: {"Content-Type" => "application/json"},
-          body: { name: "Foo" }.to_json
+          body: {name: "Foo"}.to_json
         )
         .to_return(body: zones.first)
       result = api.update_zone "zone-oOj2lGgsz", name: "Foo"

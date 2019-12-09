@@ -20,10 +20,10 @@ class ACAEngine::APIWrapper
   # *system_id*, that are instances of a *dependency_id*, or any combination of
   # these.
   def search_modules(q : String? = nil,
-              limit : Int = 20,
-              offset : Int = 0,
-              system_id : String? = nil,
-              dependency_id : String? = nil)
+                     limit : Int = 20,
+                     offset : Int = 0,
+                     system_id : String? = nil,
+                     dependency_id : String? = nil)
     get "/api/control/modules", params: from_args, as: QueryResult(Module)
   end
 end

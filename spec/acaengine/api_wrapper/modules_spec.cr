@@ -73,7 +73,7 @@ describe ACAEngine::APIWrapper do
           headers: {"Content-Type" => "application/json"},
           body: {
             dependency_id: "abc-123",
-            edge_id: "def-456"
+            edge_id:       "def-456",
           }.to_json
         )
         .to_return(body: modules.first)
@@ -98,7 +98,7 @@ describe ACAEngine::APIWrapper do
         .stub(:put, "#{domain}/api/control/modules/mod-wJHYeHm6Yn")
         .with(
           headers: {"Content-Type" => "application/json"},
-          body: { ignore_connected: true }.to_json
+          body: {ignore_connected: true}.to_json
         )
         .to_return(body: modules.first)
       result = api.update_module "mod-wJHYeHm6Yn", ignore_connected: true

@@ -140,8 +140,8 @@ describe ACAEngine::APIWrapper do
         .with(
           headers: {"Content-Type" => "application/json"},
           body: {
-            name: "Foo",
-            zones: ["a", "b", "c"]
+            name:  "Foo",
+            zones: ["a", "b", "c"],
           }.to_json
         )
         .to_return(body: systems.first)
@@ -166,7 +166,7 @@ describe ACAEngine::APIWrapper do
         .stub(:put, "#{domain}/api/control/systems/sys-rJQQlR4Cn7")
         .with(
           headers: {"Content-Type" => "application/json"},
-          body: { version: 2, name: "Foo" }.to_json
+          body: {version: 2, name: "Foo"}.to_json
         )
         .to_return(body: systems.first)
       result = api.update_system "sys-rJQQlR4Cn7", version: 2, name: "Foo"
@@ -241,7 +241,7 @@ describe ACAEngine::APIWrapper do
     it "requests available behaviours" do
       WebMock
         .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7/funcs")
-        .with(query: {"module" => "Foo","index" => "2"})
+        .with(query: {"module" => "Foo", "index" => "2"})
         .to_return(body: <<-JSON
           {
             "function_name": {
