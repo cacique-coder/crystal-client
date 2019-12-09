@@ -20,6 +20,8 @@ class ACAEngine::APIWrapper
   # Underlying HTTP connection
   private getter connection : HTTP::Client
 
+  delegate :before_request, :connect_timeout=, :read_timeout=, to: connection
+
   def initialize(base_url)
     uri = URI.parse base_url
     @connection = HTTP::Client.new uri
