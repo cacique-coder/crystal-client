@@ -13,7 +13,7 @@ class ACAEngine::APIWrapper
                     bookable : Bool? = nil,
                     installed_ui_devices : Int? = nil,
                     modules : Array(String)? = nil,
-                    settings : String? = nil,
+                    settings : Settings? = nil,
                     support_url : String? = nil)
     post "/api/control/systems", body: from_args, as: System
   end
@@ -40,7 +40,7 @@ class ACAEngine::APIWrapper
                     bookable : Bool? = nil,
                     installed_ui_devices : Int? = nil,
                     modules : Array(String)? = nil,
-                    settings : String? = nil,
+                    settings : Settings? = nil,
                     support_url : String? = nil)
     put "/api/control/systems/#{id}", body: from_args, as: System
   end

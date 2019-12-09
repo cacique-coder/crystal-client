@@ -57,7 +57,7 @@ struct ACAEngine::API::Models::Module
 
   # JSON object representing the system's configuration.
   @[JSON::Field]
-  getter settings : ::JSON::Any
+  getter settings : Hash(String, ::JSON::Any)
 
   # Last update time.
   @[JSON::Field(converter: Time::EpochConverter)]

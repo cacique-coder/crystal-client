@@ -3,7 +3,7 @@ class ACAEngine::APIWrapper
   def create_zone(name : String,
                   description : String? = nil,
                   tags : String? = nil,
-                  settings : ::JSON::Any? = nil,
+                  settings : Settings? = nil,
                   triggers : Array(String)? = nil)
     post "/api/control/zones", body: from_args, as: Zone
   end
@@ -18,7 +18,7 @@ class ACAEngine::APIWrapper
                   name : String? = nil,
                   description : String? = nil,
                   tags : String? = nil,
-                  settings : ::JSON::Any? = nil,
+                  settings : Settings? = nil,
                   triggers : Array(String)? = nil)
     put "/api/control/zones/#{id}", body: from_args, as: Zone
   end

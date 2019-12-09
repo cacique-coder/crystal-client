@@ -9,7 +9,7 @@ class ACAEngine::APIWrapper
                     makebreak : Bool? = nil,
                     uri : String? = nil,
                     custom_name : String? = nil,
-                    settings : String? = nil,
+                    settings : Settings? = nil,
                     notes : String? = nil,
                     ignore_connected : Bool? = nil,
                     ignore_startstop : Bool? = nil)
@@ -31,7 +31,7 @@ class ACAEngine::APIWrapper
                     makebreak : Bool? = nil,
                     uri : String? = nil,
                     custom_name : String? = nil,
-                    settings : String? = nil,
+                    settings : Settings? = nil,
                     notes : String? = nil,
                     ignore_connected : Bool? = nil,
                     ignore_startstop : Bool? = nil)

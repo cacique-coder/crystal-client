@@ -33,7 +33,7 @@ struct ACAEngine::API::Models::Authority
 
   # Additional configuration / context for clients.
   @[JSON::Field]
-  getter config : ::JSON::Any
+  getter config : Hash(String, ::JSON::Any)
 
   # Flag for if this client is currently authed.
   @[JSON::Field]

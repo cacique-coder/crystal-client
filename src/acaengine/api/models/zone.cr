@@ -21,7 +21,7 @@ struct ACAEngine::API::Models::Zone
 
   # JSON object representing the zone configuration.
   @[JSON::Field]
-  getter settings : ::JSON::Any
+  getter settings : Hash(String, ::JSON::Any)
 
   # List of trigger ID's to be applied to all systems that associate with this
   # zone.

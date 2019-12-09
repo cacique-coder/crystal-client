@@ -54,7 +54,7 @@ struct ACAEngine::API::Models::System
 
   # JSON object representing the system's configuration.
   @[JSON::Field]
-  getter settings : ::JSON::Any
+  getter settings : Hash(String, ::JSON::Any)
 
   # System creation time.
   @[JSON::Field(converter: Time::EpochConverter)]
