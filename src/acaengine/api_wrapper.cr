@@ -2,8 +2,7 @@ require "uri"
 require "http/client"
 require "oauth2"
 require "json"
-require "./api/error"
-require "./api/models/*"
+require "./api/**"
 require "./api_wrapper/**"
 
 # Low-level wrapper for the ACAEngine API.
