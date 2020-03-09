@@ -1,5 +1,5 @@
 require "spec"
-require "../src/acaengine/client"
+require "../src/placeos/client"
 require "webmock"
 
 Spec.before_each &->WebMock.reset

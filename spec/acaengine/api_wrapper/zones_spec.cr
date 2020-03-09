@@ -1,9 +1,9 @@
 require "../../spec_helper"
 
-describe ACAEngine::APIWrapper do
+describe PlaceOS::APIWrapper do
   domain = "http://aca.example.com"
 
-  api = ACAEngine::APIWrapper.new domain
+  api = PlaceOS::APIWrapper.new domain
 
   zones = [] of String
   zones << <<-JSON
@@ -32,7 +32,7 @@ describe ACAEngine::APIWrapper do
       result = api.search_zones
       result.total.should eq(1)
       zone = result.results.first
-      zone.should be_a(ACAEngine::API::Models::Zone)
+      zone.should be_a(PlaceOS::API::Models::Zone)
       zone.name.should eq("ACA")
     end
 
@@ -63,7 +63,7 @@ describe ACAEngine::APIWrapper do
         )
         .to_return(body: zones.first)
       result = api.create_zone name: "ACA"
-      result.should be_a(ACAEngine::API::Models::Zone)
+      result.should be_a(PlaceOS::API::Models::Zone)
     end
   end
 
@@ -73,7 +73,7 @@ describe ACAEngine::APIWrapper do
         .stub(:get, "#{domain}/api/control/zones/zone-oOj2lGgsz")
         .to_return(body: zones.first)
       result = api.retrieve_zone "zone-oOj2lGgsz"
-      result.should be_a(ACAEngine::API::Models::Zone)
+      result.should be_a(PlaceOS::API::Models::Zone)
     end
   end
 
@@ -87,7 +87,7 @@ describe ACAEngine::APIWrapper do
         )
         .to_return(body: zones.first)
       result = api.update_zone "zone-oOj2lGgsz", name: "Foo"
-      result.should be_a(ACAEngine::API::Models::Zone)
+      result.should be_a(PlaceOS::API::Models::Zone)
     end
   end
 

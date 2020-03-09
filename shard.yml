@@ -1,11 +1,11 @@
-name: acaengine-crystal-client
+name: placeos
 version: 0.1.0
 
 authors:
   - Kim Burgess <kim@acaprojects.com>
 
 description: |
-  Client library for interacting with ACAEngine from crystal-lang apps.
+  Client library for interacting with PlaceOS from crystal-lang apps.
 
 crystal: 0.30.1
 

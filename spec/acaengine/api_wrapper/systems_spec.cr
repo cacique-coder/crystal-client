@@ -1,9 +1,9 @@
 require "../../spec_helper"
 
-describe ACAEngine::APIWrapper do
+describe PlaceOS::APIWrapper do
   domain = "http://aca.example.com"
 
-  api = ACAEngine::APIWrapper.new domain
+  api = PlaceOS::APIWrapper.new domain
 
   systems = [] of String
   systems << <<-JSON
@@ -96,7 +96,7 @@ describe ACAEngine::APIWrapper do
       result = api.search_systems
       result.total.should eq(3)
       system = result.results.first
-      system.should be_a(ACAEngine::API::Models::System)
+      system.should be_a(PlaceOS::API::Models::System)
       system.name.should eq("Room 1")
     end
 
@@ -146,7 +146,7 @@ describe ACAEngine::APIWrapper do
         )
         .to_return(body: systems.first)
       result = api.create_system name: "Foo", zones: ["a", "b", "c"]
-      result.should be_a(ACAEngine::API::Models::System)
+      result.should be_a(PlaceOS::API::Models::System)
     end
   end
 
@@ -156,7 +156,7 @@ describe ACAEngine::APIWrapper do
         .stub(:get, "#{domain}/api/control/systems/sys-rJQQlR4Cn7")
         .to_return(body: systems.first)
       result = api.retrieve_system "sys-rJQQlR4Cn7"
-      result.should be_a(ACAEngine::API::Models::System)
+      result.should be_a(PlaceOS::API::Models::System)
     end
   end
 
@@ -170,7 +170,7 @@ describe ACAEngine::APIWrapper do
         )
         .to_return(body: systems.first)
       result = api.update_system "sys-rJQQlR4Cn7", version: 2, name: "Foo"
-      result.should be_a(ACAEngine::API::Models::System)
+      result.should be_a(PlaceOS::API::Models::System)
     end
   end
 
@@ -256,7 +256,7 @@ describe ACAEngine::APIWrapper do
         JSON
         )
       result = api.funcs "sys-rJQQlR4Cn7", mod: "Foo", index: 2
-      result.should be_a(Hash(String, ACAEngine::API::Models::Function))
+      result.should be_a(Hash(String, PlaceOS::API::Models::Function))
     end
   end
 

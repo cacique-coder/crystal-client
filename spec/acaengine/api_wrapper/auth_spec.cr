@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
-describe ACAEngine::APIWrapper do
-  api = ACAEngine::APIWrapper.new "http://aca.example.com"
+describe PlaceOS::APIWrapper do
+  api = PlaceOS::APIWrapper.new "http://aca.example.com"
 
   it "retrieves authority metadata" do
     WebMock.stub(:get, "aca.example.com/api/auth/authority").to_return(body: <<-JSON

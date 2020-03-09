@@ -1,9 +1,9 @@
 require "../../spec_helper"
 
-describe ACAEngine::APIWrapper do
+describe PlaceOS::APIWrapper do
   domain = "http://aca.example.com"
 
-  api = ACAEngine::APIWrapper.new domain
+  api = PlaceOS::APIWrapper.new domain
 
   modules = [] of String
   modules << <<-JSON
@@ -45,7 +45,7 @@ describe ACAEngine::APIWrapper do
       result = api.search_modules
       result.total.should eq(1)
       mod = result.results.first
-      mod.should be_a(ACAEngine::API::Models::Module)
+      mod.should be_a(PlaceOS::API::Models::Module)
       mod.ip.should eq("10.45.6.3")
     end
 
@@ -78,7 +78,7 @@ describe ACAEngine::APIWrapper do
         )
         .to_return(body: modules.first)
       result = api.create_module dependency_id: "abc-123", edge_id: "def-456"
-      result.should be_a(ACAEngine::API::Models::Module)
+      result.should be_a(PlaceOS::API::Models::Module)
     end
   end
 
@@ -88,7 +88,7 @@ describe ACAEngine::APIWrapper do
         .stub(:get, "#{domain}/api/control/modules/mod-wJHYeHm6Yn")
         .to_return(body: modules.first)
       result = api.retrieve_module "mod-wJHYeHm6Yn"
-      result.should be_a(ACAEngine::API::Models::Module)
+      result.should be_a(PlaceOS::API::Models::Module)
     end
   end
 
@@ -102,7 +102,7 @@ describe ACAEngine::APIWrapper do
         )
         .to_return(body: modules.first)
       result = api.update_module "mod-wJHYeHm6Yn", ignore_connected: true
-      result.should be_a(ACAEngine::API::Models::Module)
+      result.should be_a(PlaceOS::API::Models::Module)
     end
   end
 
