@@ -1,6 +1,6 @@
 # PlaceOS Crystal SDK
 
-TODO: Write a description here
+A library for building [crystal](crystal-lang.org/) applications that utilise PlaceOS.
 
 ## Installation
 
@@ -16,19 +16,48 @@ TODO: Write a description here
 
 ## Usage
 
-```crystal
-require "placeos"
-```
+### Authentication
 
-TODO: Write usage instructions here
+- *from environment*
+
+    ```crystal
+    require "placeos"
+
+    # Extracts user credentials from PLACEOS_USER, PLACEOS_PASS
+    client = PlaceOS::Client.from_environment_user
+
+    # OR... extracts key from PLACEOS_API_KEY
+    client = PlaceOS::Client.from_environment_key
+    ```
+
+- *with a key*
+
+    ```crystal
+    require "placeos"
+
+    key = <some key>
+    client = PlaceOS::Client.from_key(key)
+    ```
+
+- *explicit authentication*
+
+    ```crystal
+    require "placeos"
+
+    user = <some username>
+    password = <some password>
+
+    # You can optionally supply a key
+    client = PlaceOS::Client.new(user, password)
+    ```
 
 ## Development
 
-TODO: Write development instructions here
+Run `crystal spec`
 
 ## Contributing
 
-1. Fork it (<https://github.com/placeos/crystal-client/fork>)
+1. [Fork it](https://github.com/placeos/crystal-client/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -37,3 +66,4 @@ TODO: Write development instructions here
 ## Contributors
 
 - [Kim Burgess](https://github.com/kimburgess) - creator and maintainer
+- [Caspian Baska](https://github.com/caspiano) - contributor and maintainer
