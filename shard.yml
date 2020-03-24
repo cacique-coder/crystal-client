@@ -1,15 +1,14 @@
 name: placeos
 version: 0.1.0
-
-authors:
-  - Kim Burgess <kim@acaprojects.com>
+crystal: 0.33.0
+license: MIT
 
 description: |
   Client library for interacting with PlaceOS from crystal-lang apps.
 
-crystal: 0.30.1
-
-license: MIT
+authors:
+  - Kim Burgess <kim@place.technology>
+  - Caspian Baska <caspian@place.technology>
 
 development_dependencies:
   ameba:
