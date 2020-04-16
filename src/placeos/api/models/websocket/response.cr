@@ -1,6 +1,6 @@
 require "json"
 
-struct PlaceOS::API::Models::Websocket::Response
+struct PlaceOS::Client::API::Models::Websocket::Response
   enum Type
     Success
     Error

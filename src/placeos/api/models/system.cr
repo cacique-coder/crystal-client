@@ -1,56 +1,46 @@
-require "json"
-require "uri"
+require "./response"
 
-def URI.new(pull : JSON::PullParser)
-  URI.parse pull.read_string
-end
+module PlaceOS::Client::API::Models
+  struct System < Response
+    include Timestamps
 
-struct PlaceOS::API::Models::System
-  include JSON::Serializable
+    # A universally unique identifier for the system.
+    getter id : String
 
-  # A universally unique identifier for the system.
-  getter id : String
+    # A human readable identifier.
+    getter name : String
 
-  # The engine node that this system operates from.
-  getter edge_id : String
+    # Zone IDs that this system is a member of.
+    getter zones : Array(String)
 
-  # A human readable identifier.
-  getter name : String
+    # Module ID's that this system contains.
+    getter modules : Array(String)
 
-  # Zone IDs that this system is a member of.
-  getter zones : Array(String)
+    # Markdown formatted text that describes the system.
+    getter description : String?
 
-  # Module ID's that this system contains.
-  getter modules : Array(String)
+    # Calendar URI that is associated with this system.
+    getter email : String?
 
-  # Markdown formatted text that describes the system.
-  getter description : String?
+    # Number of people that can be accommodated in this space.
+    getter capacity : Int32
 
-  # Calendar URI that is associated with this system.
-  getter email : String?
+    # List of features in the room for searching and filtering spaces.
+    getter features : String
 
-  # Number of people that can be accommodated in this space.
-  getter capacity : Int32
+    # Flag for signifying the space as reservable.
+    getter bookable : Bool
 
-  # List of features in the room for searching and filtering spaces.
-  getter features : String
+    # Expected number of fixed installation touch panels.
+    getter installed_ui_devices : Int32
 
-  # Flag for signifying the space as reservable.
-  getter bookable : Bool
+    # JSON object representing the system's configuration.
+    getter settings : Hash(String, ::JSON::Any)
 
-  # Expected number of fixed installation touch panels.
-  getter installed_ui_devices : Int32
+    # A URL linking to the primary interface for controlling this system.
+    getter support_url : URI?
 
-  # JSON object representing the system's configuration.
-  getter settings : Hash(String, ::JSON::Any)
-
-  # System creation time.
-  @[JSON::Field(converter: Time::EpochConverter)]
-  getter created_at : Time
-
-  # A URL linking to the primary interface for controlling this system.
-  getter support_url : URI?
-
-  # Incrementing counter for handling stale updates.
-  getter version : Int32
+    # Incrementing counter for handling stale updates.
+    getter version : Int32
+  end
 end

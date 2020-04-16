@@ -1,6 +1,6 @@
 require "json"
 
-struct PlaceOS::API::Models::Websocket::Response::Error
+struct PlaceOS::Client::API::Models::Websocket::Response::Error
   include JSON::Serializable
 
   enum Code

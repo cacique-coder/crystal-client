@@ -2,7 +2,7 @@ require "json"
 require "./meta"
 
 # Asyncronous state update from an active binding.
-struct PlaceOS::API::Models::Websocket::Response::Notify
+struct PlaceOS::Client::API::Models::Websocket::Response::Notify
   include JSON::Serializable
 
   # The identifier included with the original request.

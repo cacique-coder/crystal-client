@@ -1,7 +1,7 @@
 require "json"
 require "./meta"
 
-struct PlaceOS::API::Models::Websocket::Response::Success
+struct PlaceOS::Client::API::Models::Websocket::Response::Success
   include JSON::Serializable
 
   # The identifier included with the original request.

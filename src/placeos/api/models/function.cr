@@ -1,27 +1,27 @@
-require "json"
+require "./response"
 
-# Invocation information for interaction with an exposed driver behaviour.
-struct PlaceOS::API::Models::Function
-  include JSON::Serializable
+module PlaceOS::Client::API::Models
+  # Invocation information for interaction with an exposed driver behaviour.
+  struct Function < Response
+    # The number of parameters that the function accepts.
+    getter arity : Int32
 
-  # The number of parameters that the function accepts.
-  getter arity : Int32
+    # Possible parameter kinds.
+    enum ParameterKind
+      # Required
+      Req
 
-  # Possible parameter kinds.
-  enum ParameterKind
-    # Required
-    Req
+      # Optional
+      Opt
 
-    # Optional
-    Opt
+      # A capture all for all trailing arguments.
+      Rest
+    end
 
-    # A capture all for all trailing arguments.
-    Rest
+    # Parameter information as {kind, name}.
+    alias Parameter = Tuple(ParameterKind, String)
+
+    # Parameter information.
+    getter params : Array(Parameter)
   end
-
-  # Parameter information as {kind, name}.
-  alias Parameter = Tuple(ParameterKind, String)
-
-  # Parameter information.
-  getter params : Array(Parameter)
 end

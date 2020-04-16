@@ -1,9 +1,10 @@
-require "json"
+require "./response"
 
-struct PlaceOS::API::Models::Ping
-  include JSON::Serializable
-
-  getter host : String
-
-  getter pingable : Bool
+module PlaceOS::Client::API::Models
+  struct Ping < Response
+    getter host : String
+    getter pingable : Bool
+    getter warning : String?
+    getter exception : String?
+  end
 end

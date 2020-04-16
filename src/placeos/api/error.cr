@@ -1,6 +1,6 @@
 require "http/client/response"
 
-class PlaceOS::API::Error < Exception
+class PlaceOS::Client::API::Error < Exception
   def self.from_response(response : HTTP::Client::Response)
     if response.success?
       # Shouldn't ever be passed through here...

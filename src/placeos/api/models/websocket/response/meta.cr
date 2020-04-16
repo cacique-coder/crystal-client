@@ -1,6 +1,6 @@
 require "json"
 
-struct PlaceOS::API::Models::Websocket::Response::Meta
+struct PlaceOS::Client::API::Models::Websocket::Response::Meta
   include JSON::Serializable
 
   # The system ID.

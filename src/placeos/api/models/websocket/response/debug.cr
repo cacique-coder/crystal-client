@@ -1,7 +1,7 @@
 require "json"
 require "./meta"
 
-struct PlaceOS::API::Models::Websocket::Response::Debug
+struct PlaceOS::Client::API::Models::Websocket::Response::Debug
   include JSON::Serializable
 
   enum Level

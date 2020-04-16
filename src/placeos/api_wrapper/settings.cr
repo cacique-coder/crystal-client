@@ -1,6 +1,7 @@
-require "json"
+require "./endpoint"
 
-class PlaceOS::APIWrapper
-  # Settings type accepted by all endpoints.
-  alias Settings = Hash(String, ::JSON::Any | ::JSON::Any::Type)
+module PlaceOS
+  class Client::APIWrapper::Settings < Client::APIWrapper::Endpoint
+    getter base : String = "#{API_ROOT}/settings"
+  end
 end
