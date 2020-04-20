@@ -34,9 +34,6 @@ module PlaceOS::Client::API::Models
     # Expected number of fixed installation touch panels.
     getter installed_ui_devices : Int32
 
-    # JSON object representing the system's configuration.
-    getter settings : Hash(String, ::JSON::Any)
-
     # A URL linking to the primary interface for controlling this system.
     getter support_url : URI?
 

@@ -20,14 +20,14 @@ module PlaceOS
     end
 
     # Executes a behaviour exposed by a module within the passed system *id*.
-    def exec(
+    def execute(
       id : String,
       module_name : String,
       method : String,
       index : Int32 = 1,
       *args : Array(JSON::Any::Type)
     )
-      post "#{base}/#{id}/exec/#{module_name}_#{index}/#{method}", body: args
+      post "#{base}/#{id}/#{module_name}_#{index}/#{method}", body: args
     end
 
     # Queries the state exposed by a module within the passed system *id*.
@@ -39,7 +39,7 @@ module PlaceOS
 
     # Queries the behaviour exposed by a module within system *id*.
     def functions(id : String, module_name : String, index : Int = 1)
-      get "#{base}/#{id}/funcs", params: from_args, as: Hash(String, Function)
+      get "#{base}/#{id}/functions/#{module_name}_#{index}", as: Hash(String, Function)
     end
 
     # Gets the number of *module_name* instances available in system *id*.

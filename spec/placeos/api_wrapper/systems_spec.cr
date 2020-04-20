@@ -11,7 +11,8 @@ module PlaceOS
     describe "#search" do
       it "enumerates all systems" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems")
+          .stub(:get, DOMAIN + client.base)
+          .with(query: {"limit" => "20", "offset" => "0"})
           .to_return(body: systems_json)
         result = client.search
         result.size.should eq(3)
@@ -22,9 +23,9 @@ module PlaceOS
 
       it "provides system search" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems")
-          .with(query: {"q" => "\"Room 1\""})
-          .to_return(body: systems_json)
+          .stub(:get, DOMAIN + client.base)
+          .with(query: {"q" => "\"Room 1\"", "limit" => "20", "offset" => "0"})
+          .to_return(body: "[#{systems.first}]")
 
         result = client.search "\"Room 1\""
         result.size.should eq(1)
@@ -33,15 +34,9 @@ module PlaceOS
 
       it "supports paging in system queries" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems")
+          .stub(:get, DOMAIN + client.base)
           .with(query: {"limit" => "1", "offset" => "1"})
-          .to_return(body: <<-JSON
-          {
-            "total": 1,
-            "results": [#{systems[1]}]
-          }
-          JSON
-          )
+          .to_return(body: "[#{systems[1]}]")
         result = client.search limit: 1, offset: 1
         result.size.should eq(1)
         result.first.name.should eq("Room 2")
@@ -51,7 +46,7 @@ module PlaceOS
     describe "#create" do
       it "posts to the systems endpoint" do
         WebMock
-          .stub(:post, "#{DOMAIN}/api/control/systems")
+          .stub(:post, DOMAIN + client.base)
           .with(
             headers: {"Content-Type" => "application/json"},
             body: {
@@ -68,7 +63,7 @@ module PlaceOS
     describe "#fetch" do
       it "inspects a systems metadata" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7")
+          .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7")
           .to_return(body: systems.first)
         result = client.fetch "sys-rJQQlR4Cn7"
         result.should be_a(Client::API::Models::System)
@@ -78,7 +73,7 @@ module PlaceOS
     describe "#update" do
       it "send a put request to the systems endpoint" do
         WebMock
-          .stub(:put, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7")
+          .stub(:put, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7")
           .with(
             headers: {"Content-Type" => "application/json"},
             body: {version: 2, name: "Foo"}.to_json
@@ -92,7 +87,7 @@ module PlaceOS
     describe "#delete" do
       it "execs a delete request" do
         WebMock
-          .stub(:delete, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7")
+          .stub(:delete, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7")
         result = client.destroy "sys-rJQQlR4Cn7"
         result.should be_nil
       end
@@ -101,7 +96,7 @@ module PlaceOS
     describe "#start" do
       it "requests a system start" do
         WebMock
-          .stub(:post, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/start")
+          .stub(:post, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/start")
         result = client.start "sys-rJQQlR4Cn7"
         result.should be_nil
       end
@@ -110,22 +105,22 @@ module PlaceOS
     describe "#stop" do
       it "requests a system stop" do
         WebMock
-          .stub(:post, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/stop")
+          .stub(:post, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/stop")
         result = client.stop "sys-rJQQlR4Cn7"
         result.should be_nil
       end
     end
 
-    describe "#exec" do
+    describe "#execute" do
       it "requests a method execution within a system" do
         WebMock
-          .stub(:post, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/exec")
+          .stub(:post, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/Foo_2/test")
           .with(
             headers: {"Content-Type" => "application/json"},
-            body: %({"module":"Foo","method":"test","index":2,"args":[]})
+            body: %([])
           )
-          .to_return(body: "[42]")
-        result = client.exec "sys-rJQQlR4Cn7", module_name: "Foo", index: 2, method: "test"
+          .to_return(body: "42")
+        result = client.execute "sys-rJQQlR4Cn7", module_name: "Foo", index: 2, method: "test"
         result.should eq(42)
       end
     end
@@ -133,8 +128,7 @@ module PlaceOS
     describe "#state" do
       it "requests full module state" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/state")
-          .with(query: {"module" => "Foo", "index" => "2"})
+          .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/Foo_2")
           .to_return(body: %({"a":1,"b":2,"c":3}))
         result = client.state "sys-rJQQlR4Cn7", module_name: "Foo", index: 2
         result.should be_a(JSON::Any)
@@ -143,8 +137,7 @@ module PlaceOS
 
       it "requests individual state keys" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/state")
-          .with(query: {"module" => "Foo", "index" => "2", "lookup" => "a"})
+          .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/Foo_2/a")
           .to_return(body: "1")
         result = client.state "sys-rJQQlR4Cn7", module_name: "Foo", index: 2, lookup: "a"
         result.should be_a(JSON::Any)
@@ -152,11 +145,10 @@ module PlaceOS
       end
     end
 
-    describe "#funcs" do
+    describe "#functions" do
       it "requests available behaviours" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/funcs")
-          .with(query: {"module" => "Foo", "index" => "2"})
+          .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/functions/Foo_2")
           .to_return(body: <<-JSON
           {
             "function_name": {
@@ -175,24 +167,23 @@ module PlaceOS
       end
     end
 
-    describe "#count" do
-      it "requests module counts" do
-        WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/count")
-          .with(query: {"module" => "Foo"})
-          .to_return(body: %({"count": 3}))
-        result = client.count "sys-rJQQlR4Cn7", module_name: "Foo"
-        result.should eq(3)
-      end
-    end
-
     describe "#types" do
       it "requests module types" do
         WebMock
-          .stub(:get, "#{DOMAIN}/api/control/systems/sys-rJQQlR4Cn7/types")
+          .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/types")
           .to_return(body: %({"Foo":3,"Bar":1,"Baz":5}))
         result = client.types "sys-rJQQlR4Cn7"
         result["Foo"].should eq(3)
+      end
+    end
+
+    describe "#count" do
+      it "requests module counts" do
+        WebMock
+          .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7/types")
+          .to_return(body: %({"Foo":3,"Bar":1,"Baz":5}))
+        result = client.count "sys-rJQQlR4Cn7", module_name: "Foo"
+        result.should eq(3)
       end
     end
   end
