@@ -29,11 +29,5 @@ module PlaceOS::Client::API::Models
 
     # Version of application
     getter version : String
-
-    # Flag for if this client is currently authed.
-    getter session : Bool
-
-    # Flag for production status.
-    getter production : Bool
   end
 end
