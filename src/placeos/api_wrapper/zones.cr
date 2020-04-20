@@ -8,7 +8,7 @@ module PlaceOS
     # Interaction
     ###########################################################################
 
-    def exec(
+    def execute(
       id : String,
       method : String,
       module_name : String,
@@ -29,7 +29,6 @@ module PlaceOS
       settings : Settings? = nil,
       triggers : Array(String)? = nil
     )
-      pp! name
       post base, body: from_args, as: API::Models::Zone
     end
 

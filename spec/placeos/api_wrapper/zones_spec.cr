@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
 module PlaceOS
-  describe Client::APIWrapper::Zones, focus: true do
+  describe Client::APIWrapper::Zones do
     api = PlaceOS::Client::APIWrapper.new DOMAIN
     client = Client::APIWrapper::Zones.new api
 
