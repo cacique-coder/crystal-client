@@ -29,7 +29,10 @@ module PlaceOS
 
     # Queries the state exposed by a module.
     def state(id : String, lookup : String? = nil)
-      get "#{base}/#{id}/state", params: from_args
+      path = "#{base}/#{id}/state"
+      path += "/#{lookup}" if lookup
+
+      get path
     end
 
     # Search

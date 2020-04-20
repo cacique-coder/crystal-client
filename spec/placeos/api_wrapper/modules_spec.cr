@@ -37,6 +37,7 @@ module PlaceOS
       it "enumerates all modules" do
         WebMock
           .stub(:get, DOMAIN + client.base)
+          .with(query: {"limit" => "20", "offset" => "0"}, headers: HEADERS)
           .to_return(body: modules_json)
         result = client.search
         result.size.should eq(1)
@@ -48,7 +49,7 @@ module PlaceOS
       it "provides module search" do
         WebMock
           .stub(:get, DOMAIN + client.base)
-          .with(query: {"q" => "\"Not there\""})
+          .with(query: {"q" => "\"Not there\"", "limit" => "20", "offset" => "0"})
           .to_return(body: "[]")
         result = client.search "\"Not there\""
         result.size.should eq(0)
