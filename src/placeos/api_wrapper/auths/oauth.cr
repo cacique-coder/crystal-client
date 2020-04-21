@@ -1,6 +1,7 @@
 require "./base"
 
 module PlaceOS
+  # :nodoc:
   alias OAuthAuthentication = Client::API::Models::OAuthAuthentication
 
   class Client::APIWrapper::OAuth < Client::APIWrapper::AuthBase(OAuthAuthentication)

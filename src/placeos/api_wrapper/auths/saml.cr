@@ -1,6 +1,7 @@
 require "./base"
 
 module PlaceOS
+  # :nodoc:
   alias SamlAuthentication = Client::API::Models::SamlAuthentication
 
   class Client::APIWrapper::Saml < Client::APIWrapper::AuthBase(SamlAuthentication)
