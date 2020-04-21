@@ -27,7 +27,7 @@ module PlaceOS
       @api_wrapper = APIWrapper.new(@uri)
     end
 
-    {% for component in %w(Authority Cluster Domains Drivers Modules OAuth Settings Systems Zones) %}
+    {% for component in %w(Authority Cluster Domains Drivers Modules OAuth Settings Systems Zones Ldap OAuth Saml) %}
     # Provide an object for managing {{component.id}}. See `PlaceOS::Client::APIWrapper::{{component.id}}`.
     def {{component.id.downcase}} : {{component.id}}
       @{{component.id.downcase}} ||= {{component.id}}.new(api_wrapper)
