@@ -3,6 +3,9 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Zones < Client::APIWrapper::Endpoint
+    include Client::APIWrapper::Endpoint::Fetch(Zone)
+    include Client::APIWrapper::Endpoint::Destroy
+
     getter base : String = "#{API_ROOT}/zones"
 
     # Interaction
@@ -32,11 +35,6 @@ module PlaceOS
       post base, body: from_args, as: API::Models::Zone
     end
 
-    # Retrieves all metadata associated with a zone.
-    def fetch(id : String)
-      get "#{base}/#{id}", as: API::Models::Zone
-    end
-
     # Updates zone attributes or configuration.
     def update(
       id : String,
@@ -47,11 +45,6 @@ module PlaceOS
       triggers : Array(String)? = nil
     )
       put "#{base}/#{id}", body: from_args, as: API::Models::Zone
-    end
-
-    # Removes a zone.
-    def destroy(id : String)
-      delete "#{base}/#{id}"
     end
 
     # Search

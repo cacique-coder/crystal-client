@@ -2,6 +2,8 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Systems < Client::APIWrapper::Endpoint
+    include Client::APIWrapper::Endpoint::Fetch(System)
+    include Client::APIWrapper::Endpoint::Destroy
     getter base : String = "#{API_ROOT}/systems"
 
     # Interaction
@@ -78,11 +80,6 @@ module PlaceOS
       post base, body: from_args, as: System
     end
 
-    # Retrieves all metadata associated with a system.
-    def fetch(id : String)
-      get "#{base}/#{id}", as: System
-    end
-
     # Requests a change to an existing system.
     #
     # In addition to specifying the ID of the system to update, you must reference
@@ -103,15 +100,6 @@ module PlaceOS
       support_url : String? = nil
     )
       put "#{base}/#{id}", body: from_args, as: System
-    end
-
-    # Removes a system.
-    #
-    # This will also stop, and remove any modules that do not belong to other
-    # systems.
-    def destroy(id : String)
-      delete "#{base}/#{id}"
-      nil
     end
 
     # Search

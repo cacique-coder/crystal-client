@@ -5,6 +5,9 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Modules < Client::APIWrapper::Endpoint
+    include Client::APIWrapper::Endpoint::Fetch(Module)
+    include Client::APIWrapper::Endpoint::Destroy
+
     getter base : String = "#{API_ROOT}/modules"
 
     # Interaction
@@ -71,11 +74,6 @@ module PlaceOS
     # Management
     ###########################################################################
 
-    # Retrieves all metadata associated with a module.
-    def fetch(id : String)
-      get "#{base}/#{id}", as: API::Models::Module
-    end
-
     # Creates a new module.
     def create(
       driver_id : String,
@@ -110,12 +108,6 @@ module PlaceOS
       ignore_startstop : Bool? = nil
     )
       put "#{base}/#{id}", body: from_args, as: API::Models::Module
-    end
-
-    # Removes a module.
-    def destroy(id : String)
-      delete "#{base}/#{id}"
-      nil
     end
   end
 end
