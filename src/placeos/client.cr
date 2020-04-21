@@ -7,8 +7,9 @@ require "uri"
 # interface with.
 module PlaceOS
   class Client
-    VERSION  = {{ `shards version "#{__DIR__}"`.chomp.stringify.downcase }}
-    API_ROOT = "/api/engine/v2"
+    VERSION       = {{ `shards version "#{__DIR__}"`.chomp.stringify.downcase }}
+    API_ROOT      = "/api/engine/v2"
+    AUTH_API_ROOT = "/api/auth"
 
     getter uri : URI
     getter api_wrapper : APIWrapper

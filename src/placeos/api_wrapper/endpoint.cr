@@ -11,6 +11,21 @@ module PlaceOS
     def initialize(@client : APIWrapper)
     end
 
+    module Fetch(T)
+      # Returns a {{ T.id }}
+      def fetch(id : String)
+        get "#{base}/#{id}", as: T
+      end
+    end
+
+    module Destroy
+      # Destroys a {{ T.id }}
+      def destroy(id : String)
+        delete "#{base}/#{id}"
+        nil
+      end
+    end
+
     {% for method in %w(get post put head delete patch options) %}
     # Executes a {{method.id.upcase}} request on the client connection.
     #

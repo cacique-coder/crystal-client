@@ -4,7 +4,7 @@ module PlaceOS
   alias OAuthAuthentication = Client::API::Models::OAuthAuthentication
 
   class Client::APIWrapper::OAuth < Client::APIWrapper::AuthBase(OAuthAuthentication)
-    getter base : String = "/api/engine/v2/oauth_auths/"
+    getter base : String = "#{API_ROOT}/oauth_auths"
 
     def create(
       name : String,

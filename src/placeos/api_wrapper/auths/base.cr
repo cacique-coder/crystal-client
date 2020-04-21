@@ -3,10 +3,8 @@ require "../../api/models/auths/*"
 
 module PlaceOS
   abstract class Client::APIWrapper::AuthBase(Model) < Client::APIWrapper::Endpoint
-    # Gets the authority metadata for the attached instance.
-    def fetch
-      get base, as: Model
-    end
+    include Client::APIWrapper::Endpoint::Fetch(Model)
+    include Client::APIWrapper::Endpoint::Destroy
 
     # List or search.
     #
@@ -39,11 +37,6 @@ module PlaceOS
 
     def create(**args) : Model
       post base, body: from_args, as: Model
-    end
-
-    def destroy(id : String)
-      delete base + "/#{id}"
-      nil
     end
   end
 end

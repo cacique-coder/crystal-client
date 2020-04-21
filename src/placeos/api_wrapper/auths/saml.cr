@@ -4,7 +4,7 @@ module PlaceOS
   alias SamlAuthentication = Client::API::Models::SamlAuthentication
 
   class Client::APIWrapper::Saml < Client::APIWrapper::AuthBase(SamlAuthentication)
-    getter base : String = "/api/engine/v2/saml_auths/"
+    getter base : String = "#{API_ROOT}/saml_auths"
 
     def create(
       name : String,

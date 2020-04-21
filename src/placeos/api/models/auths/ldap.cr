@@ -2,6 +2,9 @@ require "../response"
 
 module PlaceOS::Client::API::Models
   struct LdapAuthentication < Response
+    include Timestamps
+
+    getter id : String
     getter name : String
     getter authority_id : String
     getter port : Int32
