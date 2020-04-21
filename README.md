@@ -20,6 +20,8 @@ A library for building [crystal](crystal-lang.org/) applications that utilise Pl
 
 ## Usage
 
+When initialialized via the host environment, the key `PLACEOS_URI` is expected.
+
 ### Authentication
 
 - *from environment*
@@ -27,14 +29,15 @@ A library for building [crystal](crystal-lang.org/) applications that utilise Pl
     ```crystal
     require "placeos"
 
+    # TODO:
     # Extracts user credentials from PLACEOS_USER, PLACEOS_PASS
-    client = PlaceOS::Client.from_environment_user
+    # client = PlaceOS::Client.from_environment_user
 
-    # OR... extracts key from PLACEOS_API_KEY
-    client = PlaceOS::Client.from_environment_key
+    # OR... extracts key from PLACEOS_API_TOKEN
+    client = PlaceOS::Client.from_environment_token
     ```
 
-- *with a key*
+- _todo_: *with a key*
 
     ```crystal
     require "placeos"
@@ -43,7 +46,7 @@ A library for building [crystal](crystal-lang.org/) applications that utilise Pl
     client = PlaceOS::Client.from_key(key)
     ```
 
-- *explicit authentication*
+- _todo_: *explicit authentication*
 
     ```crystal
     require "placeos"

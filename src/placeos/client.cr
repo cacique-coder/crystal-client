@@ -17,7 +17,7 @@ module PlaceOS
 
     # Creates a new `PlaceOS::Client`
     # Expects `PLACE_URI` and `PLACE_TOKEN` in the environment
-    def self.from_env
+    def self.from_environment_token
       uri = ENV["PLACE_URI"]? || abort "missing PLACE_URI in environment"
       token = ENV["PLACE_TOKEN"]? || abort "missing PLACE_TOKEN in environment"
       new(uri, token)
