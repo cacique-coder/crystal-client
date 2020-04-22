@@ -14,13 +14,14 @@ A library for building [crystal](crystal-lang.org/) applications that utilise Pl
    dependencies:
      placeos:
        github: placeos/crystal-client
+       version: ~> 1.0
    ```
 
 2. Run `shards install`
 
 ## Usage
 
-When initialialized via the host environment, the key `PLACEOS_URI` is expected.
+When initialialized via the host environment, the key `PLACE_URI` is expected.
 
 ### Authentication
 
@@ -29,33 +30,12 @@ When initialialized via the host environment, the key `PLACEOS_URI` is expected.
     ```crystal
     require "placeos"
 
-    # TODO:
-    # Extracts user credentials from PLACEOS_USER, PLACEOS_PASS
-    # client = PlaceOS::Client.from_environment_user
-
-    # OR... extracts key from PLACEOS_API_TOKEN
-    client = PlaceOS::Client.from_environment_token
-    ```
-
-- _todo_: *with a key*
-
-    ```crystal
-    require "placeos"
-
-    key = <some key>
-    client = PlaceOS::Client.from_key(key)
-    ```
-
-- _todo_: *explicit authentication*
-
-    ```crystal
-    require "placeos"
-
-    user = <some username>
-    password = <some password>
-
-    # You can optionally supply a key
-    client = PlaceOS::Client.new(user, password)
+    # Extracts user credentials from the following environment keys...
+    # - PLACE_EMAIL
+    # - PLACE_PASSWORD
+    # - PLACE_AUTH_CLIENT_ID
+    # - PLACE_AUTH_SECRET
+    client = PlaceOS::Client.from_environment_user
     ```
 
 ## Development

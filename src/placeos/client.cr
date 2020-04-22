@@ -21,10 +21,10 @@ module PlaceOS
     delegate :close, to: api_wrapper
 
     def self.from_environment_user
-      environment = {"PLACE_EMAIL", "PLACE_PASSWORD", "PLACE_AUTH_CLIENT_ID", "PLACE_AUTH_SECRET"}.map do |key|
+      environment = {"PLACE_URI", "PLACE_EMAIL", "PLACE_PASSWORD", "PLACE_AUTH_CLIENT_ID", "PLACE_AUTH_SECRET"}.map do |key|
         ENV[key]? || abort "missing #{key} in environment"
       end
-      email, password, client_id, client_secret = environment
+      uri, email, password, client_id, client_secret = environment
 
       new(uri, email: email, password: password, client_id: client_id, client_secret: client_secret)
     end
