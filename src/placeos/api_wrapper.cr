@@ -19,19 +19,18 @@ module PlaceOS
     # Underlying HTTP connection
     protected getter connection : HTTP::Client
 
-    delegate :before_request, :connect_timeout=, :read_timeout=, to: connection
+    delegate :before_request, :connect_timeout=, :close, :read_timeout=, to: connection
 
-    def initialize(uri : URI | String)
+    def initialize(uri : URI | String, token : OAuth2::AccessToken? = nil)
       uri = URI.parse(uri) if uri.is_a?(String)
       @connection = HTTP::Client.new uri
+
+      # Authenticate the client if a token was provided
+      token.authenticate(connection) if token
     end
 
-    # Sets the authentication used by the API client.
-    #
-    # All client instances must be authenticated prior to interaction with
-    # protected endpoints.
-    def auth=(token_provider : OAuth2::AccessToken | OAuth2::Session)
-      token_provider.authenticate connection
+    def authenticate(token : OAuth2::AccessToken)
+      token.authenticate(connection)
     end
   end
 end
