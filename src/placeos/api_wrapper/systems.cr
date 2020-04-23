@@ -121,7 +121,16 @@ module PlaceOS
     # `~N`     | Specifies slop amount (deviation) after a phrase
     #
     # Up to *limit* systems will be returned, with a paging based on *offset*.
-    def search(q : String? = nil, limit : Int = 20, offset : Int = 0)
+    def search(
+      q : String? = nil,
+      limit : Int = 1000,
+      offset : Int = 0,
+      zone_id : String? = nil,
+      module_id : String? = nil,
+      features : String? = nil,
+      capacity : Int32? = nil,
+      bookable : Bool? = nil
+    )
       get base, params: from_args, as: Array(System)
     end
 

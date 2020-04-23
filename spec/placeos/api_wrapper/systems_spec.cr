@@ -12,7 +12,7 @@ module PlaceOS
       it "enumerates all systems" do
         WebMock
           .stub(:get, DOMAIN + client.base)
-          .with(query: {"limit" => "20", "offset" => "0"})
+          .with(query: {"limit" => "1000", "offset" => "0"})
           .to_return(body: systems_json)
         result = client.search
         result.size.should eq(3)
@@ -24,7 +24,7 @@ module PlaceOS
       it "provides system search" do
         WebMock
           .stub(:get, DOMAIN + client.base)
-          .with(query: {"q" => "\"Room 1\"", "limit" => "20", "offset" => "0"})
+          .with(query: {"q" => "\"Room 1\"", "limit" => "1000", "offset" => "0"})
           .to_return(body: "[#{systems.first}]")
 
         result = client.search "\"Room 1\""
