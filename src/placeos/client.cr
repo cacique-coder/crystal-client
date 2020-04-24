@@ -44,27 +44,47 @@ module PlaceOS
       @client_secret : String? = nil
     )
       @uri = base_uri.is_a?(String) ? URI.parse(base_uri) : base_uri
-      @api_wrapper = APIWrapper.new(@uri, token)
+      @api_wrapper = APIWrapper.new(@uri, ->authenticate)
     end
 
-    protected def token
-      if (email = @email) && (password = @password) && (client_id = @client_id) && (client_secret = @client_secret)
-        client = OAuth2::Client.new(
-          host: uri.host.as(String),
-          port: uri.port,
-          scheme: uri.scheme || "https",
-          client_id: client_id,
-          client_secret: client_secret,
-          authorize_uri: AUTHORIZE_ENDPOINT,
-          token_uri: TOKEN_ENDPOINT,
-        )
+    def authenticated?
+      !(@email.nil? || @password.nil? || @client_id.nil? || @client_secret.nil?)
+    end
 
-        client.get_access_token_using_resource_owner_credentials(
-          email,
-          password,
-          "public",
-        ).as(OAuth2::AccessToken::Bearer)
+    @session : OAuth2::Session? = nil
+    private property token : OAuth2::AccessToken? = nil
+    private getter authentication_lock : Mutex = Mutex.new
+
+    protected def authenticate(client : HTTP::Client)
+      return unless authenticated?
+      authentication_lock.synchronize do
+        session.authenticate(client)
       end
+    end
+
+    protected def session
+      return session.as(OAuth2::Session) unless session.nil?
+      client = OAuth2::Client.new(
+        host: uri.host.as(String),
+        port: uri.port,
+        scheme: uri.scheme || "https",
+        client_id: @client_id.as(String),
+        client_secret: @client_secret.as(String),
+        authorize_uri: AUTHORIZE_ENDPOINT,
+        token_uri: TOKEN_ENDPOINT,
+      )
+
+      token = client.get_access_token_using_resource_owner_credentials(
+        @email.as(String),
+        @password.as(String),
+        "public",
+      ).as(OAuth2::AccessToken::Bearer)
+
+      @session = OAuth2::Session.new(client, token) do |new_token|
+        self.token = new_token
+      end
+
+      @session
     end
 
     {% for component in %w(Authority Cluster Domains Drivers Modules Settings Systems Zones Ldap OAuth Saml OAuthApplications) %}

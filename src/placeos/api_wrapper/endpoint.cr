@@ -86,7 +86,7 @@ module PlaceOS
       {% end %}
 
       # Exec the request
-      response = client.connection.{{method.id}} path, headers, body
+      response = client.connection &.{{method.id}}(path, headers, body)
       raise API::Error.from_response(response) unless response.success?
 
       # Parse the response
