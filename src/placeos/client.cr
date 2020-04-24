@@ -44,7 +44,9 @@ module PlaceOS
       @client_secret : String? = nil
     )
       @uri = base_uri.is_a?(String) ? URI.parse(base_uri) : base_uri
-      @api_wrapper = APIWrapper.new(@uri, ->authenticate)
+      @api_wrapper = APIWrapper.new(@uri) do |http|
+        authenticate(http)
+      end
     end
 
     def authenticated?
@@ -58,12 +60,12 @@ module PlaceOS
     protected def authenticate(client : HTTP::Client)
       return unless authenticated?
       authentication_lock.synchronize do
-        session.authenticate(client)
+        session.try &.authenticate(client)
       end
     end
 
     protected def session
-      return session.as(OAuth2::Session) unless session.nil?
+      return @session.as(OAuth2::Session) unless @session.nil?
       client = OAuth2::Client.new(
         host: uri.host.as(String),
         port: uri.port,
@@ -80,8 +82,8 @@ module PlaceOS
         "public",
       ).as(OAuth2::AccessToken::Bearer)
 
-      @session = OAuth2::Session.new(client, token) do |new_token|
-        self.token = new_token
+      @session = OAuth2::Session.new(client, token) do |refreshed_session|
+        self.token = refreshed_session.access_token
       end
 
       @session

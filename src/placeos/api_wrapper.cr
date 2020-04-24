@@ -26,7 +26,7 @@ module PlaceOS
     # connect_timeout=
     # read_timeout=
 
-    def initialize(uri : URI | String, &authenticate : HTTP::Client)
+    def initialize(uri : URI | String, &authenticate : HTTP::Client ->)
       @uri = uri.is_a?(String) ? URI.parse(uri) : uri
       @authenticate = authenticate
     end
