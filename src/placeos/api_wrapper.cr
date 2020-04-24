@@ -1,7 +1,9 @@
-require "uri"
 require "http/client"
-require "oauth2"
 require "json"
+require "mutex"
+require "oauth2"
+require "uri"
+
 require "./api/**"
 
 # Low-level wrapper for the PlaceOS API.
@@ -16,21 +18,28 @@ module PlaceOS
   class Client::APIWrapper
     include Client::API::Models
 
-    # Underlying HTTP connection
-    protected getter connection : HTTP::Client
+    protected getter authenticate : HTTP::Client -> = ->(_client : HTTP::Client) {}
+    protected getter uri : URI
 
-    delegate :before_request, :connect_timeout=, :close, :read_timeout=, to: connection
+    # TODO:
+    # before_request
+    # connect_timeout=
+    # read_timeout=
 
-    def initialize(uri : URI | String, token : OAuth2::AccessToken? = nil)
-      uri = URI.parse(uri) if uri.is_a?(String)
-      @connection = HTTP::Client.new uri
-
-      # Authenticate the client if a token was provided
-      token.authenticate(connection) if token
+    def initialize(uri : URI | String, &authenticate : HTTP::Client)
+      @uri = uri.is_a?(String) ? URI.parse(uri) : uri
+      @authenticate = authenticate
     end
 
-    def authenticate(token : OAuth2::AccessToken)
-      token.authenticate(connection)
+    def initialize(uri : URI | String)
+      @uri = uri.is_a?(String) ? URI.parse(uri) : uri
+    end
+
+    def connection
+      HTTP::Client.new(uri) do |client|
+        authenticate.call(client)
+        yield client
+      end
     end
   end
 end
