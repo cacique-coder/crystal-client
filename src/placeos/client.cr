@@ -41,7 +41,9 @@ module PlaceOS
       @email : String? = nil,
       @password : String? = nil,
       @client_id : String? = nil,
-      @client_secret : String? = nil
+      @client_secret : String? = nil,
+      # Allow for a token to be used directly (proxying auth)
+      @token : OAuth2::AccessToken? = nil
     )
       @uri = base_uri.is_a?(String) ? URI.parse(base_uri) : base_uri
       @api_wrapper = APIWrapper.new(@uri) do |http|
@@ -50,7 +52,7 @@ module PlaceOS
     end
 
     def authenticated?
-      !(@email.nil? || @password.nil? || @client_id.nil? || @client_secret.nil?)
+      !(@session.nil? || @email.nil? || @password.nil? || @client_id.nil? || @client_secret.nil?)
     end
 
     @session : OAuth2::Session? = nil
@@ -58,9 +60,15 @@ module PlaceOS
     private getter authentication_lock : Mutex = Mutex.new
 
     protected def authenticate(client : HTTP::Client)
-      return unless authenticated?
-      authentication_lock.synchronize do
-        session.try &.authenticate(client)
+      # If a token is passed as part of client initialisation then we want
+      # to use that as we are proxying the auth
+      if @token && @session.nil?
+        @token.try &.authenticate(client)
+      else
+        return unless authenticated?
+        authentication_lock.synchronize do
+          session.try &.authenticate(client)
+        end
       end
     end
 

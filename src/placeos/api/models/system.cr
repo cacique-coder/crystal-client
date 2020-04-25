@@ -35,7 +35,7 @@ module PlaceOS::Client::API::Models
     getter installed_ui_devices : Int32
 
     # A URL linking to the primary interface for controlling this system.
-    getter support_url : URI?
+    getter support_url : String?
 
     # Incrementing counter for handling stale updates.
     getter version : Int32
