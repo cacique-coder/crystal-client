@@ -31,6 +31,7 @@ When initialialized via the host environment, the key `PLACE_URI` is expected.
     require "placeos"
 
     # Extracts user credentials from the following environment keys...
+    # - PLACE_URI
     # - PLACE_EMAIL
     # - PLACE_PASSWORD
     # - PLACE_AUTH_CLIENT_ID
