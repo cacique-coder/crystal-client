@@ -1,5 +1,4 @@
 require "./response"
-require "./trigger"
 
 module PlaceOS::Client::API::Models
   struct Version < Response

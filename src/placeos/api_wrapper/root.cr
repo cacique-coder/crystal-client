@@ -13,7 +13,7 @@ module PlaceOS
     end
 
     def version
-      post "#{base}/version", as: API::Models::Version
+      get "#{base}/version", as: API::Models::Version
     end
   end
 end
