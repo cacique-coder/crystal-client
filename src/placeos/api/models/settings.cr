@@ -1,4 +1,4 @@
-require "models/utilities/encryption"
+require "placeos-models/utilities/encryption"
 
 require "./response"
 
