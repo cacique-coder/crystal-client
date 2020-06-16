@@ -186,5 +186,32 @@ module PlaceOS
         result.should eq(3)
       end
     end
+
+    describe "#with_emails" do
+      it "multiple emails" do
+        WebMock
+          .stub(:get, DOMAIN + "#{client.base}/with_emails")
+          .with(query: {"in" => "room1@example.com,room3@example.com"})
+          .to_return(body: "[#{systems.first},#{systems.last}]")
+
+        result = client.with_emails ["room1@example.com", "room3@example.com"]
+
+        result.size.should eq(2)
+        result.first.name.should eq("Room 1")
+        result.last.name.should eq("Room 3")
+      end
+
+      it "single email" do
+        WebMock
+          .stub(:get, DOMAIN + "#{client.base}/with_emails")
+          .with(query: {"in" => "room1@example.com"})
+          .to_return(body: "[#{systems.first}]")
+
+        result = client.with_emails "room1@example.com"
+
+        result.size.should eq(1)
+        result.first.name.should eq("Room 1")
+      end
+    end
   end
 end

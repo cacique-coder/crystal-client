@@ -134,6 +134,14 @@ module PlaceOS
       get base, params: from_args, as: Array(System)
     end
 
+    # Returns systems with a specified email address(es)
+    #
+    def with_emails(in : Array(String) | String)
+      query = in.is_a?(Array) ? in.join(',') : in
+
+      get "#{base}/with_emails", params: HTTP::Params{"in" => query}, as: Array(System)
+    end
+
     private getter client
 
     def initialize(@client : APIWrapper)
