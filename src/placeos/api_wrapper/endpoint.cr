@@ -46,7 +46,10 @@ module PlaceOS
         {% if params.id.symbolize == :from_args %}
           params = HTTP::Params.build do |param|
             each_arg do |key, val, default|
-              param.add \{{key}}, \{{val}}.to_s unless \{{val}}.nil?
+              unless \{{val}}.nil?
+                v = \{{val}}.is_a?(Array) ? \{{val}}.map(&.to_s).join(',') : \{{val}}.to_s
+                param.add \{{key}}, v
+              end
             end
           end
           path = "#{{{path}}}?#{params}"

@@ -15,7 +15,7 @@ module PlaceOS::Client::API::Models
     getter description : String?
 
     # Space seperated list of tags for categorizing the zone.
-    getter tags : String?
+    getter tags : Array(String) = [] of String
 
     # List of trigger ID's to be applied to all systems that associate with this zone.
     getter triggers : Array(String)

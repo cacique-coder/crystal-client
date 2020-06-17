@@ -28,7 +28,7 @@ module PlaceOS
     def create(
       name : String,
       description : String? = nil,
-      tags : String? = nil,
+      tags : Array(String)? = nil,
       settings : Settings? = nil,
       triggers : Array(String)? = nil
     )
@@ -40,7 +40,7 @@ module PlaceOS
       id : String,
       name : String? = nil,
       description : String? = nil,
-      tags : String? = nil,
+      tags : Array(String)? = nil,
       settings : Settings? = nil,
       triggers : Array(String)? = nil
     )
@@ -52,7 +52,7 @@ module PlaceOS
 
     # List or search for zones.
     #
-    # Results maybe filtered by specifying a query - *q* - to search across module
+    # Results maybe filtered by specifying a query - *q* - to search across zone
     # attributes. A small query language is supported within this:
     #
     # Operator | Action
@@ -72,7 +72,7 @@ module PlaceOS
       q : String? = nil,
       limit : Int = 20,
       offset : Int = 0,
-      tags : String? = nil
+      tags : Array(String) | String? = nil
     )
       get base, params: from_args, as: Array(API::Models::Zone)
     end

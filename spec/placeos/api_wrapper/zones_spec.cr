@@ -10,7 +10,7 @@ module PlaceOS
       {
         "name": "Place",
         "description": null,
-        "tags": "org",
+        "tags": ["org"],
         "triggers": [],
         "created_at": 1555995992,
         "updated_at": 1555996000,
