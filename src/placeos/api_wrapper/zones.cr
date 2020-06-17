@@ -72,6 +72,7 @@ module PlaceOS
       q : String? = nil,
       limit : Int = 20,
       offset : Int = 0,
+      parent : String? = nil,
       tags : Array(String) | String? = nil
     )
       get base, params: from_args, as: Array(API::Models::Zone)
