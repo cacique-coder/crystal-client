@@ -26,7 +26,7 @@ module PlaceOS::Client::API::Models
     getter capacity : Int32
 
     # List of features in the room for searching and filtering spaces.
-    getter features : String
+    getter features : Set(String) = Set(String).new
 
     # Flag for signifying the space as reservable.
     getter bookable : Bool
