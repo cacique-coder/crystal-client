@@ -52,7 +52,7 @@ module PlaceOS
               end
             end
           end
-          path = "#{{{path}}}?#{params}"
+          path = params.empty? ? {{path}} : "#{{{path}}}?#{params}"
         {% elsif !params.nil? && !params.is_a?(NilLiteral) %}
           path = "#{{{path}}}?#{{{params}}}"
         {% else %}

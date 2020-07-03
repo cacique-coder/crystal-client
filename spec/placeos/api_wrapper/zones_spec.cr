@@ -89,7 +89,7 @@ module PlaceOS
         WebMock
           .stub(:delete, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
         result = client.destroy "zone-oOj2lGgsz"
-        result.should eq(nil)
+        result.should be_nil
       end
     end
   end
