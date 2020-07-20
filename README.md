@@ -2,7 +2,6 @@
 
 [![GitHub release](https://img.shields.io/github/release/placeos/crystal-client.svg)](https://github.com/placeos/crystal-client/releases)
 [![Build Status](https://travis-ci.com/placeos/crystal-client.svg?branch=master)](https://travis-ci.com/placeos/crystal-client)
-[![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://placeos.github.io/crystal-client/)
 
 A library for building [crystal](crystal-lang.org/) applications that utilise PlaceOS.
 
