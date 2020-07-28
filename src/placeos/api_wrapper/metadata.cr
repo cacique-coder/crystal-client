@@ -21,7 +21,7 @@ module PlaceOS
     )
       params = HTTP::Params{"name" => name}
       body = {name: name, description: description, details: details, parent_id: id}
-      post "#{base}/#{id}?#{params}", body: body, as: API::Models::Metadata
+      put "#{base}/#{id}?#{params}", body: body, as: API::Models::Metadata
     end
 
     def destroy(id : String, name : String)
