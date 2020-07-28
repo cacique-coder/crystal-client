@@ -58,7 +58,7 @@ module PlaceOS
 
     it "update" do
       WebMock
-        .stub(:post, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
+        .stub(:put, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
         .with(query: {"name" => "Place1"}, body: mock_metadata.first)
         .to_return(status: 200, body: mock_metadata.first)
       client.update("zone-oOj2lGgsz", "Place1", {name: "frodo"}, "metadata 1").should eq Client::API::Models::Metadata.from_json(mock_metadata.first)
