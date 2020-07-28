@@ -16,7 +16,7 @@ module PlaceOS
     def update(
       id : String,
       name : String,
-      details : JSON::Any | Hash | NamedTuple,
+      details : JSON::Any | Hash | NamedTuple | Array,
       description : String? = nil
     )
       params = HTTP::Params{"name" => name}
