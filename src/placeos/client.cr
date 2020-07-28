@@ -52,7 +52,8 @@ module PlaceOS
     end
 
     def authenticated?
-      !(@session.nil? || @email.nil? || @password.nil? || @client_id.nil? || @client_secret.nil?)
+      return true if @session
+      !(@email.nil? || @password.nil? || @client_id.nil? || @client_secret.nil?)
     end
 
     @session : OAuth2::Session? = nil
