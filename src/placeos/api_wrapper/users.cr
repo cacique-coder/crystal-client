@@ -14,5 +14,9 @@ module PlaceOS
     def current
       get "#{base}/current", as: User
     end
+
+    def resource_token
+      post "#{base}/resource_token", as: ResourceToken
+    end
   end
 end
