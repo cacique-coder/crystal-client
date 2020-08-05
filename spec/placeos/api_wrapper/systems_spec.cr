@@ -73,7 +73,7 @@ module PlaceOS
     describe "#update" do
       it "send a put request to the systems endpoint" do
         WebMock
-          .stub(:put, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7")
+          .stub(:put, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7?version=2")
           .with(
             headers: {"Content-Type" => "application/json"},
             body: {version: 2, name: "Foo"}.to_json

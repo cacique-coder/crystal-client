@@ -99,7 +99,7 @@ module PlaceOS
       modules : Array(String)? = nil,
       support_url : String? = nil
     )
-      put "#{base}/#{id}", body: from_args, as: System
+      put "#{base}/#{id}", params: "version=#{version}", body: from_args, as: System
     end
 
     # Search
