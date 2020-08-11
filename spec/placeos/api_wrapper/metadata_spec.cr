@@ -34,7 +34,8 @@ module PlaceOS
     }
     JSON
 
-    mock_metadata = Hash(String, JSON::Any).from_json(metadata_json).map &.to_json
+    mock_metadata = {} of String => String
+    Hash(String, JSON::Any).from_json(metadata_json).each { |key, value| mock_metadata[key] = value.to_json }
 
     describe "fetch" do
       it "gets metadata for a parent" do
