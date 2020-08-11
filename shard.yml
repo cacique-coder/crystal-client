@@ -13,7 +13,7 @@ authors:
 dependencies:
   placeos-models:
     github: placeos/models
-    version: ~> 3.0
+    version: ~> 4.2
 
 development_dependencies:
   ameba:
