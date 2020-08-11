@@ -6,8 +6,8 @@ module PlaceOS
     client = Client::APIWrapper::Metadata.new api
 
     metadata_json = <<-JSON
-    [
-      {
+    {
+      "Place1": {
         "name": "Place1",
         "description": "metadata 1",
         "details": {
@@ -15,7 +15,7 @@ module PlaceOS
         },
         "parent_id": "zone-oOj2lGgsz"
       },
-      {
+      "Place2": {
         "name": "Place2",
         "description": "metadata 2",
         "details": {
@@ -23,7 +23,7 @@ module PlaceOS
         },
         "parent_id": "zone-oOj2lGgsz"
       },
-      {
+      "Place3": {
         "name": "Place3",
         "description": "metadata 3",
         "details": {
@@ -31,10 +31,10 @@ module PlaceOS
         },
         "parent_id": "zone-oOj2lGgsz"
       }
-    ]
+    }
     JSON
 
-    mock_metadata = Array(JSON::Any).from_json(metadata_json).map &.to_json
+    mock_metadata = Hash(String, JSON::Any).from_json(metadata_json).map &.to_json
 
     describe "fetch" do
       it "gets metadata for a parent" do
@@ -48,7 +48,7 @@ module PlaceOS
         WebMock
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
           .with(query: {"name" => "Place1"})
-          .to_return(status: 200, body: "[#{mock_metadata.first}]")
+          .to_return(status: 200, body: %({"Place1": #{mock_metadata["Place1"]}}))
         client.fetch("zone-oOj2lGgsz", "Place1").size.should eq 1
       end
     end
@@ -59,9 +59,9 @@ module PlaceOS
     it "update" do
       WebMock
         .stub(:put, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
-        .with(query: {"name" => "Place1"}, body: mock_metadata.first)
-        .to_return(status: 200, body: mock_metadata.first)
-      client.update("zone-oOj2lGgsz", "Place1", {name: "frodo"}, "metadata 1").should eq Client::API::Models::Metadata.from_json(mock_metadata.first)
+        .with(query: {"name" => "Place1"}, body: mock_metadata["Place1"])
+        .to_return(status: 200, body: mock_metadata["Place1"])
+      client.update("zone-oOj2lGgsz", "Place1", {name: "frodo"}, "metadata 1").should eq Client::API::Models::Metadata.from_json(mock_metadata["Place1"])
     end
 
     it "delete" do
