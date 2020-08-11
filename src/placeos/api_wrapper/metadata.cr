@@ -6,7 +6,7 @@ module PlaceOS
     getter base : String = "#{API_ROOT}/metadata"
 
     def fetch(id : String, name : String? = nil)
-      get "#{base}/#{id}", params: from_args, as: Array(API::Models::Metadata)
+      get "#{base}/#{id}", params: from_args, as: Hash(String, API::Models::Metadata)
     end
 
     def children(id : String, name : String? = nil)
