@@ -9,7 +9,7 @@ module PlaceOS
       channel : String,
       payload
     )
-      post "#{base}/signal", body: payload
+      post "#{base}/signal?channel=#{channel}", body: payload
     end
 
     def version
