@@ -68,7 +68,13 @@ module PlaceOS
       else
         return unless authenticated?
         authentication_lock.synchronize do
-          session.try &.authenticate(client)
+          begin
+            session.try &.authenticate(client)
+          rescue OAuth2::Error
+            # Reauthenticate if something went wrong with the refresh token
+            @session = nil
+            session.try &.authenticate(client)
+          end
         end
       end
     end
