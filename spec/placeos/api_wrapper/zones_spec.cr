@@ -14,7 +14,9 @@ module PlaceOS
         "triggers": [],
         "created_at": 1555995992,
         "updated_at": 1555996000,
-        "id": "zone-oOj2lGgsz"
+        "id": "zone-oOj2lGgsz",
+        "count": 0,
+        "capacity": 2
       }
     ]
     JSON
