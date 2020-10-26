@@ -142,6 +142,27 @@ module PlaceOS
       get "#{base}/with_emails", params: HTTP::Params{"in" => query}, as: Array(System)
     end
 
+    # Unique Actions
+    def zones(id : String)
+      get "#{base}/#{id}/zones"
+    end
+
+    def settings(id : String)
+      get "#{base}/#{id}/settings"
+    end
+
+    def add_module(id : String, module_id : String)
+      put "#{base}/#{id}/module/#{module_id}"
+    end
+
+    def remove_module(id : String, module_id : String)
+      delete "#{base}/#{id}/module/#{module_id}"
+    end
+
+    def control
+      ws "#{base}/control"
+    end
+
     private getter client
 
     def initialize(@client : APIWrapper)

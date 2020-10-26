@@ -78,6 +78,11 @@ module PlaceOS
       get base, params: from_args, as: Array(API::Models::Zone)
     end
 
+    # Unique Actions
+    def trigger(id : String)
+      get "#{base}/#{id}/triggers"
+    end
+
     private getter client
 
     def initialize(@client : APIWrapper)

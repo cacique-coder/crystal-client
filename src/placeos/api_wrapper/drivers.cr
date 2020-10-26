@@ -56,5 +56,14 @@ module PlaceOS
     )
       put "#{base}/#{id}", body: from_args, as: Driver
     end
+
+    # Unique Actions
+    def recompile(id : String)
+      post "#{base}/#{id}/recompile", as: Driver
+    end
+
+    def compiled(id : String)
+      get "#{base}/#{id}/compiled", as: Driver
+    end
   end
 end

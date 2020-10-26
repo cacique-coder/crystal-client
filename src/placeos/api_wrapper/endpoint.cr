@@ -11,11 +11,20 @@ module PlaceOS
     def initialize(@client : APIWrapper)
     end
 
+    module Search(T)
+    end
+
     module Fetch(T)
       # Returns a {{ T.id }}
       def fetch(id : String)
         get "#{base}/#{id}", as: T
       end
+    end
+
+    module Create(T)
+    end
+
+    module Update(T)
     end
 
     module Destroy

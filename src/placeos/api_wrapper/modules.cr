@@ -109,5 +109,23 @@ module PlaceOS
     )
       put "#{base}/#{id}", body: from_args, as: API::Models::Module
     end
+
+    # Unique Actions
+    def settings(id : String)
+      get "#{base}/#{id}/settings"
+    end
+
+    # Current
+    def execute(
+      id : String,
+      method : String,
+      *args : Array(JSON::Any::Type)
+    )
+      post "#{base}/#{id}/exec/#{method}", body: args
+    end
+
+    def load(id : String)
+      post "#{base}/#{id}/load"
+    end
   end
 end
