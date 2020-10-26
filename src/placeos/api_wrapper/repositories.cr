@@ -46,9 +46,9 @@ module PlaceOS
       username : String,
       password : String,
       key : String,
-      folder_name : String? = nil,
-      description : String? = nil,
-      commit_hash : String = "HEAD"
+      folder_name : String?,
+      description : String?,
+      commit_hash : String?
     )
       post base, body: from_args, as: Repository
     end
@@ -62,7 +62,7 @@ module PlaceOS
       key : String,
       folder_name : String?,
       description : String?,
-      commit_hash : String = "HEAD"
+      commit_hash : String?
     )
       put "#{base}/#{id}", body: from_args, as: Repository
     end

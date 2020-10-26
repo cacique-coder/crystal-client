@@ -19,11 +19,11 @@ module PlaceOS
     def create(
       name : String,
       domain : String,
-      description : String? = nil,
-      login_url : String = "/login?continue={{url}}",
-      logout_url : String = "/auth/logout",
-      internals : Hash(String, JSON::Any) = {} of String => JSON::Any,
-      config : Hash(String, JSON::Any) = {} of String => JSON::Anyy
+      description : String?,
+      login_url : String?,
+      logout_url : String?,
+      internals : Hash(String, JSON::Any)?,
+      config : Hash(String, JSON::Any)?
     )
       post base, body: from_args, as: Authority
     end

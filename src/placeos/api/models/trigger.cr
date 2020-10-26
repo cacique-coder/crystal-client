@@ -1,10 +1,11 @@
 require "./response"
 
 module PlaceOS::Client::API::Models
+  # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/trigger.cr
+  #
   struct Trigger < Response
     getter name : String
     getter description : String
-    getter control_system_id : String
 
     getter actions : Actions
     getter conditions : Conditions
@@ -15,6 +16,8 @@ module PlaceOS::Client::API::Models
 
     getter enable_webhook : Bool
     getter supported_methods : Array(String)
+
+    getter control_system_id : String
 
     struct Actions < Response
       getter functions : Array(Function) = [] of PlaceOS::Client::API::Models::Trigger::Actions::Function

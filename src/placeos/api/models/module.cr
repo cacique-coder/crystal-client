@@ -2,6 +2,8 @@ require "./response"
 require "./role"
 
 module PlaceOS::Client::API::Models
+  # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/module.cr
+  #
   struct Module < Response
     include Timestamps
 
@@ -14,17 +16,19 @@ module PlaceOS::Client::API::Models
     # The system this module is bound to (logic modules only).
     getter control_sytem_id : String?
 
+    # getter edge_id : String # | Nil ?
+
     # IP address or resolvable hostname of the device this module connects to.
     getter ip : String?
+
+    # The TCP or UDP port that the associated device communicates on.
+    # getter port : Int32?
 
     # True if the device communicates securely.
     getter tls : Bool?
 
     # Protocol uses UDP rather that TCP.
     getter udp : Bool?
-
-    # The TCP or UDP port that the associated device communicates on.
-    getter port : Int32?
 
     # If enabled, provides an ephemeral connection that disconnects during idle
     # periods.
@@ -33,12 +37,12 @@ module PlaceOS::Client::API::Models
     # The based URI of the remote service (service modules only).
     getter uri : URI?
 
+    # Driver's default name for the module
+    getter name : String
+
     # The modules class name (Display, Lighting etc) if it should differ from the
     # default defined in the driver.
     getter custom_name : String?
-
-    # Driver's default name for the module
-    getter name : String
 
     # The associated driver type.
     getter role : Role
@@ -48,6 +52,8 @@ module PlaceOS::Client::API::Models
 
     # Module start/stop state.
     getter running : Bool
+
+    # getter notes : String
 
     # If enabled, system metrics ignore connectivity state.
     getter ignore_connected : Bool

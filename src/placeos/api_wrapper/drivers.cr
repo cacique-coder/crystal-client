@@ -34,25 +34,25 @@ module PlaceOS
       file_name : String,
       module_name : String,
       repository_id : String,
-      default_uri : String? = nil,
-      default_port : Int32? = nil,
-      description : String? = nil,
-      ignore_connected : Bool? = nil
+      default_uri : String?,
+      default_port : Int32?,
+      description : String?,
+      ignore_connected : Bool?
     )
       post base, body: from_args, as: Driver
     end
 
     def update(
       id : String,
-      name : String? = nil,
-      role : Role? = nil,
-      commit : String? = nil,
-      file_name : String? = nil,
-      module_name : String? = nil,
-      default_uri : String? = nil,
-      default_port : Int32? = nil,
-      description : String? = nil,
-      ignore_connected : Bool? = nil
+      name : String?,
+      role : Role?,
+      commit : String?,
+      file_name : String?,
+      module_name : String?,
+      default_uri : String?,
+      default_port : Int32?,
+      description : String?,
+      ignore_connected : Bool?
     )
       put "#{base}/#{id}", body: from_args, as: Driver
     end
