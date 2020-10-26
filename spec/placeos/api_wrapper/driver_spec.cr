@@ -39,7 +39,7 @@ module PlaceOS
 
     describe "#create" do
       it "posts to the drivers endpoint" do
-        body = {name: "Place", commit: "string", file_name: "string", module_name: "string", repository_id: "string"}.to_json
+        body = {name: "Place", role: Role::Driver, commit: "string", file_name: "string", module_name: "string", repository_id: "string"}.to_json
         WebMock
           .stub(:post, DOMAIN + client.base)
           .with(
