@@ -4,6 +4,7 @@ module PlaceOS::Client::API::Models
   # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/repository.cr
   #
   struct Repository < Response
+    getter id : String
     getter name : String
     getter uri : String
     getter repo_type : String
