@@ -4,6 +4,10 @@ require "./role"
 module PlaceOS::Client::API::Models
   struct Driver < Response
     include Timestamps
+
+    # A universally unique identifier for the driver.
+    getter id : String
+
     getter name : String
     getter description : String
 

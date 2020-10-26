@@ -29,11 +29,12 @@ module PlaceOS
 
     def create(
       name : String,
-      role : Role,
+      # role: Role,
       commit : String,
       file_name : String,
       module_name : String,
       repository_id : String,
+      role : Role? = nil, # should be mandatory? TODO fix
       default_uri : String? = nil,
       default_port : Int32? = nil,
       description : String? = nil,

@@ -20,7 +20,7 @@ A library for building [crystal](crystal-lang.org/) applications that utilise Pl
 
 ## Usage
 
-When initialialized via the host environment, the key `PLACE_URI` is expected.
+When initialized via the host environment, the key `PLACE_URI` is expected.
 
 ### Authentication
 
