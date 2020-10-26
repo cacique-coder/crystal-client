@@ -26,15 +26,15 @@ module PlaceOS
         driver.name.should eq("Place")
       end
 
-        it "provides driver search" do
-          WebMock
-            .stub(:get, DOMAIN + client.base)
-            .with(query: {"q" => "Place", "limit" => "20", "offset" => "0"}, headers: HEADERS)
-            .to_return(body: drivers_json)
-          result = client.search q: "Place"
-          result.size.should eq(1)
-          result.first.name.should eq("Place")
-        end
+      it "provides driver search" do
+        WebMock
+          .stub(:get, DOMAIN + client.base)
+          .with(query: {"q" => "Place", "limit" => "20", "offset" => "0"}, headers: HEADERS)
+          .to_return(body: drivers_json)
+        result = client.search q: "Place"
+        result.size.should eq(1)
+        result.first.name.should eq("Place")
+      end
     end
 
     describe "#create" do
