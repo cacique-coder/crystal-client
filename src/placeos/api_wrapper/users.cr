@@ -11,14 +11,6 @@ module PlaceOS
 
     getter base : String = "#{API_ROOT}/users"
 
-    def current
-      get "#{base}/current", as: User
-    end
-
-    def resource_token
-      post "#{base}/resource_token", as: ResourceToken
-    end
-
     # CRUD Actions
     def search(
       q : String? = nil,
@@ -89,6 +81,14 @@ module PlaceOS
       support : Bool?
     )
       put "#{base}/#{id}", body: from_args, as: User
+    end
+
+    def current
+      get "#{base}/current", as: User
+    end
+
+    def resource_token
+      post "#{base}/resource_token", as: ResourceToken
     end
   end
 end

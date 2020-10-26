@@ -32,6 +32,20 @@ module PlaceOS
       get base, params: from_args, as: Array(OAuthApplication)
     end
 
+    def create(
+      name : String,
+      uid : String? = nil,
+      secret : String? = nil,
+      scopes : String? = nil,
+      owner_id : String? = nil,
+      redirect_uri : String? = nil,
+      skip_authorization : Bool? = nil,
+      confidential : Bool? = nil,
+      revoked_at : Time? = nil
+    )
+      post base, body: from_args, as: OAuthApplication
+    end
+
     def update(
       id : String,
       name : String? = nil,
@@ -45,20 +59,6 @@ module PlaceOS
       revoked_at : Time? = nil
     )
       put "#{base}/#{id}", body: from_args, as: OAuthApplication
-    end
-
-    def create(
-      name : String,
-      uid : String? = nil,
-      secret : String? = nil,
-      scopes : String? = nil,
-      owner_id : String? = nil,
-      redirect_uri : String? = nil,
-      skip_authorization : Bool? = nil,
-      confidential : Bool? = nil,
-      revoked_at : Time? = nil
-    )
-      post base, body: from_args, as: OAuthApplication
     end
   end
 end
