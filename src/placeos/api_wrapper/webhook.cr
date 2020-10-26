@@ -1,6 +1,6 @@
 require "./endpoint"
 
 module PlaceOS
-  class Client::APIWrapper::Webhook < Client::APIWrapper::Endpoint
+  class Client::APIWrapper::Webhook
   end
 end
