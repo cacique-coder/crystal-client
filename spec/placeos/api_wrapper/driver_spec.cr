@@ -1,10 +1,8 @@
-# require "../api/models/zone"
 require "../../spec_helper"
 
-# require role enum
-# require "../role"
-
 module PlaceOS
+  include Client::API::Models
+
   describe Client::APIWrapper::Drivers do
     api = PlaceOS::Client::APIWrapper.new DOMAIN
     client = Client::APIWrapper::Drivers.new api
@@ -39,7 +37,7 @@ module PlaceOS
 
     describe "#create" do
       it "posts to the drivers endpoint" do
-        body = {name: "Place", role: Role::Driver, commit: "string", file_name: "string", module_name: "string", repository_id: "string"}.to_json
+        body = {name: "Place", role: Role::Device, commit: "string", file_name: "string", module_name: "string", repository_id: "string"}.to_json
         WebMock
           .stub(:post, DOMAIN + client.base)
           .with(
@@ -47,7 +45,7 @@ module PlaceOS
             body: body
           )
           .to_return(body: drivers.first)
-        result = client.create(name: "Place", commit: "string", file_name: "string", module_name: "string", repository_id: "string")
+        result = client.create(name: "Place", role: Role::Device, commit: "string", file_name: "string", module_name: "string", repository_id: "string")
         result.should be_a(Client::API::Models::Driver)
         result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"id\":\"driver-oOj2lGgsz\",\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end

@@ -1,4 +1,4 @@
-# require "models/driver"
+#  require "models/driver"
 
 module PlaceOS::Client::API::Models
   # NOTE: active-model is having an issue with resolving a type.
