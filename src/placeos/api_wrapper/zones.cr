@@ -32,7 +32,7 @@ module PlaceOS
       settings : Settings? = nil,
       triggers : Array(String)? = nil
     )
-      post base, body: from_args, as: API::Models::Zone
+      post base, body: from_args, as: API::Models::Zone # Should this just be Zone
     end
 
     # Updates zone attributes or configuration.

@@ -59,11 +59,11 @@ module PlaceOS
 
     # Unique Actions
     def recompile(id : String)
-      post "#{base}/#{id}/recompile", as: Driver
+      post "#{base}/#{id}/recompile"
     end
 
     def compiled(id : String)
-      get "#{base}/#{id}/compiled", as: Driver
+      get "#{base}/#{id}/compiled"
     end
   end
 end

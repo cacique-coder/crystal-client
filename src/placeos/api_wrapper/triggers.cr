@@ -48,7 +48,7 @@ module PlaceOS
 
     # Unique Actions
     def instances(id : String)
-      get "#{base}/#{id}/instance", as: Array(Trigger)
+      get "#{base}/#{id}/instance"
     end
   end
 end

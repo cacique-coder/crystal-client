@@ -81,11 +81,11 @@ module PlaceOS
     end
 
     def commits(id : String, count : Int32?, driver : String?)
-      get "#{base}/#{id}/commits", body: from_args
+      get "#{base}/#{id}/commits", params: from_args
     end
 
     def details(id : String, driver : String, commit : String)
-      get "#{base}/#{id}/details", body: from_args
+      get "#{base}/#{id}/details", params: from_args
     end
 
     def branches(id : String)
