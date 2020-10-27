@@ -32,6 +32,17 @@ module PlaceOS
         result.size.should eq(2)
         result.first.name.should eq("Place")
       end
+
+      # expecting 1 getting 2.
+      pending "can limit pages correctly" do
+        WebMock
+          .stub(:get, DOMAIN + client.base)
+          .with(query: {"limit" => "1", "offset" => "0"}, headers: HEADERS)
+          .to_return(body: drivers_json)
+        result = client.search limit: 1
+        result.size.should eq(1)
+        # result.first.name.should eq("Place")
+      end
     end
 
     describe "#create" do
