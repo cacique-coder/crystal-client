@@ -33,6 +33,7 @@ module PlaceOS
         result.first.name.should eq("Place")
       end
 
+      # TODO
       # expecting 1 getting 2.
       pending "can limit pages correctly" do
         WebMock
@@ -97,9 +98,25 @@ module PlaceOS
     end
 
     describe "#recompile" do
+      it "execs recompile" do
+        WebMock
+          .stub(:post, DOMAIN + "#{client.base}/driver-oOj2lGgsz/recompile")
+          .to_return(body: drivers.first)
+        result = client.recompile "driver-oOj2lGgsz"
+        result.should be_a(Client::API::Models::Driver)
+        result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"id\":\"driver-oOj2lGgsz\",\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+      end
     end
 
     describe "#compiled" do
+      it "execs compile" do
+        WebMock
+          .stub(:get, DOMAIN + "#{client.base}/driver-oOj2lGgsz/compiled")
+          .to_return(body: drivers.first)
+        result = client.compiled "driver-oOj2lGgsz"
+        result.should be_a(Client::API::Models::Driver)
+        result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"id\":\"driver-oOj2lGgsz\",\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+      end
     end
   end
 end
