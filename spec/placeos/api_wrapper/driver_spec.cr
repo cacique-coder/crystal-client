@@ -10,7 +10,7 @@ module PlaceOS
     drivers_json = {{ read_file("#{__DIR__}/mocks/drivers.json") }}
     drivers = Array(JSON::Any).from_json(drivers_json).map &.to_json
 
-    describe "search" do
+    describe "#search" do
       it "enumerates all drivers" do
         WebMock
           .stub(:get, DOMAIN + client.base)
@@ -50,7 +50,7 @@ module PlaceOS
       end
     end
 
-    describe "#retrieve" do
+    describe "#fetch" do
       it "inspects a drivers metadata" do
         WebMock
           .stub(:get, DOMAIN + "#{client.base}/driver-oOj2lGgsz")
@@ -76,13 +76,19 @@ module PlaceOS
       end
     end
 
-    describe "#delete" do
+    describe "#destroy" do
       it "execs a delete request" do
         WebMock
           .stub(:delete, DOMAIN + "#{client.base}/driver-oOj2lGgsz")
         result = client.destroy "driver-oOj2lGgsz"
         result.should be_nil
       end
+    end
+
+    describe "#recompile" do
+    end
+
+    describe "#compiled" do
     end
   end
 end
