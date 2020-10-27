@@ -10,7 +10,6 @@ module PlaceOS
     drivers_json = {{ read_file("#{__DIR__}/mocks/drivers.json") }}
     drivers = Array(JSON::Any).from_json(drivers_json).map &.to_json
 
-    # test search
     describe "search" do
       it "enumerates all drivers" do
         WebMock
@@ -18,7 +17,7 @@ module PlaceOS
           .with(query: {"limit" => "20", "offset" => "0"}, headers: HEADERS)
           .to_return(body: drivers_json)
         result = client.search
-        result.size.should eq(1)
+        result.size.should eq(2)
         driver = result.first
         driver.should be_a(Client::API::Models::Driver)
         driver.name.should eq("Place")
@@ -30,7 +29,7 @@ module PlaceOS
           .with(query: {"q" => "Place", "limit" => "20", "offset" => "0"}, headers: HEADERS)
           .to_return(body: drivers_json)
         result = client.search q: "Place"
-        result.size.should eq(1)
+        result.size.should eq(2)
         result.first.name.should eq("Place")
       end
     end
