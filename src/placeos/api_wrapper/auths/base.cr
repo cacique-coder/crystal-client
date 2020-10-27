@@ -31,12 +31,12 @@ module PlaceOS
       get base, params: from_args, as: Array(Model)
     end
 
-    def update(**args)
-      put "#{base}/#{id}", body: from_args, as: Model
-    end
-
     def create(**args) : Model
       post base, body: from_args, as: Model
+    end
+
+    def update(**args)
+      put "#{base}/#{id}", body: from_args, as: Model
     end
   end
 end

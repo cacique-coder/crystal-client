@@ -68,7 +68,7 @@ module PlaceOS
       control_system_id : String? = nil,
       driver_id : String? = nil
     )
-      get base, params: from_args, as: Array(API::Models::Module)
+      get base, params: from_args, as: Array(Module)
     end
 
     # Management
@@ -89,7 +89,7 @@ module PlaceOS
       ignore_connected : Bool? = nil,
       ignore_startstop : Bool? = nil
     )
-      post base, body: from_args, as: API::Models::Module
+      post base, body: from_args, as: Module
     end
 
     # Updates module attributes or configuration.
@@ -107,7 +107,25 @@ module PlaceOS
       ignore_connected : Bool? = nil,
       ignore_startstop : Bool? = nil
     )
-      put "#{base}/#{id}", body: from_args, as: API::Models::Module
+      put "#{base}/#{id}", body: from_args, as: Module
+    end
+
+    # Unique Actions
+    def settings(id : String)
+      get "#{base}/#{id}/settings"
+    end
+
+    # Current
+    def execute(
+      id : String,
+      method : String,
+      *args : Array(JSON::Any::Type)
+    )
+      post "#{base}/#{id}/exec/#{method}", body: args
+    end
+
+    def load(id : String)
+      post "#{base}/#{id}/load"
     end
   end
 end

@@ -23,7 +23,7 @@ module PlaceOS
 
     zones = Array(JSON::Any).from_json(zones_json).map &.to_json
 
-    describe "search" do
+    describe "#search" do
       it "enumerates all zones" do
         WebMock
           .stub(:get, DOMAIN + client.base)
@@ -62,7 +62,7 @@ module PlaceOS
       end
     end
 
-    describe "#retrieve" do
+    describe "#fetch" do
       it "inspects a zones metadata" do
         WebMock
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
@@ -86,13 +86,19 @@ module PlaceOS
       end
     end
 
-    describe "#delete" do
+    describe "#destroy" do
       it "execs a delete request" do
         WebMock
           .stub(:delete, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
         result = client.destroy "zone-oOj2lGgsz"
         result.should be_nil
       end
+    end
+
+    describe "#execute" do
+    end
+
+    describe "#trigger" do
     end
   end
 end

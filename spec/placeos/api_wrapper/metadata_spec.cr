@@ -37,7 +37,7 @@ module PlaceOS
     mock_metadata = {} of String => String
     Hash(String, JSON::Any).from_json(metadata_json).each { |key, value| mock_metadata[key] = value.to_json }
 
-    describe "fetch" do
+    describe "#fetch" do
       it "gets metadata for a parent" do
         WebMock
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
@@ -54,10 +54,10 @@ module PlaceOS
       end
     end
 
-    pending "children" do
+    pending "#children" do
     end
 
-    it "update" do
+    it "#update" do
       WebMock
         .stub(:put, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
         .with(query: {"name" => "Place1"}, body: mock_metadata["Place1"])
@@ -65,7 +65,7 @@ module PlaceOS
       client.update("zone-oOj2lGgsz", "Place1", {name: "frodo"}, "metadata 1").should eq Client::API::Models::Metadata.from_json(mock_metadata["Place1"])
     end
 
-    it "delete" do
+    it "#destroy" do
       WebMock
         .stub(:delete, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
         .with(query: {"name" => "Place1"})

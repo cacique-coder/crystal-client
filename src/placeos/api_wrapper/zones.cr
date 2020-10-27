@@ -32,7 +32,7 @@ module PlaceOS
       settings : Settings? = nil,
       triggers : Array(String)? = nil
     )
-      post base, body: from_args, as: API::Models::Zone
+      post base, body: from_args, as: API::Models::Zone # Should this just be Zone
     end
 
     # Updates zone attributes or configuration.
@@ -76,6 +76,11 @@ module PlaceOS
       tags : Array(String) | String? = nil
     )
       get base, params: from_args, as: Array(API::Models::Zone)
+    end
+
+    # Unique Actions
+    def trigger(id : String)
+      get "#{base}/#{id}/triggers"
     end
 
     private getter client

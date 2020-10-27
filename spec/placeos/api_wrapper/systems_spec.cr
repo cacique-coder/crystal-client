@@ -84,7 +84,7 @@ module PlaceOS
       end
     end
 
-    describe "#delete" do
+    describe "#destroy" do
       it "execs a delete request" do
         WebMock
           .stub(:delete, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7")
@@ -212,6 +212,18 @@ module PlaceOS
         result.size.should eq(1)
         result.first.name.should eq("Room 1")
       end
+    end
+
+    describe "#settings" do
+    end
+
+    describe "#add_module" do
+    end
+
+    describe "#remove_module" do
+    end
+
+    describe "#control" do
     end
   end
 end

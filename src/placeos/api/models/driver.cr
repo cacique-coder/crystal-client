@@ -2,6 +2,8 @@ require "./response"
 require "./role"
 
 module PlaceOS::Client::API::Models
+  # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/driver.cr
+  #
   struct Driver < Response
     include Timestamps
 

@@ -142,5 +142,17 @@ module PlaceOS
         result.as_i.should eq(1)
       end
     end
+
+    describe "ping" do
+    end
+
+    describe "settings" do
+    end
+
+    describe "execute" do
+    end
+
+    describe "load" do
+    end
   end
 end
