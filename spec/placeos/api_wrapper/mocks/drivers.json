@@ -1,0 +1,32 @@
+[
+    {
+        "id": "driver-oOj2lGgsz",
+        "name": "Place",
+        "description": "null",
+        "default_uri": "hello",
+        "default_port": 80,
+        "role": 1,
+        "file_name": "string",
+        "commit": "string",
+        "repository_id": "string",
+        "module_name": "string",
+        "ignore_connected": true,
+        "created_at": 1562041110,
+        "updated_at": 1562041120
+    },
+    {
+        "id": "driver-oOj2lGgsa",
+        "name": "Place",
+        "description": "null",
+        "default_uri": "hello again",
+        "default_port": 80,
+        "role": 2,
+        "file_name": "string",
+        "commit": "string",
+        "repository_id": "string",
+        "module_name": "string",
+        "ignore_connected": true,
+        "created_at": 1562041111,
+        "updated_at": 1562041121
+    }
+]
