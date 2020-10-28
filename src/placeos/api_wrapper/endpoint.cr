@@ -11,8 +11,8 @@ module PlaceOS
     def initialize(@client : APIWrapper)
     end
 
-    module Search(T)
-    end
+    # module Search(T)
+    # end
 
     module Fetch(T)
       # Returns a {{ T.id }}
@@ -21,11 +21,11 @@ module PlaceOS
       end
     end
 
-    module Create(T)
-    end
+    # module Create(T)
+    # end
 
-    module Update(T)
-    end
+    # module Update(T)
+    # end
 
     module Destroy
       # Destroys a {{ T.id }}

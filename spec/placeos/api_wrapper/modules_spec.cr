@@ -143,16 +143,16 @@ module PlaceOS
       end
     end
 
-    describe "ping" do
+    describe "#ping" do
     end
 
-    describe "settings" do
+    describe "#settings" do
     end
 
-    describe "execute" do
+    describe "#execute" do
     end
 
-    describe "load" do
+    describe "#load" do
     end
   end
 end

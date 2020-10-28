@@ -1,7 +1,11 @@
 require "../../spec_helper"
+require "placeos-models"
+
+# driver1 = Generator.driver(role: Driver::Role::Service)
 
 module PlaceOS
   include Client::API::Models
+  include PlaceOS::Model
 
   describe Client::APIWrapper::Drivers do
     api = PlaceOS::Client::APIWrapper.new DOMAIN
@@ -9,6 +13,10 @@ module PlaceOS
 
     drivers_json = {{ read_file("#{__DIR__}/mocks/drivers.json") }}
     drivers = Array(JSON::Any).from_json(drivers_json).map &.to_json
+
+    # driver1 = Generator.driver(role: Driver::Role::Service)
+    # driver1 = driver(1, "module_name", "repo_name")
+    # puts driver1
 
     describe "#search" do
       it "enumerates all drivers" do

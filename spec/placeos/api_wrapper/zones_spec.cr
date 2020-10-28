@@ -31,9 +31,8 @@ module PlaceOS
           .to_return(body: zones_json)
         result = client.search
         result.size.should eq(1)
-        zone = result.first
-        zone.should be_a(Client::API::Models::Zone)
-        zone.name.should eq("Place")
+        result.first.should be_a(Client::API::Models::Zone)
+        result.first.name.should eq("Place")
       end
 
       it "provides zone search" do
@@ -96,9 +95,30 @@ module PlaceOS
     end
 
     describe "#execute" do
+      # TODO
+      pending "should exec execute" do
+        body = {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json
+        WebMock
+          .stub(:post, DOMAIN + "#{client.base}/zone-oOj2lGgsz/module_name_1/method")
+          .with(
+            headers: HTTP::Headers{"Content-Type" => "application/json"},
+            body: {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json,
+          )
+          .to_return(body: zones.first)
+        result = client.execute id: "zone-oOj2lGgsz", method: "string", module_name: "string"
+        result.should be_a(Client::API::Models::Zone)
+      end
     end
 
     describe "#trigger" do
+      it "should exec trigger" do
+        WebMock
+          .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz/triggers")
+          .to_return(body: zones.first)
+        result = client.trigger "zone-oOj2lGgsz"
+        result.should be_a(Client::API::Models::Zone)
+        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"zone-oOj2lGgsz\",\"name\":\"Place\",\"tags\":[\"org\"],\"count\":0,\"capacity\":2,\"triggers\":[]}")
+      end
     end
   end
 end

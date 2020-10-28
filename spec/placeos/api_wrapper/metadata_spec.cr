@@ -55,7 +55,11 @@ module PlaceOS
     end
 
     pending "#children" do
-    end
+      # WebMock
+      #   .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz/children")
+      #   .to_return(status: 200)
+      # result = client.children("zone-oOj2lGgsz")
+    end 
 
     it "#update" do
       WebMock
