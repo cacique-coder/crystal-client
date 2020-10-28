@@ -3,21 +3,22 @@ require "./endpoint"
 module PlaceOS
   class Client::APIWrapper::SystemTriggers < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Destroy
+    include Client::APIWrapper::Endpoint::Search(API::Models::TriggerInstance)
 
     # SystemTriggers are embedded beneath a systems route
     getter base : String = "#{API_ROOT}/systems"
 
     # CRUD Actions
-    def search(
-      control_system_id : String?,
-      trigger_id : String?,
-      zone_id : String?,
-      q : String? = nil,
-      limit : Int = 20,
-      offset : Int = 0
-    )
-      get base, params: from_args, as: Array(API::Models::TriggerInstance)
-    end
+    # def search(
+    #   control_system_id : String?,
+    #   trigger_id : String?,
+    #   zone_id : String?,
+    #   q : String? = nil,
+    #   limit : Int = 20,
+    #   offset : Int = 0
+    # )
+    #   get base, params: from_args, as: Array(API::Models::TriggerInstance)
+    # end
 
     def fetch(id : String, complete : Bool?)
       get "#{base}/#{id}", params: from_args, as: API::Model::TriggerInstance

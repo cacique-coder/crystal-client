@@ -4,33 +4,10 @@ module PlaceOS
   class Client::APIWrapper::OAuthApplications < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Fetch(OAuthApplication)
     include Client::APIWrapper::Endpoint::Destroy
+    include Client::APIWrapper::Endpoint::Search(OAuthApplication)
+    
 
     getter base : String = "#{API_ROOT}/oauth_apps"
-
-    # List or search for applications.
-    #
-    # Results maybe filtered by specifying a query - *q* - to search across application
-    # attributes. A small query language is supported within this:
-    #
-    # Operator | Action
-    # -------- | ------
-    # `+`      | Matches both terms
-    # `|`      | Matches either terms
-    # `-`      | Negates a single token
-    # `"`      | Wraps tokens to form a phrase
-    # `(`  `)` | Provides precedence
-    # `~N`     | Specifies edit distance (fuzziness) after a word
-    # `~N`     | Specifies slop amount (deviation) after a phrase
-    #
-    # Up to *limit* application will be returned, with a paging based on *offset*.
-    def search(
-      q : String? = nil,
-      limit : Int = 20,
-      offset : Int = 0,
-      authority : String? = nil
-    )
-      get base, params: from_args, as: Array(OAuthApplication)
-    end
 
     def create(
       name : String,

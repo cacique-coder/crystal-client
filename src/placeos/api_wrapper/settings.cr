@@ -4,18 +4,19 @@ module PlaceOS
   class Client::APIWrapper::Settings < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Fetch(API::Models::Settings)
     include Client::APIWrapper::Endpoint::Destroy
+    include Client::APIWrapper::Endpoint::Search(API::Models::Settings)
 
     getter base : String = "#{API_ROOT}/settings"
 
     # CRUD Actions
-    def search(
-      parent_id : String?,
-      q : String? = nil,
-      limit : Int = 20,
-      offset : Int = 0
-    )
-      get base, params: from_args, as: Array(API::Models::Settings)
-    end
+    # def search(
+    #   parent_id : String?,
+    #   q : String? = nil,
+    #   limit : Int = 20,
+    #   offset : Int = 0
+    # )
+    #   get base, params: from_args, as: Array(API::Models::Settings)
+    # end
 
     def create(
       parent_id : String,

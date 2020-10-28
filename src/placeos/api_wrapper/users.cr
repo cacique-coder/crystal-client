@@ -8,17 +8,9 @@ module PlaceOS
   class Client::APIWrapper::Users < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Fetch(User)
     include Client::APIWrapper::Endpoint::Destroy
+    include Client::APIWrapper::Endpoint::Search(User)
 
     getter base : String = "#{API_ROOT}/users"
-
-    # CRUD Actions
-    def search(
-      q : String? = nil,
-      limit : Int = 20,
-      offset : Int = 0
-    )
-      get base, params: from_args, as: Array(User)
-    end
 
     def create(
       authority_id : String,

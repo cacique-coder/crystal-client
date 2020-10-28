@@ -11,6 +11,22 @@ module PlaceOS
     def initialize(@client : APIWrapper)
     end
 
+    # List or search for drivers.
+    #
+    # Results maybe filtered by specifying a query - *q* - to search across driver
+    # attributes. A small query language is supported within this:
+    #
+    # Operator | Action
+    # -------- | ------
+    # `+`      | Matches both terms
+    # `|`      | Matches either terms
+    # `-`      | Negates a single token
+    # `"`      | Wraps tokens to form a phrase
+    # `(`  `)` | Provides precedence
+    # `~N`     | Specifies edit distance (fuzziness) after a word
+    # `~N`     | Specifies slop amount (deviation) after a phrase
+    #
+    # Up to *limit* drivers will be returned, with a paging based on *offset*.
     module Search(T)
       def search(
         q : String? = nil,
