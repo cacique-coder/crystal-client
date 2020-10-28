@@ -29,6 +29,7 @@ module PlaceOS
     end
 
     def update(
+      id : String,
       name : String?,
       domain : String?,
       description : String?,
