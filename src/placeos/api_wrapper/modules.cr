@@ -7,23 +7,13 @@ module PlaceOS
   class Client::APIWrapper::Modules < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Fetch(Module)
     include Client::APIWrapper::Endpoint::Destroy
+    include Client::APIWrapper::Endpoint::StartStop
+    include Client::APIWrapper::Endpoint::Settings
 
     getter base : String = "#{API_ROOT}/modules"
 
     # Interaction
     ###########################################################################
-
-    # Starts a module.
-    def start(id : String)
-      post "#{base}/#{id}/start"
-      nil
-    end
-
-    # Stops a module.
-    def stop(id : String)
-      post "#{base}/#{id}/stop"
-      nil
-    end
 
     # Performs a connectivity check with the associated device or service.
     def ping(id : String)
@@ -111,11 +101,6 @@ module PlaceOS
     end
 
     # Unique Actions
-    def settings(id : String)
-      get "#{base}/#{id}/settings"
-    end
-
-    # Current
     def execute(
       id : String,
       method : String,

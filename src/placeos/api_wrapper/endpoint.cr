@@ -11,21 +11,23 @@ module PlaceOS
     def initialize(@client : APIWrapper)
     end
 
-    # module Search(T)
-    # end
-
-    module Fetch(T)
-      # Returns a {{ T.id }}
-      def fetch(id : String)
-        get "#{base}/#{id}", as: T
+    module Search(T)
+      def search(
+        q : String? = nil,
+        limit : Int = 20,
+        offset : Int = 0,
+        **args
+      ) : Array(T)
+        get base, params: from_args, as: Array(T)
       end
     end
 
-    # module Create(T)
-    # end
-
-    # module Update(T)
-    # end
+    module Fetch(T)
+      # Returns a {{ T.id }}
+      def fetch(id : String) : T
+        get "#{base}/#{id}", as: T
+      end
+    end
 
     module Destroy
       # Destroys a {{ T.id }}
@@ -33,6 +35,59 @@ module PlaceOS
         delete "#{base}/#{id}"
         nil
       end
+    end
+
+    module Create(T)
+      def create(**args) : T
+        post base, body: from_args, as: T
+      end
+    end
+
+    module Update(T)
+      def update(id, **args) : T
+        post "#{base}/#{id}", body: from_args, as: T
+      end
+    end
+
+    module StartStop
+      # Starts a module.
+      def start(id : String)
+        post "#{base}/#{id}/start"
+        nil
+      end
+
+      # Stops a module.
+      def stop(id : String)
+        post "#{base}/#{id}/stop"
+        nil
+      end
+    end
+
+    module Settings
+      def settings(id : String)
+        get "#{base}/#{id}/settings"
+      end
+    end
+
+    module State
+      # def state(id : String, lookup : String? = nil)
+      #   path = "#{base}/#{id}/state"
+      #   path += "/#{lookup}" if lookup
+
+      #   get path
+      # end
+    end
+
+    module Execute
+      # def execute(
+      #   id : String,
+      #   method : String,
+      #   # module_name : String,
+      #   # index : Int32 = 1,
+      #   args = nil
+      # )
+      #   # post "#{base}/#{id}/#{module_name}_#{index}/#{method}", body: args
+      # end
     end
 
     {% for method in %w(get post put head delete patch options) %}

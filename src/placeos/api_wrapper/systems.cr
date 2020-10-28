@@ -4,22 +4,13 @@ module PlaceOS
   class Client::APIWrapper::Systems < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Fetch(System)
     include Client::APIWrapper::Endpoint::Destroy
+    include Client::APIWrapper::Endpoint::StartStop
+    include Client::APIWrapper::Endpoint::Settings
+
     getter base : String = "#{API_ROOT}/systems"
 
     # Interaction
     ###########################################################################
-
-    # Start all modules within a system.
-    def start(id : String)
-      post "#{base}/#{id}/start"
-      nil
-    end
-
-    # Stops all modules within a system.
-    def stop(id : String)
-      post "#{base}/#{id}/stop"
-      nil
-    end
 
     # Executes a behaviour exposed by a module within the passed system *id*.
     def execute(
@@ -52,10 +43,6 @@ module PlaceOS
     # Queries the types of modules available in system *id*.
     def types(id : String)
       get "#{base}/#{id}/types", as: Hash(String, Int32)
-    end
-
-    def settings(id : String)
-      get "#{base}/#{id}/settings", as: Array(Settings)
     end
 
     # Management
@@ -145,10 +132,6 @@ module PlaceOS
     # Unique Actions
     def zones(id : String)
       get "#{base}/#{id}/zones"
-    end
-
-    def settings(id : String)
-      get "#{base}/#{id}/settings"
     end
 
     def add_module(id : String, module_id : String)
