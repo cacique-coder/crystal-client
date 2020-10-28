@@ -21,7 +21,7 @@ module PlaceOS
     # end
 
     def fetch(id : String, complete : Bool?)
-      get "#{base}/#{id}", params: from_args, as: API::Model::TriggerInstance
+      get "#{base}/#{id}", params: from_args, as: API::Models::TriggerInstance
     end
 
     def create(
