@@ -16,9 +16,6 @@ module PlaceOS::Client::API::Models
     getter commit_hash : String?
     getter branch : String?
     getter repo_type : Type?
-    getter username : String?
-    getter password : String?
-    getter key : String?
   end
 
   enum Type
