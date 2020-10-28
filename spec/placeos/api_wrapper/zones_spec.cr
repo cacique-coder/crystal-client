@@ -104,7 +104,7 @@ module PlaceOS
             headers: HTTP::Headers{"Content-Type" => "application/json"},
             body: {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json,
           )
-          .to_return(body: zones.first)
+          .to_return(body: body)
         result = client.execute id: "zone-oOj2lGgsz", method: "string", module_name: "string"
         result.should be_a(Client::API::Models::Zone)
       end

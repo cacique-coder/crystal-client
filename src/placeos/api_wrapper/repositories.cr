@@ -54,16 +54,18 @@ module PlaceOS
     end
 
     def update(
-      name : String?,
-      uri : String?,
-      repo_type : String?,
+      id : String,
       username : String,
       password : String,
       key : String,
+      name : String?,
+      uri : String?,
+      repo_type : String?,
       folder_name : String?,
       description : String?,
       commit_hash : String?
     )
+      # id not defined, what should I used, or define it somewhere else?
       put "#{base}/#{id}", body: from_args, as: Repository
     end
 
