@@ -5,7 +5,6 @@ module PlaceOS
     include Client::APIWrapper::Endpoint::Fetch(OAuthApplication)
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::Search(OAuthApplication)
-    
 
     getter base : String = "#{API_ROOT}/oauth_apps"
 

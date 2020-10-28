@@ -8,7 +8,7 @@ module PlaceOS
     # settings_json = <<-JSON
     # [
     #   {
-    #     "id": "setting-oOj2lGgsz",  
+    #     "id": "setting-oOj2lGgsz",
     #     "parent_id": ""
     #     "name": "Place",
     #     "description": null,
@@ -23,7 +23,7 @@ module PlaceOS
     # JSON
 
     # settings = Array(JSON::Any).from_json(settings_json).map &.to_json
-    
+
     describe "#search" do
       # it "enumerates all settings" do
       #   WebMock

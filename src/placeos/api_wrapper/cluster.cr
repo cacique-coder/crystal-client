@@ -7,6 +7,5 @@ module PlaceOS
     include Client::APIWrapper::Endpoint::Search(Cluster)
 
     getter base : String = "#{API_ROOT}/cluster"
-
   end
 end
