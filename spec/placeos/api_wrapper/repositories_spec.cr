@@ -10,7 +10,7 @@ module PlaceOS
     repositories_json = <<-JSON
     [
       {
-        "id": "repository-oOj2lGgsz",  
+        "id": "repository-oOj2lGgsz",
         "name": "Place",
         "uri": "uri",
         "repo_name": "your-fave-repo",

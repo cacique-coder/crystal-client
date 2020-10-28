@@ -8,7 +8,7 @@ module PlaceOS
     oauth_applications_json = <<-JSON
     [
       {
-        "id": "oauthapplication-oOj2lGgsz",  
+        "id": "oauthapplication-oOj2lGgsz",
         "name": "Place",
         "authority_id": "authority_id",
         "uid": "client_id",
