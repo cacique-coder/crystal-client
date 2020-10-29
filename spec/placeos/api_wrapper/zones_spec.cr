@@ -96,17 +96,18 @@ module PlaceOS
 
     describe "#execute" do
       # TODO
+      # Unsure about how this is supposed to work
       pending "should exec execute" do
-        body = {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json
+        # body = {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json
         WebMock
           .stub(:post, DOMAIN + "#{client.base}/zone-oOj2lGgsz/module_name_1/method")
           .with(
             headers: HTTP::Headers{"Content-Type" => "application/json"},
             body: {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json,
           )
-          .to_return(body: body)
+          .to_return(body: zones.first)
         result = client.execute id: "zone-oOj2lGgsz", method: "string", module_name: "string"
-        result.should be_a(PlaceOS::Model::Zone)
+        # result.should be_a(PlaceOS::Model::Zone)
       end
     end
 

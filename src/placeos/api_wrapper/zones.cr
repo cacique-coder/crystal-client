@@ -1,4 +1,3 @@
-require "../api/models/zone"
 require "./endpoint"
 
 module PlaceOS

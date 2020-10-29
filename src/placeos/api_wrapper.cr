@@ -49,4 +49,3 @@ module PlaceOS
 end
 
 require "./api_wrapper/**"
-
