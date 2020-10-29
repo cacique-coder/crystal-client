@@ -115,8 +115,8 @@ module PlaceOS
         WebMock
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz/triggers")
           .to_return(body: zones.first)
-        result = client.trigger "zone-oOj2lGgsz"
-        result.should be_a(Client::API::Models::Zone)
+        result = client.triggers "zone-oOj2lGgsz"
+        result.should be_a(Client::API::Models::Zone) # This should be Array(Client::API::Models::Trigger)
         result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"zone-oOj2lGgsz\",\"name\":\"Place\",\"tags\":[\"org\"],\"count\":0,\"capacity\":2,\"triggers\":[]}")
       end
     end

@@ -16,13 +16,13 @@ module PlaceOS::Client::API::Models
     # The system this module is bound to (logic modules only).
     getter control_sytem_id : String?
 
-    # getter edge_id : String # | Nil ?
+    getter edge_id : String?
 
     # IP address or resolvable hostname of the device this module connects to.
     getter ip : String?
 
     # The TCP or UDP port that the associated device communicates on.
-    # getter port : Int32?
+    getter port : Int32?
 
     # True if the device communicates securely.
     getter tls : Bool?

@@ -79,8 +79,8 @@ module PlaceOS
     end
 
     # Unique Actions
-    def trigger(id : String)
-      get "#{base}/#{id}/triggers", as: Zone
+    def triggers(id : String)
+      get "#{base}/#{id}/triggers", as: Zone # This should be Array(Client::API::Models::Trigger)
     end
 
     private getter client
