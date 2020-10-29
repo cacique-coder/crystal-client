@@ -117,8 +117,8 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz/triggers")
           .to_return(body: zones.first)
         result = client.trigger "zone-oOj2lGgsz"
-        result.should be_a(PlaceOS::Model::Zone)
-        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"tags\":[\"org\"],\"count\":0,\"capacity\":2,\"triggers\":[]}")
+        result.should be_a(PlaceOS::Model::Trigger)
+        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"actions\":{\"functions\":[],\"mailers\":[]},\"conditions\":{\"comparisons\":[],\"time_dependents\":[]},\"debounce_period\":0,\"important\":false,\"enable_webhook\":false,\"supported_methods\":[\"POST\"]}")
       end
     end
   end

@@ -21,7 +21,7 @@ module PlaceOS
       get "#{base}"
     end
 
-    def reindex(backfill : Bool?)
+    def reindex(backfill : Bool? = true)
       get "#{base}/reindex", params: from_args
     end
 

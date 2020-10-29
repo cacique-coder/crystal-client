@@ -79,7 +79,7 @@ module PlaceOS
 
     # Unique Actions
     def trigger(id : String)
-      get "#{base}/#{id}/triggers", as: PlaceOS::Model::Zone
+      get "#{base}/#{id}/triggers", as: PlaceOS::Model::Trigger
     end
 
     private getter client
