@@ -29,7 +29,7 @@ module PlaceOS
       path = "#{base}/#{id}/state"
       path += "/#{lookup}" if lookup
 
-      get path
+      get path # spec and type casting requires rest-api specs
     end
 
     # Management
@@ -77,11 +77,11 @@ module PlaceOS
       method : String,
       *args : Array(JSON::Any::Type)
     )
-      post "#{base}/#{id}/exec/#{method}", body: args
+      post "#{base}/#{id}/exec/#{method}", body: args # spec and type casting requires rest-api specs
     end
 
     def load(id : String)
-      post "#{base}/#{id}/load"
+      post "#{base}/#{id}/load" # spec and type casting requires rest-api specs
     end
   end
 end
