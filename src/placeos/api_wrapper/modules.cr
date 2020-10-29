@@ -1,18 +1,15 @@
-require "../api/models/module"
-require "../api/models/ping"
-
 require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Modules < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(Module)
+    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Module)
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::StartStop
     include Client::APIWrapper::Endpoint::Settings
     # Results my also also be limited to those associated with a specific
     # *system_id*, that are instances of a *driver_id*, or any combination of
     # these.
-    include Client::APIWrapper::Endpoint::Search(Module)
+    include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::Module)
 
     getter base : String = "#{API_ROOT}/modules"
 
@@ -50,7 +47,7 @@ module PlaceOS
       ignore_connected : Bool? = nil,
       ignore_startstop : Bool? = nil
     )
-      post base, body: from_args, as: Module
+      post base, body: from_args, as: PlaceOS::Model::Module
     end
 
     # Updates module attributes or configuration.
@@ -68,7 +65,7 @@ module PlaceOS
       ignore_connected : Bool? = nil,
       ignore_startstop : Bool? = nil
     )
-      put "#{base}/#{id}", body: from_args, as: Module
+      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Module
     end
 
     # Unique Actions
@@ -77,11 +74,11 @@ module PlaceOS
       method : String,
       *args : Array(JSON::Any::Type)
     )
-      post "#{base}/#{id}/exec/#{method}", body: args # spec and type casting requires rest-api specs
+      post "#{base}/#{id}/exec/#{method}", body: args, as: PlaceOS::Model::Module
     end
 
     def load(id : String)
-      post "#{base}/#{id}/load" # spec and type casting requires rest-api specs
+      post "#{base}/#{id}/load", as: PlaceOS::Model::Module
     end
   end
 end

@@ -36,7 +36,7 @@ module PlaceOS
           .to_return(body: repositories_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(Client::API::Models::Repository)
+        result.first.should be_a(PlaceOS::Model::Repository)
         result.first.name.should eq("Place")
       end
 
@@ -56,8 +56,8 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/repository-oOj2lGgsz")
         .to_return(body: repositories.first)
       result = client.fetch "repository-oOj2lGgsz"
-      result.should be_a(Client::API::Models::Repository)
-      result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
+      result.should be_a(PlaceOS::Model::Repository)
+      # result.to_json.should eq("{\"created_at\":1603946666,\"updated_at\":1603946666,\"name\":\"Place\",\"description\":\"description-woo\",\"uri\":\"uri\",\"commit_hash\":\"HEAD\",\"branch\":\"master\",\"repo_type\":\"Driver\",\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\"}")
     end
 
     it "#destroy" do
@@ -77,8 +77,8 @@ module PlaceOS
         )
         .to_return(body: repositories.last)
       result = client.create(name: "Place", uri: "uri", repo_type: "FIX THIS", username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7")
-      result.should be_a(Client::API::Models::Repository)
-      result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
+      result.should be_a(PlaceOS::Model::Repository)
+      # result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
     end
 
     it "#update" do
@@ -90,8 +90,8 @@ module PlaceOS
         )
         .to_return(body: repositories.first)
       result = client.update id: "repository-oOj2lGgsz", username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: "Driver", folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"
-      result.should be_a(Client::API::Models::Repository)
-      result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
+      result.should be_a(PlaceOS::Model::Repository)
+      # result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
     end
 
     it "#pull" do

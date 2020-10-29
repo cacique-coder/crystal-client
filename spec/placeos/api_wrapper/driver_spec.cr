@@ -1,11 +1,9 @@
 require "../../spec_helper"
 require "placeos-models"
 
-# driver1 = Generator.driver(role: Driver::Role::Service)
-
 module PlaceOS
-  include Client::API::Models
-  # include PlaceOS::Model
+  include Client::API::Models # require for Role definitions, would like to dpened on Role definition in placeos-models
+  include PlaceOS::Model
 
   describe Client::APIWrapper::Drivers do
     api = PlaceOS::Client::APIWrapper.new DOMAIN
@@ -13,10 +11,6 @@ module PlaceOS
 
     drivers_json = {{ read_file("#{__DIR__}/mocks/drivers.json") }}
     drivers = Array(JSON::Any).from_json(drivers_json).map &.to_json
-
-    # driver1 = Generator.driver(role: Driver::Role::Service)
-    # driver1 = driver(1, "module_name", "repo_name")
-    # puts driver1
 
     describe "#search" do
       it "enumerates all drivers" do
@@ -67,6 +61,7 @@ module PlaceOS
         result = client.create(name: "Place", role: Role::Device, commit: "string", file_name: "string", module_name: "string", repository_id: "string")
         result.should be_a(PlaceOS::Model::Driver)
         result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+        result.commit.should eq ("string")
       end
     end
 

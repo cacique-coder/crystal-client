@@ -2,9 +2,9 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Repositories < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(Repository)
+    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Repository)
     include Client::APIWrapper::Endpoint::Destroy
-    include Client::APIWrapper::Endpoint::Search(Repository)
+    include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::Repository)
 
     getter base : String = "#{API_ROOT}/repositories"
 
@@ -19,7 +19,7 @@ module PlaceOS
       description : String?,
       commit_hash : String?
     )
-      post base, body: from_args, as: Repository
+      post base, body: from_args, as: PlaceOS::Model::Repository
     end
 
     def update(
@@ -35,7 +35,7 @@ module PlaceOS
       commit_hash : String?
     )
       # id not defined, what should I used, or define it somewhere else?
-      put "#{base}/#{id}", body: from_args, as: Repository
+      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Repository
     end
 
     # Unique Actions

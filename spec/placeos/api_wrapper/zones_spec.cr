@@ -31,7 +31,7 @@ module PlaceOS
           .to_return(body: zones_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(Client::API::Models::Zone)
+        result.first.should be_a(PlaceOS::Model::Zone)
         result.first.name.should eq("Place")
       end
 
@@ -57,7 +57,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.create name: "Place"
-        result.should be_a(Client::API::Models::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -67,7 +67,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
           .to_return(body: zones.first)
         result = client.fetch "zone-oOj2lGgsz"
-        result.should be_a(Client::API::Models::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -81,7 +81,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.update(id: "zone-oOj2lGgsz", name: "Foo")
-        result.should be_a(Client::API::Models::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -96,17 +96,18 @@ module PlaceOS
 
     describe "#execute" do
       # TODO
+      # Unsure about how this is supposed to work
       pending "should exec execute" do
-        body = {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json
+        # body = {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json
         WebMock
           .stub(:post, DOMAIN + "#{client.base}/zone-oOj2lGgsz/module_name_1/method")
           .with(
             headers: HTTP::Headers{"Content-Type" => "application/json"},
             body: {id: "zone-oOj2lGgsz", method: "string", module_name: "string"}.to_json,
           )
-          .to_return(body: body)
+          .to_return(body: zones.first)
         result = client.execute id: "zone-oOj2lGgsz", method: "string", module_name: "string"
-        result.should be_a(Client::API::Models::Zone)
+        # result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -115,9 +116,9 @@ module PlaceOS
         WebMock
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz/triggers")
           .to_return(body: zones.first)
-        result = client.triggers "zone-oOj2lGgsz"
-        result.should be_a(Client::API::Models::Zone) # This should be Array(Client::API::Models::Trigger)
-        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"zone-oOj2lGgsz\",\"name\":\"Place\",\"tags\":[\"org\"],\"count\":0,\"capacity\":2,\"triggers\":[]}")
+        result = client.trigger "zone-oOj2lGgsz"
+        result.should be_a(PlaceOS::Model::Trigger)
+        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"actions\":{\"functions\":[],\"mailers\":[]},\"conditions\":{\"comparisons\":[],\"time_dependents\":[]},\"debounce_period\":0,\"important\":false,\"enable_webhook\":false,\"supported_methods\":[\"POST\"]}")
       end
     end
   end

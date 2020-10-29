@@ -1,7 +1,4 @@
 require "./endpoint"
-require "placeos-models"
-
-# PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/driver.cr
 
 module PlaceOS
   class Client::APIWrapper::Drivers < Client::APIWrapper::Endpoint
