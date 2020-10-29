@@ -129,6 +129,14 @@ module PlaceOS
     end
 
     describe "#details" do
+      # WebMock
+      #   .stub(:get, DOMAIN + "#{client.base}/repo-G03N8MjLRnz/details")
+      #   .with(query: {"driver" => "drivers/place/spec_helper.cr", "commit" => "d3d0882"})
+      #   .to_return(body: %([{"commit":"1b2de89","date":"2020-05-08T16:06:14+10:00","author":"Caspian Baska","subject":"refactor: migrate to Log"},{"commit":"2ee7ab1","date":"2020-04-08T14:08:20+10:00","author":"Stephen von Takach","subject":"feat: add feature test driver"},{"commit":"4be0571","date":"2020-03-12T13:03:00+11:00","author":"Caspian Baska","subject":"feat(place:private_helper): add an echo function"},{"commit":"ca54d2e","date":"2020-03-09T16:04:49+11:00","author":"Caspian Baska","subject":"refactor: `ACAEngine` -> `PlaceOS`"}]))
+
+      # result = client.details id: "repo-G03N8MjLRnz", driver: "drivers/place/spec_helper.cr", commit: "d3d0882"
+      # result.should be_a(Array(NamedTuple(commit: String, date: Time, author: String, subject: String)))
+      # result.should eq(Array(NamedTuple(commit: String, date: Time, author: String, subject: String)).from_json(%([{"commit":"1b2de89","date":"2020-05-08T16:06:14+10:00","author":"Caspian Baska","subject":"refactor: migrate to Log"},{"commit":"2ee7ab1","date":"2020-04-08T14:08:20+10:00","author":"Stephen von Takach","subject":"feat: add feature test driver"},{"commit":"4be0571","date":"2020-03-12T13:03:00+11:00","author":"Caspian Baska","subject":"feat(place:private_helper): add an echo function"},{"commit":"ca54d2e","date":"2020-03-09T16:04:49+11:00","author":"Caspian Baska","subject":"refactor: `ACAEngine` -> `PlaceOS`"}])))
     end
 
     it "#branches" do
