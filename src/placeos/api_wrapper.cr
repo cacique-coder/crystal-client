@@ -6,6 +6,10 @@ require "uri"
 
 require "./api/**"
 
+# PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/driver.cr
+# is there a better place for this require?
+require "placeos-models"
+
 # Low-level wrapper for the PlaceOS API.
 #
 # Each method maps one-to-one with an API endpoint. All invocations will either
@@ -45,3 +49,4 @@ module PlaceOS
 end
 
 require "./api_wrapper/**"
+

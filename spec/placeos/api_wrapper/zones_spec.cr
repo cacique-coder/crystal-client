@@ -31,7 +31,7 @@ module PlaceOS
           .to_return(body: zones_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(Client::API::Models::Zone)
+        result.first.should be_a(PlaceOS::Model::Zone)
         result.first.name.should eq("Place")
       end
 
@@ -57,7 +57,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.create name: "Place"
-        result.should be_a(Client::API::Models::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -67,7 +67,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
           .to_return(body: zones.first)
         result = client.fetch "zone-oOj2lGgsz"
-        result.should be_a(Client::API::Models::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -81,7 +81,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.update(id: "zone-oOj2lGgsz", name: "Foo")
-        result.should be_a(Client::API::Models::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -106,7 +106,7 @@ module PlaceOS
           )
           .to_return(body: body)
         result = client.execute id: "zone-oOj2lGgsz", method: "string", module_name: "string"
-        result.should be_a(Client::API::Models::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 
@@ -116,8 +116,8 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz/triggers")
           .to_return(body: zones.first)
         result = client.trigger "zone-oOj2lGgsz"
-        result.should be_a(Client::API::Models::Zone)
-        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"zone-oOj2lGgsz\",\"name\":\"Place\",\"tags\":[\"org\"],\"count\":0,\"capacity\":2,\"triggers\":[]}")
+        result.should be_a(PlaceOS::Model::Zone)
+        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"tags\":[\"org\"],\"count\":0,\"capacity\":2,\"triggers\":[]}")
       end
     end
   end
