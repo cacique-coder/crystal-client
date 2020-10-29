@@ -27,9 +27,9 @@ module PlaceOS
 
       authority_api = Client::APIWrapper::Authority.new api
       authority = authority_api.fetch
-      authority.id.should eq("sgrp-oOO6aZj1-J")
+      # authority.id.should eq("sgrp-oOO6aZj1-J") # no id in placeos-models/authority?
       authority.name.should eq(DOMAIN)
-      authority.description.should be_nil
+      authority.description.should eq("")
       authority.login_url.should eq("/login?continue={{url}}")
       authority.logout_url.should eq("/")
       authority.config["universe"].as_i.should eq(42)

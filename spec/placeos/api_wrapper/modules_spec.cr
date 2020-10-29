@@ -42,7 +42,7 @@ module PlaceOS
         result = client.search
         result.size.should eq(1)
         mod = result.first
-        mod.should be_a(Client::API::Models::Module)
+        mod.should be_a(PlaceOS::Model::Module)
         mod.ip.should eq("10.45.6.3")
       end
 
@@ -68,7 +68,7 @@ module PlaceOS
           )
           .to_return(body: modules.first)
         result = client.create driver_id: "abc-123"
-        result.should be_a(Client::API::Models::Module)
+        result.should be_a(PlaceOS::Model::Module)
       end
     end
 
@@ -78,7 +78,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/mod-wJHYeHm6Yn")
           .to_return(body: modules.first)
         result = client.fetch "mod-wJHYeHm6Yn"
-        result.should be_a(Client::API::Models::Module)
+        result.should be_a(PlaceOS::Model::Module)
       end
     end
 
@@ -92,7 +92,7 @@ module PlaceOS
           )
           .to_return(body: modules.first)
         result = client.update "mod-wJHYeHm6Yn", ignore_connected: true
-        result.should be_a(Client::API::Models::Module)
+        result.should be_a(PlaceOS::Model::Module)
       end
     end
 
