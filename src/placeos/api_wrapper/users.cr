@@ -5,7 +5,8 @@ module PlaceOS
     include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::User)
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::User)
-
+    # include Client::APIWrapper::Endpoint::Create(PlaceOS::Model::User)
+    
     getter base : String = "#{API_ROOT}/users"
 
     def create(
@@ -37,7 +38,7 @@ module PlaceOS
       # password : String?,
       # sys_admin : Bool?,
       # support : Bool?
-    )
+    ) : PlaceOS::Model::User
       post base, body: from_args, as: PlaceOS::Model::User
     end
 
