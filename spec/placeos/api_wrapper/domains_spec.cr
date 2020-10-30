@@ -23,7 +23,7 @@ module PlaceOS
         # .with(query: {"complete" => "true"})
         .to_return(body: %({"created_at":1603948254,"updated_at":1603948254,"name":"localhost:8443/backoffice","description":"","domain":"localhost","login_url":"/login?continue={{url}}","logout_url":"/auth/logout","internals":{},"config":{},"id":"authority-G03OrvJj~5j"}))
       result = client.fetch id: "authority-G03OrvJj~5j", complete: true
-      result.should be_a(PlaceOS::Client::API::Models::Authority)
+      result.should be_a(PlaceOS::Model::Authority)
     end
 
     describe "#destroy" do

@@ -88,16 +88,6 @@ module PlaceOS
         result = client.create authority_id: "hello", name: "Place", nickname: "place nickname"
         result.should be_a(PlaceOS::Model::User)
       end
-
-      # [:created_at, :updated_at, :authority_id, :name, :nickname, :email, :phone, :country, :image, :ui_theme, :misc, :login_name, :staff_id, :first_name, :last_name, :building, :password_digest, :email_digest, :card_number, :deleted, :groups, :access_token, :refresh_token, :expires_at, :expires, :password, :sys_admin, :support, :id]
-      # puts PlaceOS::Model::User.attributes
-
-      # puts PlaceOS::Model::User.subset_json(:authoritry_id)
-
-      # puts PlaceOS::Model::User.settings_json
-
-      # puts PlaceOS::Model::User.nickname
-
     end
 
     describe "#update" do
