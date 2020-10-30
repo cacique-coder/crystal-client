@@ -2,9 +2,9 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Domains < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(Authority)
+    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Authority)
     include Client::APIWrapper::Endpoint::Destroy
-    include Client::APIWrapper::Endpoint::Search(Authority)
+    include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::Authority)
 
     getter base : String = "#{API_ROOT}/domains"
 
@@ -17,7 +17,7 @@ module PlaceOS
       internals : Hash(String, JSON::Any)?,
       config : Hash(String, JSON::Any)?
     )
-      post base, body: from_args, as: Authority
+      post base, body: from_args, as: PlaceOS::Model::Authority
     end
 
     def update(
@@ -30,7 +30,7 @@ module PlaceOS
       internals : Hash(String, JSON::Any)?,
       config : Hash(String, JSON::Any)?
     )
-      put "#{base}/#{id}", body: from_args, as: Authority
+      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Authority
     end
   end
 end
