@@ -105,6 +105,12 @@ module PlaceOS
     end
 
     describe "#loaded_interfaces" do
+      WebMock
+        .stub(:get, DOMAIN + "#{client.base}/interfaces")
+        .to_return(body: %({"backoffice":"b443da9"}))
+      result = client.loaded_interfaces
+      result.should be_a(NamedTuple(backoffice: String))
+      result.should eq({backoffice: "b443da9"})
     end
 
     describe "#drivers" do

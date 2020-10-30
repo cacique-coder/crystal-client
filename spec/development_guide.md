@@ -1,6 +1,6 @@
 **List of Missing Specs**
 
-**Cluster:**
+Cluster:
 
 - S, F, D
 
@@ -19,15 +19,12 @@ Modules:
 
 Repositories
 
-- Loaded_interfaces
 - Branches
 - Details
 
 Root
 
 - Signal
-- Reindex
-- Backfill
 - Version
 - Root
 
@@ -54,6 +51,13 @@ Users
 Zones
 
 - Execute
+
+Brokers (not done yet for methods or specs) (S,F,C,U,D)
+Auths (specs not done yet) (S,C,U)
+
+Other tasks:
+
+- Convert all NamedTuples to Models
 
 **Abbrev.**
 

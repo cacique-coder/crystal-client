@@ -59,6 +59,23 @@ module PlaceOS
     end
 
     describe "#update" do
+      # id = "sys-G03RF2BVBxP"
+      # trigger_id = "trig-G03JhJhxfUH"
+      # pp! client.base
+
+      # WebMock
+      #   .stub(:put, DOMAIN + "#{client.base}/#{id}/triggers/#{trigger_id}")
+      #   .with(
+      #     headers: {"Content-Type" => "application/json"},
+      #     body: {id:"trig-G03JhJhxfUH",name:"TestTrigger-0ede08b5",updated_at:1603948256,debounce_period:-1,important:true,enabled:true,control_system_id:"sys-G03RF2BVBxP",zone_id:"zone-G03PfSG4YRP",system_name:"TestSystem-0ede08b5",enable_webhook:false,supported_methods:["POST"],activated_count:0,version:0}.to_json
+      #     # body: %({"id":"trig-G03JhJhxfUH","name":"TestTrigger-0ede08b5","updated_at":1603948256,"debounce_period":-1,"important":true,"enabled":true,"control_system_id":"sys-G03RF2BVBxP","zone_id":"zone-G03PfSG4YRP","system_name":"TestSystem-0ede08b5","enable_webhook":false,"supported_methods":["POST"],"activated_count":0,"version":0,"actions":{"functions":[],"mailers":[]},"conditions":{"comparisons":[],"time_dependents":[]}})
+      #   )
+      #   .to_return(body: %({"created_at":1603948256,"updated_at":1604035745,"control_system_id":"sys-G03RF2BVBxP","trigger_id":"trigger-G03J8Cq3alf","zone_id":"zone-G03PfSG4YRP","enabled":true,"triggered":false,"important":true,"exec_enabled":false,"webhook_secret":"187b32d40116559414714d950bce75b82b16a180ff28d2b95b3c00d08e8e07c2","trigger_count":0,"id":"trig-G03JhJhxfUH"}))
+      # result = client.update id:"trig-G03JhJhxfUH",name:"TestTrigger-0ede08b5",updated_at:1603948256,debounce_period:-1,important:true,enabled:true,control_system_id:"sys-G03RF2BVBxP",zone_id:"zone-G03PfSG4YRP",system_name:"TestSystem-0ede08b5",enable_webhook:false,supported_methods:["POST"],activated_count:0,version:0
+      # result.should be_a(PlaceOS::Model::TriggerInstance)
+
+      # # /api/engine/v2/systems/sys-G03RF2BVBxP/triggers/trig-G03JhJhxfUH
+      # # {"created_at":1603948256,"updated_at":1604035745,"control_system_id":"sys-G03RF2BVBxP","trigger_id":"trigger-G03J8Cq3alf","zone_id":"zone-G03PfSG4YRP","enabled":true,"triggered":false,"important":true,"exec_enabled":false,"webhook_secret":"187b32d40116559414714d950bce75b82b16a180ff28d2b95b3c00d08e8e07c2","trigger_count":0,"id":"trig-G03JhJhxfUH"}
     end
   end
 end
