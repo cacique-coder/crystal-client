@@ -16,7 +16,6 @@ Modules:
 
 - Ping
 - Execute
-- Load
 
 Repositories
 
@@ -42,8 +41,6 @@ System Triggers
 
 Systems
 
-- Add_module
-- Remove_module
 - Control
 
 **Triggers**

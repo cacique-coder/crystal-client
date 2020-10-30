@@ -78,7 +78,7 @@ module PlaceOS
     end
 
     def load(id : String)
-      post "#{base}/#{id}/load", as: PlaceOS::Model::Module
+      post "#{base}/#{id}/load", as: Bool
     end
   end
 end

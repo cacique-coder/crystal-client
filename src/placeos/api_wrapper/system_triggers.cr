@@ -4,6 +4,7 @@ module PlaceOS
   class Client::APIWrapper::SystemTriggers < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::TriggerInstance)
+    include Client::APIWrapper::Endpoint::Update(PlaceOS::Model::TriggerInstance)
 
     # SystemTriggers are embedded beneath a systems route
     getter base : String = "#{API_ROOT}/systems"
@@ -38,19 +39,19 @@ module PlaceOS
       post base, body: from_args, as: PlaceOS::Model::TriggerInstance
     end
 
-    def update(
-      id : String,
-      control_system_id : String?,
-      trigger_id : String?,
-      zone_id : String?,
-      enabled : Bool?,
-      triggered : Bool?,
-      important : Bool?,
-      exec_enabled : Bool?,
-      webhook_secret : String?,
-      trigger_count : Int32?
-    )
-      post "#{base}/#{id}", body: from_args, as: PlaceOS::Model::TriggerInstance
-    end
+    # def update(
+    #   id : String,
+    #   control_system_id : String?,
+    #   trigger_id : String?,
+    #   zone_id : String?,
+    #   enabled : Bool?,
+    #   triggered : Bool?,
+    #   important : Bool?,
+    #   exec_enabled : Bool?,
+    #   webhook_secret : String?,
+    #   trigger_count : Int32?
+    # )
+    #   post "#{base}/#{id}", body: from_args, as: PlaceOS::Model::TriggerInstance
+    # end
   end
 end

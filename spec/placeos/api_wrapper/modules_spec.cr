@@ -158,6 +158,12 @@ module PlaceOS
     end
 
     describe "#load" do
+      WebMock
+        .stub(:post, DOMAIN + "#{client.base}/mod-G0U3rAFy8d_/load")
+        .to_return(body: %(true))
+      result = client.load "mod-G0U3rAFy8d_"
+      result.should be_a(Bool)
+      result.should eq(true)
     end
   end
 end

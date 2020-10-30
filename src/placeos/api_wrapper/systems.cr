@@ -135,11 +135,11 @@ module PlaceOS
     end
 
     def add_module(id : String, module_id : String)
-      put "#{base}/#{id}/module/#{module_id}"
+      put "#{base}/#{id}/module/#{module_id}", as: PlaceOS::Model::Module
     end
 
     def remove_module(id : String, module_id : String)
-      delete "#{base}/#{id}/module/#{module_id}"
+      delete "#{base}/#{id}/module/#{module_id}", as: PlaceOS::Model::Module
     end
 
     def control

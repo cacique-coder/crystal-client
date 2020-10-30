@@ -223,9 +223,25 @@ module PlaceOS
     end
 
     describe "#add_module" do
+      id = "sys-G03RF2BVBxP"
+      module_id = "mod-G0U3rAFy8d_"
+
+      WebMock
+        .stub(:put, DOMAIN + "#{client.base}/#{id}/module/#{module_id}")
+        .to_return(body: %({"created_at":1603948255,"updated_at":1604033694,"name":"TestSystem-0ede08b5","description":"","features":["TestModule-0ede08b5","This is a custom name"],"bookable":false,"capacity":0,"support_url":"","version":2,"installed_ui_devices":0,"zones":["zone-G03PfSG4YRP"],"modules":["mod-G03EBWsV9mx","mod-G0U3rAFy8d_"],"id":"sys-G03RF2BVBxP"}))
+      result = client.add_module id: id, module_id: module_id
+      result.should be_a(PlaceOS::Model::Module)
     end
 
     describe "#remove_module" do
+      id = "sys-G03RF2BVBxP"
+      module_id = "mod-G0U3rAFy8d_"
+
+      WebMock
+        .stub(:delete, DOMAIN + "#{client.base}/#{id}/module/#{module_id}")
+        .to_return(body: %({"created_at":1603948255,"updated_at":1604035469,"name":"TestSystem-0ede08b5","description":"","features":["TestModule-0ede08b5"],"bookable":false,"capacity":0,"support_url":"","version":3,"installed_ui_devices":0,"zones":["zone-G03PfSG4YRP"],"modules":["mod-G03EBWsV9mx"],"id":"sys-G03RF2BVBxP"}))
+      result = client.remove_module id: id, module_id: module_id
+      result.should be_a(PlaceOS::Model::Module)
     end
 
     describe "#control" do
