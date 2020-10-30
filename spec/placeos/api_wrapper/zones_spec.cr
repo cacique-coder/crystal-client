@@ -107,7 +107,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.execute id: "zone-oOj2lGgsz", method: "string", module_name: "string"
-        # result.should be_a(PlaceOS::Model::Zone)
+        result.should be_a(PlaceOS::Model::Zone)
       end
     end
 

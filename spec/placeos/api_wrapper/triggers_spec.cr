@@ -4,7 +4,7 @@ module PlaceOS
   describe Client::APIWrapper::Triggers do
     api = PlaceOS::Client::APIWrapper.new DOMAIN
     client = Client::APIWrapper::Triggers.new api
-    
+
     triggers_json = <<-JSON
     [
       {

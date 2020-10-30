@@ -6,8 +6,7 @@ module PlaceOS
 
     include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Trigger)
     include Client::APIWrapper::Endpoint::Destroy
-    # include Client::APIWrapper::Endpoint::Create(PlaceOS::Model::Trigger)
-    
+
     getter base : String = "#{API_ROOT}/triggers"
 
     # CRUD Actions
