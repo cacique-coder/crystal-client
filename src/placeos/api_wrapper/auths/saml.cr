@@ -2,9 +2,9 @@ require "./base"
 
 module PlaceOS
   # :nodoc:
-  # alias SamlAuthentication = Client::API::Models::SamlAuthentication
+  alias SamlAuthentication = PlaceOS::Model::SamlAuthentication
 
-  class Client::APIWrapper::Saml < Client::APIWrapper::AuthBase(PlaceOS::Model::SamlAuthentication)
+  class Client::APIWrapper::Saml < Client::APIWrapper::AuthBase(SamlAuthentication)
     getter base : String = "#{API_ROOT}/saml_auths"
 
     def create(

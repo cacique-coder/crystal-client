@@ -1,5 +1,5 @@
 require "../endpoint"
-require "../../api/models/auths/*"
+require "placeos-models"
 
 module PlaceOS
   abstract class Client::APIWrapper::AuthBase(Model) < Client::APIWrapper::Endpoint

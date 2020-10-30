@@ -2,7 +2,7 @@ require "./base"
 
 module PlaceOS
   # :nodoc:
-  alias LdapAuthentication = Client::API::Models::LdapAuthentication
+  alias LdapAuthentication = PlaceOS::Model::LdapAuthentication
 
   class Client::APIWrapper::Ldap < Client::APIWrapper::AuthBase(LdapAuthentication)
     getter base : String = "#{API_ROOT}/ldap_auths"
