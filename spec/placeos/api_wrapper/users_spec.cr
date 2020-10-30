@@ -89,16 +89,16 @@ module PlaceOS
       end
     end
 
-    describe "#update" do
+    it "#update" do
       res = "{\"created_at\":1603948255,\"name\":\"Place Support (localhost=>8443)\",\"nickname\":\"\",\"email\":\"support@place.tech\",\"phone\":\"\",\"country\":\"\",\"image\":\"\",\"ui_theme\":\"light\",\"misc\":\"\",\"deleted\":false,\"groups\":[],\"expires\":false,\"sys_admin\":true,\"support\":false}"
       WebMock
         .stub(:put, DOMAIN + client.base + "/user-G03JG1kx3yS")
         .to_return(body: res)
-      result = client.update id: "user-G03JG1kx3yS", version: 0, name: "Place Support (localhost:8443)", updated_at:1604021794, password:"development", authority_id:"authority-G03OrvJj~5j", email:"support@place.tech", email_digest: "18270840d5b8357a2175208b63ca52a4", staff_id:"21341234", support:true, sys_admin:true, ui_theme:"light"
+      result = client.update "user-G03JG1kx3yS", version: 0, name: "Place Support (localhost:8443)", updated_at:1604021794, password:"development", authority_id:"authority-G03OrvJj~5j", email:"support@place.tech", email_digest: "18270840d5b8357a2175208b63ca52a4", staff_id:"21341234", support:true, sys_admin:true, ui_theme:"light"
       result.should be_a(PlaceOS::Model::User)
     end
 
-    describe "#current" do
+    it "#current" do
       user_parsed = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "first_name" => nil, "last_name" => nil, "country" => "", "building" => nil, "image" => "", "created_at" => 1603948255, "sys_admin" => true, "support" => false, "email" => "support@place.tech", "phone" => "", "ui_theme" => "light", "metadata" => "", "login_name" => nil, "staff_id" => nil, "card_number" => nil, "groups" => [] of String}
       WebMock
         .stub(:get, DOMAIN + client.base + "/current")
