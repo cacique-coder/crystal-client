@@ -2,7 +2,7 @@ require "../../spec_helper"
 
 module PlaceOS
   describe Client::APIWrapper::Root do
-    describe "#singal" do
+    describe "#signal" do
     end
 
     describe "#version" do

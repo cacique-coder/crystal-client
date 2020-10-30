@@ -40,8 +40,8 @@ module PlaceOS
 
     module Fetch(T)
       # Returns a {{ T.id }}
-      def fetch(id : String) : T
-        get "#{base}/#{id}", as: T
+      def fetch(id : String, **args) : T
+        get "#{base}/#{id}", params: from_args, as: T
       end
     end
 
