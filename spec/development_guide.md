@@ -1,6 +1,6 @@
 **List of Missing Specs**
 
-**Cluster:**
+Cluster:
 
 - S, F, D
 
