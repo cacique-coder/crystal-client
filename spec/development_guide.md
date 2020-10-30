@@ -43,9 +43,8 @@ Systems
 
 - Control
 
-**Triggers**
+Triggers
 
-- S, F, D, C, U
 - Instances
 
 Users

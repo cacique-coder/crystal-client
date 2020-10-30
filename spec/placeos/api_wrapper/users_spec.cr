@@ -15,7 +15,6 @@ module PlaceOS
         "triggers": [],
         "created_at": 1555995992,
         "updated_at": 1555996000,
-        
         "count": 0,
         "capacity": 2
       }
