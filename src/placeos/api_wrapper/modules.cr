@@ -26,7 +26,7 @@ module PlaceOS
       path = "#{base}/#{id}/state"
       path += "/#{lookup}" if lookup
 
-      get path
+      get path # spec and type casting requires rest-api specs
     end
 
     # Management

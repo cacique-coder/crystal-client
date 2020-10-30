@@ -40,27 +40,27 @@ module PlaceOS
 
     # Unique Actions
     def pull(id : String)
-      post "#{base}/#{id}/pull"
+      post "#{base}/#{id}/pull", as: NamedTuple(commit_hash: String)
     end
 
     def loaded_interfaces
-      get "#{base}/interfaces"
+      get "#{base}/interfaces" # spec and type casting requires rest-api specs
     end
 
     def drivers(id : String)
-      get "#{base}/#{id}/drivers"
+      get "#{base}/#{id}/drivers", as: Array(Path)
     end
 
-    def commits(id : String, count : Int32?, driver : String?)
-      get "#{base}/#{id}/commits", params: from_args
+    def commits(id : String, count : Int32? = nil, driver : String? = nil)
+      get "#{base}/#{id}/commits", params: from_args, as: Array(NamedTuple(commit: String, date: Time, author: String, subject: String))
     end
 
     def details(id : String, driver : String, commit : String)
-      get "#{base}/#{id}/details", params: from_args
+      get "#{base}/#{id}/details", params: from_args # spec and type casting requires rest-api specs
     end
 
     def branches(id : String)
-      get "#{base}/#{id}/branches"
+      get "#{base}/#{id}/branches" # spec and type casting requires rest-api specs
     end
   end
 end
