@@ -44,7 +44,7 @@ module PlaceOS
         result = client.search q: "Place"
         result.size.should eq(1)
         result.first.name.should eq("Place")
-      end  
+      end
     end
 
     it "#fetch" do
@@ -63,7 +63,7 @@ module PlaceOS
     end
 
     describe "#create" do
-      it "should create a user with minimum attributes" do  
+      it "should create a user with minimum attributes" do
         body = {authority_id: "hello", name: "Place"}.to_json
         WebMock
           .stub(:post, DOMAIN + client.base)
@@ -76,7 +76,7 @@ module PlaceOS
         result.should be_a(PlaceOS::Model::User)
       end
 
-      it "should create a user with all the attributes" do  
+      it "should create a user with all the attributes" do
         body = {authority_id: "hello", name: "Place", nickname: "place nickname"}.to_json
         WebMock
           .stub(:post, DOMAIN + client.base)
@@ -90,14 +90,12 @@ module PlaceOS
       end
 
       # [:created_at, :updated_at, :authority_id, :name, :nickname, :email, :phone, :country, :image, :ui_theme, :misc, :login_name, :staff_id, :first_name, :last_name, :building, :password_digest, :email_digest, :card_number, :deleted, :groups, :access_token, :refresh_token, :expires_at, :expires, :password, :sys_admin, :support, :id]
-      PlaceOS::Model::User.attributes.each { |attribute| 
+      PlaceOS::Model::User.attributes.each { |attribute|
         puts attribute
-        
       }
 
       # puts PlaceOS::Model::User.nickname
-    
-  
+
     end
 
     describe "#update" do

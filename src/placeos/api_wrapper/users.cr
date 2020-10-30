@@ -13,7 +13,7 @@ module PlaceOS
       name : String,
       nickname : String? = "",
       **args
-      
+
       # email : String? = "",
       # phone : String? = "",
       # country : String? = "",
