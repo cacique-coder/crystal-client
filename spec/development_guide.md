@@ -15,7 +15,6 @@ Metadata:
 Modules:
 
 - Ping
-- Settings
 - Execute
 - Load
 
@@ -40,6 +39,12 @@ Settings
 System Triggers
 
 - C, U
+
+Systems
+
+- Add_module
+- Remove_module
+- Control
 
 **Triggers**
 
