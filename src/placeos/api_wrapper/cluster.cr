@@ -1,6 +1,6 @@
 require "./endpoint"
 
-# missing model? 
+# missing model?
 
 module PlaceOS
   class Client::APIWrapper::Cluster < Client::APIWrapper::Endpoint
