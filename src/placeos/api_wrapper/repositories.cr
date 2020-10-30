@@ -44,7 +44,7 @@ module PlaceOS
     end
 
     def loaded_interfaces
-      get "#{base}/interfaces" # spec and type casting requires rest-api specs
+      get "#{base}/interfaces", as: NamedTuple(backoffice: String)
     end
 
     def drivers(id : String)
