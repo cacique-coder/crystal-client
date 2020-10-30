@@ -147,6 +147,11 @@ module PlaceOS
     end
 
     describe "#settings" do
+      WebMock
+        .stub(:get, DOMAIN + "#{client.base}/mod-G03EBWsV9mx/settings")
+        .to_return(body: %([{"created_at":1603948256,"updated_at":1603948256,"parent_id":"sys-G03RF2BVBxP","encryption_level":0,"settings_string":"test_setting: true","keys":["test_setting"],"parent_type":0,"id":"sets-G039XsPNCiU"}]))
+      result = client.settings "mod-G03EBWsV9mx"
+      result[0].should be_a(PlaceOS::Client::API::Models::Setting)
     end
 
     describe "#execute" do
