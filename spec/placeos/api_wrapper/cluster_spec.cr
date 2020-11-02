@@ -2,8 +2,8 @@ require "../../spec_helper"
 
 module PlaceOS
   describe Client::APIWrapper::Cluster do
-    api = PlaceOS::Client::APIWrapper.new DOMAIN
-    client = Client::APIWrapper::Cluster.new api
+    # api = PlaceOS::Client::APIWrapper.new DOMAIN
+    # client = Client::APIWrapper::Cluster.new api
 
     describe "#search" do
       # WebMock

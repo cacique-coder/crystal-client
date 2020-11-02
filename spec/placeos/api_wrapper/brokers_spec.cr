@@ -7,7 +7,7 @@ module PlaceOS
 
     brokers_json = ([] of String).to_json
 
-    brokers = Array(JSON::Any).from_json(brokers_json).map &.to_json
+    # brokers = Array(JSON::Any).from_json(brokers_json).map &.to_json
 
     describe "#index" do
       WebMock

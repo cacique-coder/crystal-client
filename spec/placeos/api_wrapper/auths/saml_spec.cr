@@ -5,12 +5,10 @@ module PlaceOS
     api = Client::APIWrapper.new DOMAIN
     Client::APIWrapper::Saml.new api
 
-    it "#create" do 
-      
+    it "#create" do
     end
 
-    it "#update" do 
-      
+    it "#update" do
     end
   end
 end
