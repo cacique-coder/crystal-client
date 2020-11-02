@@ -2,7 +2,7 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Systems < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(System)
+    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::ControlSystem)
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::StartStop
     include Client::APIWrapper::Endpoint::Settings
@@ -64,7 +64,7 @@ module PlaceOS
       modules : Array(String)? = nil,
       support_url : String? = nil
     )
-      post base, body: from_args, as: System
+      post base, body: from_args, as: PlaceOS::Model::ControlSystem
     end
 
     # Requests a change to an existing system.
@@ -86,7 +86,7 @@ module PlaceOS
       modules : Array(String)? = nil,
       support_url : String? = nil
     )
-      put "#{base}/#{id}", params: "version=#{version}", body: from_args, as: System
+      put "#{base}/#{id}", params: "version=#{version}", body: from_args, as: PlaceOS::Model::ControlSystem
     end
 
     # Search
@@ -118,7 +118,7 @@ module PlaceOS
       capacity : Int32? = nil,
       bookable : Bool? = nil
     )
-      get base, params: from_args, as: Array(System)
+      get base, params: from_args, as: Array(PlaceOS::Model::ControlSystem)
     end
 
     # Returns systems with a specified email address(es)
@@ -126,7 +126,7 @@ module PlaceOS
     def with_emails(in : Array(String) | String)
       query = in.is_a?(Array) ? in.join(',') : in
 
-      get "#{base}/with_emails", params: HTTP::Params{"in" => query}, as: Array(System)
+      get "#{base}/with_emails", params: HTTP::Params{"in" => query}, as: Array(PlaceOS::Model::ControlSystem)
     end
 
     # Unique Actions
