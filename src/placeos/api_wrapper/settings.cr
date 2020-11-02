@@ -2,9 +2,9 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Settings < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(API::Models::Settings)
+    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Settings)
     include Client::APIWrapper::Endpoint::Destroy
-    include Client::APIWrapper::Endpoint::Search(API::Models::Settings)
+    include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::Settings)
 
     getter base : String = "#{API_ROOT}/settings"
 
@@ -26,7 +26,7 @@ module PlaceOS
       settings_id : String? = nil,
       keys : Array(String) = [] of String
     )
-      post base, body: from_args, as: API::Models::Settings
+      post base, body: from_args, as: PlaceOS::Model::Settings
     end
 
     def update(
@@ -38,7 +38,7 @@ module PlaceOS
       settings_id : String?,
       keys : Array(String)?
     )
-      put "#{base}/#{id}", body: from_args, as: API::Models::Settings
+      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Settings
     end
 
     # Unique Actions

@@ -26,7 +26,7 @@ module PlaceOS
           .to_return(body: settings_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(PlaceOS::Client::API::Models::Settings)
+        result.first.should be_a(PlaceOS::Model::Settings)
         result.first.parent_id.should eq("Place")
       end
 
@@ -46,8 +46,8 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/settings-oOj2lGgsz")
         .to_return(body: settings.first)
       result = client.fetch "settings-oOj2lGgsz"
-      result.should be_a(Client::API::Models::Settings)
-      result.to_json.should eq("{\"id\":\"settings-oOj2lGgsz\",\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_id\":\"Place\",\"parent_type\":1}")
+      result.should be_a(PlaceOS::Model::Settings)
+      result.to_json.should contain("\"parent_id\":\"Place\",\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_type\":1}")
     end
 
     it "#destroy" do
@@ -67,8 +67,8 @@ module PlaceOS
         )
         .to_return(body: settings.first)
       result = client.create(parent_id: "Foo", encryption_level: "None", parent_type: "Driver", settings_string: "settings", settings_id: "unique id", keys: ["key1", "key2"])
-      result.should be_a(Client::API::Models::Settings)
-      result.to_json.should eq("{\"id\":\"settings-oOj2lGgsz\",\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_id\":\"Place\",\"parent_type\":1}")
+      result.should be_a(PlaceOS::Model::Settings)
+      result.to_json.should contain("\"parent_id\":\"Place\",\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_type\":1}")
     end
 
     it "#update" do
@@ -80,8 +80,8 @@ module PlaceOS
         )
         .to_return(body: settings.first)
       result = client.update "settings-oOj2lGgsz", parent_id: "Foo", encryption_level: nil, parent_type: nil, settings_string: nil, settings_id: nil, keys: nil
-      result.should be_a(Client::API::Models::Settings)
-      result.to_json.should eq("{\"id\":\"settings-oOj2lGgsz\",\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_id\":\"Place\",\"parent_type\":1}")
+      result.should be_a(PlaceOS::Model::Settings)
+      result.to_json.should contain("\"parent_id\":\"Place\",\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_type\":1}")
     end
 
     describe "#history" do

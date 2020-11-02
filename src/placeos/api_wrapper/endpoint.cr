@@ -81,7 +81,7 @@ module PlaceOS
 
     module Settings
       def settings(id : String)
-        get "#{base}/#{id}/settings", as: Array(PlaceOS::Client::API::Models::Setting)
+        get "#{base}/#{id}/settings", as: Array(PlaceOS::Model::Settings)
       end
     end
 
