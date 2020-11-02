@@ -38,6 +38,12 @@ module PlaceOS
       end
     end
 
+    module Index(T)
+      def index : Array(T)
+        get base, params: from_args, as: Array(T)
+      end
+    end
+
     module Fetch(T)
       # Returns a {{ T.id }}
       def fetch(id : String, **args) : T
