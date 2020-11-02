@@ -104,7 +104,7 @@ module PlaceOS
       @session
     end
 
-    {% for component in %w(Authority Users Cluster Domains Drivers Modules Settings Systems Zones Ldap OAuth Saml OAuthApplications Root Metadata) %}
+    {% for component in %w(Authority Brokers Cluster Domains Drivers Metadata Modules OAuthApplications Repositories Root Settings SystemTriggers Systems Triggers Users Zones Ldap OAuth Saml) %}
     # Provide an object for managing {{component.id}}. See `PlaceOS::Client::APIWrapper::{{component.id}}`.
     def {{component.id.downcase}} : APIWrapper::{{component.id}}
       @{{component.id.downcase}} ||= APIWrapper::{{component.id}}.new(api_wrapper)
