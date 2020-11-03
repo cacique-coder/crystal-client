@@ -6,7 +6,7 @@ module PlaceOS
 
     # Gets the authority metadata for the attached instance.
     def fetch
-      get base, as: PlaceOS::Model::Authority
+      get base, as: PlaceOS::Client::API::Models::Authority
     end
   end
 end

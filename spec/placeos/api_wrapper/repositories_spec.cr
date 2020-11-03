@@ -15,9 +15,9 @@ module PlaceOS
         "username": "GabFitzgerald",
         "password": "iheartadamlambert",
         "key": "sshhhshsh",
-        "foldername": "your-fave-folder",
+        "folder_name": "your-fave-folder",
         "description": "description-woo",
-        "commit-hash": "b930e07d9fd2b682de48e881d5405176888a1de8",
+        "commit_hash": "b930e07d9fd2b682de48e881d5405176888a1de8",
         "branch": "master",
         "repo_type": "Driver"
       }
