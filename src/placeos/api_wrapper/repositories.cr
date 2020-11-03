@@ -11,25 +11,27 @@ module PlaceOS
     def create(
       name : String,
       uri : String,
-      repo_type : String,
-      username : String,
-      password : String,
-      key : String,
-      folder_name : String?,
-      description : String?,
-      commit_hash : String?
+      # This can be improved later
+      repo_type : PlaceOS::Model::Repository::Type,
+      username : String? = "",
+      password : String? = "",
+      key : String? = "",
+      folder_name : String? = "",
+      description : String? = "",
+      commit_hash : String? = ""
     )
       post base, body: from_args, as: PlaceOS::Model::Repository
     end
 
     def update(
       id : String,
-      username : String,
-      password : String,
-      key : String,
+      username : String?,
+      password : String?,
+      key : String?,
       name : String?,
       uri : String?,
-      repo_type : String?,
+      # This can be improved later
+      repo_type : PlaceOS::Model::Repository::Type?,
       folder_name : String?,
       description : String?,
       commit_hash : String?
