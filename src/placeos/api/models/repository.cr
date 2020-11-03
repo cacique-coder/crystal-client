@@ -10,7 +10,7 @@ module PlaceOS::Client::API::Models
         JSON::Any.new(to_s)
       end
     end
-    
+
     getter id : String
     getter name : String
     getter repo_name : String
@@ -21,6 +21,6 @@ module PlaceOS::Client::API::Models
     getter description : String
     getter commit_hash : String
     getter branch : String
-    getter repo_type : Type  
+    getter repo_type : Type
   end
 end

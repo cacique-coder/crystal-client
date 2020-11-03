@@ -20,7 +20,6 @@ module PlaceOS
         "country": "",
         "building": "",
         "image": ""
-        
       }
     ]
     JSON
