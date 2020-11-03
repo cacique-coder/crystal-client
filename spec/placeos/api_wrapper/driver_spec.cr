@@ -21,7 +21,7 @@ module PlaceOS
         result = client.search
         result.size.should eq(2)
         driver = result.first
-        driver.should be_a(PlaceOS::Model::Driver)
+        driver.should be_a(PlaceOS::Client::API::Models::Driver)
         driver.name.should eq("Place")
       end
 
@@ -59,7 +59,7 @@ module PlaceOS
           )
           .to_return(body: drivers.first)
         result = client.create(name: "Place", role: Role::Device, commit: "string", file_name: "string", module_name: "string", repository_id: "string")
-        result.should be_a(PlaceOS::Model::Driver)
+        result.should be_a(PlaceOS::Client::API::Models::Driver)
         result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
         result.commit.should eq ("string")
       end
@@ -71,7 +71,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/driver-oOj2lGgsz")
           .to_return(body: drivers.first)
         result = client.fetch "driver-oOj2lGgsz"
-        result.should be_a(PlaceOS::Model::Driver)
+        result.should be_a(PlaceOS::Client::API::Models::Driver)
         result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end
@@ -86,7 +86,7 @@ module PlaceOS
           )
           .to_return(body: drivers.first)
         result = client.update "driver-oOj2lGgsz", name: "Foo"
-        result.should be_a(PlaceOS::Model::Driver)
+        result.should be_a(PlaceOS::Client::API::Models::Driver)
         result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end
@@ -106,7 +106,7 @@ module PlaceOS
           .stub(:post, DOMAIN + "#{client.base}/driver-oOj2lGgsz/recompile")
           .to_return(body: drivers.first)
         result = client.recompile "driver-oOj2lGgsz"
-        result.should be_a(PlaceOS::Model::Driver)
+        result.should be_a(PlaceOS::Client::API::Models::Driver)
         result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end
@@ -117,7 +117,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/driver-oOj2lGgsz/compiled")
           .to_return(body: drivers.first)
         result = client.compiled "driver-oOj2lGgsz"
-        result.should be_a(PlaceOS::Model::Driver)
+        result.should be_a(PlaceOS::Client::API::Models::Driver)
         result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end

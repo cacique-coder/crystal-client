@@ -17,7 +17,7 @@ module PlaceOS
         result = client.search
         result.size.should eq(3)
         system = result.first
-        system.should be_a(PlaceOS::Model::ControlSystem)
+        system.should be_a(PlaceOS::Client::API::Models::System)
         system.name.should eq("Room 1")
       end
 
@@ -56,7 +56,7 @@ module PlaceOS
           )
           .to_return(body: systems.first)
         result = client.create name: "Foo", zones: ["a", "b", "c"]
-        result.should be_a(PlaceOS::Model::ControlSystem)
+        result.should be_a(PlaceOS::Client::API::Models::System)
       end
     end
 
@@ -66,7 +66,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7")
           .to_return(body: systems.first)
         result = client.fetch "sys-rJQQlR4Cn7"
-        result.should be_a(PlaceOS::Model::ControlSystem)
+        result.should be_a(PlaceOS::Client::API::Models::System)
       end
     end
 
@@ -80,7 +80,7 @@ module PlaceOS
           )
           .to_return(body: systems.first)
         result = client.update "sys-rJQQlR4Cn7", version: 2, name: "Foo"
-        result.should be_a(PlaceOS::Model::ControlSystem)
+        result.should be_a(PlaceOS::Client::API::Models::System)
       end
     end
 
@@ -219,7 +219,7 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/sys-G03RF2BVBxP/settings")
         .to_return(body: %([{"created_at":1603948256,"updated_at":1603948256,"parent_id":"sys-G03RF2BVBxP","encryption_level":0,"settings_string":"test_setting: true","keys":["test_setting"],"parent_type":0,"id":"sets-G039XsPNCiU"}]        ))
       result = client.settings "sys-G03RF2BVBxP"
-      result[0].should be_a(PlaceOS::Model::Settings)
+      result[0].should be_a(PlaceOS::Client::API::Models::Settings)
     end
 
     describe "#add_module" do
@@ -230,7 +230,7 @@ module PlaceOS
         .stub(:put, DOMAIN + "#{client.base}/#{id}/module/#{module_id}")
         .to_return(body: %({"created_at":1603948255,"updated_at":1604033694,"name":"TestSystem-0ede08b5","description":"","features":["TestModule-0ede08b5","This is a custom name"],"bookable":false,"capacity":0,"support_url":"","version":2,"installed_ui_devices":0,"zones":["zone-G03PfSG4YRP"],"modules":["mod-G03EBWsV9mx","mod-G0U3rAFy8d_"],"id":"sys-G03RF2BVBxP"}))
       result = client.add_module id: id, module_id: module_id
-      result.should be_a(PlaceOS::Model::Module)
+      result.should be_a(PlaceOS::Client::API::Models::Module)
     end
 
     describe "#remove_module" do
@@ -241,7 +241,7 @@ module PlaceOS
         .stub(:delete, DOMAIN + "#{client.base}/#{id}/module/#{module_id}")
         .to_return(body: %({"created_at":1603948255,"updated_at":1604035469,"name":"TestSystem-0ede08b5","description":"","features":["TestModule-0ede08b5"],"bookable":false,"capacity":0,"support_url":"","version":3,"installed_ui_devices":0,"zones":["zone-G03PfSG4YRP"],"modules":["mod-G03EBWsV9mx"],"id":"sys-G03RF2BVBxP"}))
       result = client.remove_module id: id, module_id: module_id
-      result.should be_a(PlaceOS::Model::Module)
+      result.should be_a(PlaceOS::Client::API::Models::Module)
     end
 
     describe "#control" do

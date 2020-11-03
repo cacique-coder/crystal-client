@@ -31,7 +31,7 @@ module PlaceOS
           .to_return(body: zones_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(PlaceOS::Model::Zone)
+        result.first.should be_a(PlaceOS::Client::API::Models::Zone)
         result.first.name.should eq("Place")
       end
 
@@ -57,7 +57,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.create name: "Place"
-        result.should be_a(PlaceOS::Model::Zone)
+        result.should be_a(PlaceOS::Client::API::Models::Zone)
       end
     end
 
@@ -67,7 +67,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
           .to_return(body: zones.first)
         result = client.fetch "zone-oOj2lGgsz"
-        result.should be_a(PlaceOS::Model::Zone)
+        result.should be_a(PlaceOS::Client::API::Models::Zone)
       end
     end
 
@@ -81,7 +81,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.update(id: "zone-oOj2lGgsz", name: "Foo")
-        result.should be_a(PlaceOS::Model::Zone)
+        result.should be_a(PlaceOS::Client::API::Models::Zone)
       end
     end
 
@@ -107,7 +107,7 @@ module PlaceOS
           )
           .to_return(body: zones.first)
         result = client.execute id: "zone-oOj2lGgsz", method: "string", module_name: "string"
-        result.should be_a(PlaceOS::Model::Zone)
+        result.should be_a(PlaceOS::Client::API::Models::Zone)
       end
     end
 
@@ -115,10 +115,10 @@ module PlaceOS
       it "should exec trigger" do
         WebMock
           .stub(:get, DOMAIN + "#{client.base}/zone-oOj2lGgsz/triggers")
-          .to_return(body: zones.first)
+          .to_return(body: {"name" => "Place", "control_system_id" => "hello"}.to_json)
         result = client.trigger "zone-oOj2lGgsz"
-        result.should be_a(PlaceOS::Model::Trigger)
-        result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"actions\":{\"functions\":[],\"mailers\":[]},\"conditions\":{\"comparisons\":[],\"time_dependents\":[]},\"debounce_period\":0,\"important\":false,\"enable_webhook\":false,\"supported_methods\":[\"POST\"]}")
+        result.should be_a(PlaceOS::Client::API::Models::Trigger)
+        result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
       end
     end
   end

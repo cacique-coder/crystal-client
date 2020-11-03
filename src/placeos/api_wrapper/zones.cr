@@ -2,7 +2,7 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Zones < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Zone)
+    include Client::APIWrapper::Endpoint::Fetch(Zone)
     include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/zones"
@@ -17,7 +17,7 @@ module PlaceOS
       index : Int32 = 1,
       args = nil
     )
-      post "#{base}/#{id}/#{module_name}_#{index}/#{method}", body: args, as: PlaceOS::Model::Zone
+      post "#{base}/#{id}/#{module_name}_#{index}/#{method}", body: args, as: Zone
     end
 
     # Management
@@ -31,7 +31,7 @@ module PlaceOS
       settings : Settings? = nil,
       triggers : Array(String)? = nil
     )
-      post base, body: from_args, as: PlaceOS::Model::Zone
+      post base, body: from_args, as: Zone
     end
 
     # Updates zone attributes or configuration.
@@ -43,7 +43,7 @@ module PlaceOS
       settings : Settings? = nil,
       triggers : Array(String)? = nil
     )
-      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Zone
+      put "#{base}/#{id}", body: from_args, as: Zone
     end
 
     # Search
@@ -74,12 +74,12 @@ module PlaceOS
       parent : String? = nil,
       tags : Array(String) | String? = nil
     )
-      get base, params: from_args, as: Array(PlaceOS::Model::Zone)
+      get base, params: from_args, as: Array(Zone)
     end
 
     # Unique Actions
     def trigger(id : String)
-      get "#{base}/#{id}/triggers", as: PlaceOS::Model::Trigger
+      get "#{base}/#{id}/triggers", as: Trigger
     end
 
     private getter client

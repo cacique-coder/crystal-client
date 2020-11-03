@@ -2,9 +2,9 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Repositories < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Repository)
+    include Client::APIWrapper::Endpoint::Fetch(Repository)
     include Client::APIWrapper::Endpoint::Destroy
-    include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::Repository)
+    include Client::APIWrapper::Endpoint::Search(Repository)
 
     getter base : String = "#{API_ROOT}/repositories"
 
@@ -12,7 +12,7 @@ module PlaceOS
       name : String,
       uri : String,
       # This can be improved later
-      repo_type : PlaceOS::Model::Repository::Type,
+      repo_type : Repository::Type,
       username : String? = "",
       password : String? = "",
       key : String? = "",
@@ -20,7 +20,7 @@ module PlaceOS
       description : String? = "",
       commit_hash : String? = ""
     )
-      post base, body: from_args, as: PlaceOS::Model::Repository
+      post base, body: from_args, as: Repository
     end
 
     def update(
@@ -31,13 +31,13 @@ module PlaceOS
       name : String?,
       uri : String?,
       # This can be improved later
-      repo_type : PlaceOS::Model::Repository::Type?,
+      repo_type : PlaceOS::Client::API::Models::Repository::Type?,
       folder_name : String?,
       description : String?,
       commit_hash : String?
     )
       # id not defined, what should I used, or define it somewhere else?
-      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Repository
+      put "#{base}/#{id}", body: from_args, as: Repository
     end
 
     # Unique Actions

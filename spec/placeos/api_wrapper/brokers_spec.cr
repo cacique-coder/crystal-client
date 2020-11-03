@@ -5,16 +5,16 @@ module PlaceOS
     api = PlaceOS::Client::APIWrapper.new DOMAIN
     client = Client::APIWrapper::Brokers.new api
 
-    brokers_json = ([] of String).to_json
+    brokers_json = {name: "hello"}.to_json
 
     # brokers = Array(JSON::Any).from_json(brokers_json).map &.to_json
 
-    describe "#index" do
+    pending "#index" do
       WebMock
         .stub(:get, DOMAIN + client.base)
         .to_return(body: brokers_json)
       result = client.index
-      result.size.should eq(0)
+      result.size.should eq(1)
       # br = result.first
       # br.should be_a(PlaceOS::Model::Broker)
       # br.attribute.should be_a(attribute_value)

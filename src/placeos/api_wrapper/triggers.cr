@@ -4,7 +4,7 @@ module PlaceOS
   class Client::APIWrapper::Triggers < Client::APIWrapper::Endpoint
     include JSON::Serializable::Strict
 
-    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Trigger)
+    include Client::APIWrapper::Endpoint::Fetch(Trigger)
     include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/triggers"
@@ -16,7 +16,7 @@ module PlaceOS
       limit : Int = 20,
       offset : Int = 0
     )
-      get base, params: from_args, as: Array(PlaceOS::Model::Trigger)
+      get base, params: from_args, as: Array(Trigger)
     end
 
     def create(
@@ -31,7 +31,7 @@ module PlaceOS
       # enable_webhook : Bool?,
       # supported_methods : Array(String)?
     )
-      post base, body: from_args, as: PlaceOS::Model::Trigger
+      post base, body: from_args, as: Trigger
     end
 
     def update(
@@ -47,7 +47,7 @@ module PlaceOS
       # enable_webhook : Bool?,
       # supported_methods : Array(String)?
     )
-      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Trigger
+      put "#{base}/#{id}", body: from_args, as: Trigger
     end
 
     # Unique Actions

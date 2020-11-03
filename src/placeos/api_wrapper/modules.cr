@@ -2,14 +2,14 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Modules < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Model::Module)
+    include Client::APIWrapper::Endpoint::Fetch(Module)
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::StartStop
     include Client::APIWrapper::Endpoint::Settings
     # Results my also also be limited to those associated with a specific
     # *system_id*, that are instances of a *driver_id*, or any combination of
     # these.
-    include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::Module)
+    include Client::APIWrapper::Endpoint::Search(Module)
 
     getter base : String = "#{API_ROOT}/modules"
 
@@ -18,7 +18,7 @@ module PlaceOS
 
     # Performs a connectivity check with the associated device or service.
     def ping(id : String)
-      post "#{base}/#{id}/ping", as: API::Models::Ping
+      post "#{base}/#{id}/ping", as: Ping
     end
 
     # Queries the state exposed by a module.
@@ -47,7 +47,7 @@ module PlaceOS
       ignore_connected : Bool? = nil,
       ignore_startstop : Bool? = nil
     )
-      post base, body: from_args, as: PlaceOS::Model::Module
+      post base, body: from_args, as: Module
     end
 
     # Updates module attributes or configuration.
@@ -65,7 +65,7 @@ module PlaceOS
       ignore_connected : Bool? = nil,
       ignore_startstop : Bool? = nil
     )
-      put "#{base}/#{id}", body: from_args, as: PlaceOS::Model::Module
+      put "#{base}/#{id}", body: from_args, as: Module
     end
 
     # Unique Actions
@@ -74,7 +74,7 @@ module PlaceOS
       method : String,
       *args : Array(JSON::Any::Type)
     )
-      post "#{base}/#{id}/exec/#{method}", body: args, as: PlaceOS::Model::Module
+      post "#{base}/#{id}/exec/#{method}", body: args, as: Module
     end
 
     def load(id : String)

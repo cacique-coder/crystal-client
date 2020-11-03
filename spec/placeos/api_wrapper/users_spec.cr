@@ -10,13 +10,16 @@ module PlaceOS
       {
         "id": "user-oOj2lGgsz",
         "name": "Place",
-        "description": null,
-        "tags": ["org"],
-        "triggers": [],
+        "authority_id": "hello",
         "created_at": 1555995992,
         "updated_at": 1555996000,
-        "count": 0,
-        "capacity": 2
+        "email_digest": "",
+        "nickname": "",
+        "first_name": "",
+        "last_name": "",
+        "country": "",
+        "building": "",
+        "image": ""
       }
     ]
     JSON
@@ -31,7 +34,7 @@ module PlaceOS
           .to_return(body: users_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(PlaceOS::Model::User)
+        result.first.should be_a(PlaceOS::Client::API::Models::User)
         result.first.name.should eq("Place")
       end
 
@@ -51,7 +54,7 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/user-oOj2lGgsz")
         .to_return(body: users.first)
       result = client.fetch "user-oOj2lGgsz"
-      result.should be_a(PlaceOS::Model::User)
+      result.should be_a(PlaceOS::Client::API::Models::User)
     end
 
     it "#destroy" do
@@ -72,7 +75,7 @@ module PlaceOS
           )
           .to_return(body: users.first)
         result = client.create authority_id: "hello", name: "Place"
-        result.should be_a(PlaceOS::Model::User)
+        result.should be_a(PlaceOS::Client::API::Models::User)
       end
 
       it "should create a user with all the attributes" do
@@ -85,26 +88,26 @@ module PlaceOS
           )
           .to_return(body: users.first)
         result = client.create authority_id: "hello", name: "Place", nickname: "place nickname"
-        result.should be_a(PlaceOS::Model::User)
+        result.should be_a(PlaceOS::Client::API::Models::User)
       end
     end
 
     it "#update" do
-      res = "{\"created_at\":1603948255,\"name\":\"Place Support (localhost=>8443)\",\"nickname\":\"\",\"email\":\"support@place.tech\",\"phone\":\"\",\"country\":\"\",\"image\":\"\",\"ui_theme\":\"light\",\"misc\":\"\",\"deleted\":false,\"groups\":[],\"expires\":false,\"sys_admin\":true,\"support\":false}"
+      res = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "created_at" => 155599599, "updated_at" => 1555996000, "first_name" => "hello", "last_name" => "", "country"=> "", "building" => "", "image"=> ""}.to_json
       WebMock
         .stub(:put, DOMAIN + client.base + "/user-G03JG1kx3yS")
         .to_return(body: res)
-      result = client.update "user-G03JG1kx3yS", version: 0, name: "Place Support (localhost:8443)", updated_at:1604021794, password:"development", authority_id:"authority-G03OrvJj~5j", email:"support@place.tech", email_digest: "18270840d5b8357a2175208b63ca52a4", staff_id:"21341234", support:true, sys_admin:true, ui_theme:"light"
-      result.should be_a(PlaceOS::Model::User)
+      result = client.update "user-G03JG1kx3yS", authority_id:"authority-G03OrvJj~5j", name: "hello"
+      result.should be_a(PlaceOS::Client::API::Models::User)
     end
 
     it "#current" do
-      user_parsed = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "first_name" => nil, "last_name" => nil, "country" => "", "building" => nil, "image" => "", "created_at" => 1603948255, "sys_admin" => true, "support" => false, "email" => "support@place.tech", "phone" => "", "ui_theme" => "light", "metadata" => "", "login_name" => nil, "staff_id" => nil, "card_number" => nil, "groups" => [] of String}
+      user_parsed = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "created_at" => 1555995992, "updated_at" => 1555996000, "first_name" => "hello", "last_name" => "", "country"=> "", "building" => "", "image"=> ""}
       WebMock
         .stub(:get, DOMAIN + client.base + "/current")
         .to_return(body: user_parsed.to_json)
       result = client.current
-      result.should be_a(PlaceOS::Model::User)
+      result.should be_a(PlaceOS::Client::API::Models::User)
     end
 
     describe "#resource_token" do

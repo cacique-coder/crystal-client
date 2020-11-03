@@ -42,7 +42,7 @@ module PlaceOS
         result = client.search
         result.size.should eq(1)
         mod = result.first
-        mod.should be_a(PlaceOS::Model::Module)
+        mod.should be_a(PlaceOS::Client::API::Models::Module)
         mod.ip.should eq("10.45.6.3")
       end
 
@@ -68,7 +68,7 @@ module PlaceOS
           )
           .to_return(body: modules.first)
         result = client.create driver_id: "abc-123"
-        result.should be_a(PlaceOS::Model::Module)
+        result.should be_a(PlaceOS::Client::API::Models::Module)
       end
     end
 
@@ -78,7 +78,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/mod-wJHYeHm6Yn")
           .to_return(body: modules.first)
         result = client.fetch "mod-wJHYeHm6Yn"
-        result.should be_a(PlaceOS::Model::Module)
+        result.should be_a(PlaceOS::Client::API::Models::Module)
       end
     end
 
@@ -92,7 +92,7 @@ module PlaceOS
           )
           .to_return(body: modules.first)
         result = client.update "mod-wJHYeHm6Yn", ignore_connected: true
-        result.should be_a(PlaceOS::Model::Module)
+        result.should be_a(PlaceOS::Client::API::Models::Module)
       end
     end
 
@@ -151,7 +151,7 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/mod-G03EBWsV9mx/settings")
         .to_return(body: %([{"created_at":1603948256,"updated_at":1603948256,"parent_id":"sys-G03RF2BVBxP","encryption_level":0,"settings_string":"test_setting: true","keys":["test_setting"],"parent_type":0,"id":"sets-G039XsPNCiU"}]))
       result = client.settings "mod-G03EBWsV9mx"
-      result[0].should be_a(PlaceOS::Model::Settings)
+      result[0].should be_a(PlaceOS::Client::API::Models::Settings)
     end
 
     describe "#execute" do
