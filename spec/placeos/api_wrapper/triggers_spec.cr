@@ -8,6 +8,7 @@ module PlaceOS
     triggers_json = <<-JSON
     [
       {
+        "control_system_id": "hello",
         "name": "Place",
         "authority_id": "hello",
         "description": null,
@@ -32,7 +33,7 @@ module PlaceOS
           .to_return(body: triggers_json)
         result = client.search "hello"
         result.size.should eq(1)
-        result.first.should be_a(PlaceOS::Model::Trigger)
+        result.first.should be_a(PlaceOS::Client::API::Models::Trigger)
         result.first.name.should eq("Place")
       end
 
@@ -52,8 +53,8 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/trigger-oOj2lGgsz")
         .to_return(body: triggers.first)
       result = client.fetch "trigger-oOj2lGgsz"
-      result.should be_a(PlaceOS::Model::Trigger)
-      result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"actions\":{\"functions\":[],\"mailers\":[]},\"conditions\":{\"comparisons\":[],\"time_dependents\":[]},\"debounce_period\":0,\"important\":false,\"enable_webhook\":false,\"supported_methods\":[\"POST\"]}")
+      result.should be_a(PlaceOS::Client::API::Models::Trigger)
+      result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
     end
 
     it "#destroy" do
@@ -73,8 +74,8 @@ module PlaceOS
         )
         .to_return(body: triggers.first)
       result = client.create(control_system_id: "hello", name: "Place")
-      result.should be_a(PlaceOS::Model::Trigger)
-      result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"actions\":{\"functions\":[],\"mailers\":[]},\"conditions\":{\"comparisons\":[],\"time_dependents\":[]},\"debounce_period\":0,\"important\":false,\"enable_webhook\":false,\"supported_methods\":[\"POST\"]}")
+      result.should be_a(PlaceOS::Client::API::Models::Trigger)
+      result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
     end
 
     it "#update" do
@@ -86,8 +87,8 @@ module PlaceOS
         )
         .to_return(body: triggers.first)
       result = client.update "trigger-oOj2lGgsz", control_system_id: "foo", name: "Foo"
-      result.should be_a(PlaceOS::Model::Trigger)
-      result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"name\":\"Place\",\"description\":\"\",\"actions\":{\"functions\":[],\"mailers\":[]},\"conditions\":{\"comparisons\":[],\"time_dependents\":[]},\"debounce_period\":0,\"important\":false,\"enable_webhook\":false,\"supported_methods\":[\"POST\"]}")
+      result.should be_a(PlaceOS::Client::API::Models::Trigger)
+      result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
     end
 
     describe "#instances" do

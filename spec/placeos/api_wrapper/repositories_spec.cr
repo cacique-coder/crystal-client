@@ -34,7 +34,7 @@ module PlaceOS
           .to_return(body: repositories_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(PlaceOS::Model::Repository)
+        result.first.should be_a(PlaceOS::Client::API::Models::Repository)
         result.first.name.should eq("Place")
       end
 
@@ -54,7 +54,7 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/repository-oOj2lGgsz")
         .to_return(body: repositories.first)
       result = client.fetch "repository-oOj2lGgsz"
-      result.should be_a(PlaceOS::Model::Repository)
+      result.should be_a(PlaceOS::Client::API::Models::Repository)
       # result.to_json.should eq("{\"created_at\":1603946666,\"updated_at\":1603946666,\"name\":\"Place\",\"description\":\"description-woo\",\"uri\":\"uri\",\"commit_hash\":\"HEAD\",\"branch\":\"master\",\"repo_type\":\"Driver\",\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\"}")
     end
 
@@ -66,7 +66,7 @@ module PlaceOS
     end
 
     describe "#create" do
-      body = {name: "Place", uri: "uri", repo_type: PlaceOS::Model::Repository::Type::Driver, username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7"}.to_json
+      body = {name: "Place", uri: "uri", repo_type: PlaceOS::Client::API::Models::Repository::Type::Driver, username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7"}.to_json
       WebMock
         .stub(:post, DOMAIN + client.base)
         .with(
@@ -74,8 +74,8 @@ module PlaceOS
           body: body
         )
         .to_return(body: repositories.last)
-      result = client.create(name: "Place", uri: "uri", repo_type: PlaceOS::Model::Repository::Type::Driver, username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7")
-      result.should be_a(PlaceOS::Model::Repository)
+      result = client.create(name: "Place", uri: "uri", repo_type: PlaceOS::Client::API::Models::Repository::Type::Driver, username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7")
+      result.should be_a(PlaceOS::Client::API::Models::Repository)
       # result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
     end
 
@@ -87,8 +87,8 @@ module PlaceOS
           body: {username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: PlaceOS::Model::Repository::Type::Driver, folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"}.to_json
         )
         .to_return(body: repositories.first)
-      result = client.update id: "repository-oOj2lGgsz", username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: PlaceOS::Model::Repository::Type::Driver, folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"
-      result.should be_a(PlaceOS::Model::Repository)
+      result = client.update id: "repository-oOj2lGgsz", username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: PlaceOS::Client::API::Models::Repository::Type::Driver, folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"
+      result.should be_a(PlaceOS::Client::API::Models::Repository)
       # result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
     end
 

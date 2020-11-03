@@ -3,18 +3,18 @@ require "./response"
 module PlaceOS::Client::API::Models
   struct Trigger < Response
     getter name : String
-    getter description : String
+    getter description : String?
     getter control_system_id : String
 
-    getter actions : Actions
-    getter conditions : Conditions
+    getter actions : Actions?
+    getter conditions : Conditions?
 
     # In milliseconds
-    getter debounce_period : Int32
-    getter important : Bool
+    getter debounce_period : Int32?
+    getter important : Bool?
 
-    getter enable_webhook : Bool
-    getter supported_methods : Array(String)
+    getter enable_webhook : Bool?
+    getter supported_methods : Array(String)?
 
     struct Actions < Response
       getter functions : Array(Function) = [] of PlaceOS::Client::API::Models::Trigger::Actions::Function

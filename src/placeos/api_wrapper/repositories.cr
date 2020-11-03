@@ -31,7 +31,7 @@ module PlaceOS
       name : String?,
       uri : String?,
       # This can be improved later
-      repo_type : Repository::Type?,
+      repo_type : PlaceOS::Client::API::Models::Repository::Type?,
       folder_name : String?,
       description : String?,
       commit_hash : String?
