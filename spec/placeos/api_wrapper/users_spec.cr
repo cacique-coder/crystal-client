@@ -93,16 +93,16 @@ module PlaceOS
     end
 
     it "#update" do
-      res = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "created_at" => 155599599, "updated_at" => 1555996000, "first_name" => "hello", "last_name" => "", "country"=> "", "building" => "", "image"=> ""}.to_json
+      res = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "created_at" => 155599599, "updated_at" => 1555996000, "first_name" => "hello", "last_name" => "", "country" => "", "building" => "", "image" => ""}.to_json
       WebMock
         .stub(:put, DOMAIN + client.base + "/user-G03JG1kx3yS")
         .to_return(body: res)
-      result = client.update "user-G03JG1kx3yS", authority_id:"authority-G03OrvJj~5j", name: "hello"
+      result = client.update "user-G03JG1kx3yS", authority_id: "authority-G03OrvJj~5j", name: "hello"
       result.should be_a(PlaceOS::Client::API::Models::User)
     end
 
     it "#current" do
-      user_parsed = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "created_at" => 1555995992, "updated_at" => 1555996000, "first_name" => "hello", "last_name" => "", "country"=> "", "building" => "", "image"=> ""}
+      user_parsed = {"id" => "user-G03JG1kx3yS", "email_digest" => "18270840d5b8357a2175208b63ca52a4", "nickname" => "", "name" => "Place Support (localhost=>8443)", "created_at" => 1555995992, "updated_at" => 1555996000, "first_name" => "hello", "last_name" => "", "country" => "", "building" => "", "image" => ""}
       WebMock
         .stub(:get, DOMAIN + client.base + "/current")
         .to_return(body: user_parsed.to_json)
