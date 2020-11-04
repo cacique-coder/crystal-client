@@ -19,7 +19,7 @@ module PlaceOS
         "description": "description-woo",
         "commit_hash": "b930e07d9fd2b682de48e881d5405176888a1de8",
         "branch": "master",
-        "repo_type": "Driver"
+        "repo_type": 0
       }
     ]
     JSON
@@ -66,7 +66,7 @@ module PlaceOS
     end
 
     describe "#create" do
-      body = {name: "Place", uri: "uri", repo_type: "Driver", username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7"}.to_json
+      body = {name: "Place", uri: "uri", repo_type: 0, username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7"}.to_json
       WebMock
         .stub(:post, DOMAIN + client.base)
         .with(
@@ -74,7 +74,7 @@ module PlaceOS
           body: body
         )
         .to_return(body: repositories.last)
-      result = client.create(name: "Place", uri: "uri", repo_type: "Driver", username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7")
+      result = client.create(name: "Place", uri: "uri", repo_type: 0, username: "GabFitzgerald", password: "iheartadamlambert", key: "sshhhshsh", folder_name: "your-fave-folder", description: "description description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de7")
       result.should be_a(PlaceOS::Client::API::Models::Repository)
       # result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
     end
@@ -84,10 +84,10 @@ module PlaceOS
         .stub(:put, DOMAIN + "#{client.base}/repository-oOj2lGgsz")
         .with(
           headers: {"Content-Type" => "application/json"},
-          body: {username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: "Driver", folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"}.to_json
+          body: {username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: 0, folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"}.to_json
         )
         .to_return(body: repositories.first)
-      result = client.update id: "repository-oOj2lGgsz", username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: "Driver", folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"
+      result = client.update id: "repository-oOj2lGgsz", username: "GabFitzgerald", password: "asdfgh", key: "key", name: "Foo", uri: "uri", repo_type: 0, folder_name: "folder", description: "new description", commit_hash: "b930e07d9fd2b682de48e881d5405176888a1de6"
       result.should be_a(PlaceOS::Client::API::Models::Repository)
       # result.to_json.should eq("{\"id\":\"repository-oOj2lGgsz\",\"name\":\"Place\",\"uri\":\"uri\",\"repo_type\":0,\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\",\"description\":\"description-woo\",\"branch\":\"master\"}")
     end

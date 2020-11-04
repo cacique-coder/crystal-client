@@ -12,7 +12,7 @@ module PlaceOS
 
     def create(
       name : String,
-      role : String,
+      role : Int32,
       commit : String,
       file_name : String,
       module_name : String,
@@ -27,8 +27,8 @@ module PlaceOS
 
     def update(
       id : String,
+      role : Int32? = nil,
       name : String? = nil,
-      role : String? = nil,
       commit : String? = nil,
       file_name : String? = nil,
       module_name : String? = nil,

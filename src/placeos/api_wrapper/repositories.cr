@@ -13,7 +13,7 @@ module PlaceOS
     def create(
       name : String,
       uri : String,
-      repo_type : String,
+      repo_type : Int32,
       username : String? = "",
       password : String? = "",
       key : String? = "",
@@ -31,7 +31,7 @@ module PlaceOS
       key : String?,
       name : String?,
       uri : String?,
-      repo_type : String?,
+      repo_type : Int32?,
       folder_name : String?,
       description : String?,
       commit_hash : String?
