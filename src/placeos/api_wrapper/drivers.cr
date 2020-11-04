@@ -10,7 +10,7 @@ module PlaceOS
 
     def create(
       name : String,
-      role : Role,
+      role : PlaceOS::Client::API::Models::Role,
       commit : String,
       file_name : String,
       module_name : String,

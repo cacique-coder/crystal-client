@@ -3,8 +3,8 @@ require "./endpoint"
 module PlaceOS
   class Client::APIWrapper::SystemTriggers < Client::APIWrapper::Endpoint
     include Client::APIWrapper::Endpoint::Destroy
-    include Client::APIWrapper::Endpoint::Search(PlaceOS::Model::TriggerInstance)
-    include Client::APIWrapper::Endpoint::Update(PlaceOS::Model::TriggerInstance)
+    include Client::APIWrapper::Endpoint::Search(TriggerInstance)
+    include Client::APIWrapper::Endpoint::Update(TriggerInstance)
 
     # SystemTriggers are embedded beneath a systems route
     getter base : String = "#{API_ROOT}/systems"
@@ -22,7 +22,7 @@ module PlaceOS
     # end
 
     def fetch(id : String, complete : Bool?)
-      get "#{base}/#{id}", params: from_args, as: PlaceOS::Model::TriggerInstance
+      get "#{base}/#{id}", params: from_args, as: TriggerInstance
     end
 
     def create(
@@ -36,7 +36,7 @@ module PlaceOS
       webhook_secret : String?,
       trigger_count : Int32?
     )
-      post base, body: from_args, as: PlaceOS::Model::TriggerInstance
+      post base, body: from_args, as: TriggerInstance
     end
 
     # def update(
