@@ -2,9 +2,11 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::OAuthApplications < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(OAuthApplication)
-    include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::Search(OAuthApplication)
+    include Client::APIWrapper::Endpoint::Fetch(OAuthApplication)
+    # include Client::APIWrapper::Endpoint::Create
+    # include Client::APIWrapper::Endpoint::Update
+    include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/oauth_apps"
 

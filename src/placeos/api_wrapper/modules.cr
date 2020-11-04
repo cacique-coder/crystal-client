@@ -2,32 +2,18 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Modules < Client::APIWrapper::Endpoint
+    include Client::APIWrapper::Endpoint::Search(Module)
     include Client::APIWrapper::Endpoint::Fetch(Module)
+    # include Client::APIWrapper::Endpoint::Create
+    # include Client::APIWrapper::Endpoint::Update
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::StartStop
     include Client::APIWrapper::Endpoint::Settings
     # Results my also also be limited to those associated with a specific
     # *system_id*, that are instances of a *driver_id*, or any combination of
     # these.
-    include Client::APIWrapper::Endpoint::Search(Module)
 
     getter base : String = "#{API_ROOT}/modules"
-
-    # Interaction
-    ###########################################################################
-
-    # Performs a connectivity check with the associated device or service.
-    def ping(id : String)
-      post "#{base}/#{id}/ping", as: Ping
-    end
-
-    # Queries the state exposed by a module.
-    def state(id : String, lookup : String? = nil)
-      path = "#{base}/#{id}/state"
-      path += "/#{lookup}" if lookup
-
-      get path # spec and type casting requires rest-api specs
-    end
 
     # Management
     ###########################################################################
@@ -79,6 +65,22 @@ module PlaceOS
 
     def load(id : String)
       post "#{base}/#{id}/load", as: Bool
+    end
+
+    # Interaction
+    ###########################################################################
+
+    # Performs a connectivity check with the associated device or service.
+    def ping(id : String)
+      post "#{base}/#{id}/ping", as: Ping
+    end
+
+    # Queries the state exposed by a module.
+    def state(id : String, lookup : String? = nil)
+      path = "#{base}/#{id}/state"
+      path += "/#{lookup}" if lookup
+
+      get path # spec and type casting requires rest-api specs
     end
   end
 end

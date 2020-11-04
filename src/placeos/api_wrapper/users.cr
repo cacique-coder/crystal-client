@@ -2,9 +2,11 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Users < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(User)
-    include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::Search(User)
+    include Client::APIWrapper::Endpoint::Fetch(User)
+    # include Client::APIWrapper::Endpoint::Create(User)
+    # include Client::APIWrapper::Endpoint::Update(User)
+    include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/users"
 

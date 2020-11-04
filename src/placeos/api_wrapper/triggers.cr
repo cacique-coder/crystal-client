@@ -2,9 +2,10 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Triggers < Client::APIWrapper::Endpoint
-    include JSON::Serializable::Strict
-
+    # include Client::APIWrapper::Endpoint::Search(Trigger)
     include Client::APIWrapper::Endpoint::Fetch(Trigger)
+    # include Client::APIWrapper::Endpoint::Create(Trigger)
+    # include Client::APIWrapper::Endpoint::Update(Trigger)
     include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/triggers"

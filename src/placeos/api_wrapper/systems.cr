@@ -2,7 +2,10 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Systems < Client::APIWrapper::Endpoint
+    # include Client::APIWrapper::Endpoint::Search(System)
     include Client::APIWrapper::Endpoint::Fetch(System)
+    # include Client::APIWrapper::Endpoint::Create(System)
+    # include Client::APIWrapper::Endpoint::Update(System)
     include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::StartStop
     include Client::APIWrapper::Endpoint::Settings

@@ -2,9 +2,11 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Settings < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Client::API::Models::Settings)
-    include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::Search(PlaceOS::Client::API::Models::Settings)
+    include Client::APIWrapper::Endpoint::Fetch(PlaceOS::Client::API::Models::Settings)
+    # include Client::APIWrapper::Endpoint::Create(PlaceOS::Client::API::Models::Settings)
+    # include Client::APIWrapper::Endpoint::Update(PlaceOS::Client::API::Models::Settings)
+    include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/settings"
 

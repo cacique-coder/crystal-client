@@ -2,15 +2,17 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Drivers < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Fetch(Driver)
-    include Client::APIWrapper::Endpoint::Destroy
     include Client::APIWrapper::Endpoint::Search(Driver)
+    include Client::APIWrapper::Endpoint::Fetch(Driver)
+    # include Client::APIWrapper::Endpoint::Create(Driver)
+    # include Client::APIWrapper::Endpoint::Update(Driver)
+    include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/drivers"
 
     def create(
       name : String,
-      role : PlaceOS::Client::API::Models::Role,
+      role : String,
       commit : String,
       file_name : String,
       module_name : String,
@@ -26,7 +28,7 @@ module PlaceOS
     def update(
       id : String,
       name : String? = nil,
-      role : Role? = nil,
+      role : String? = nil,
       commit : String? = nil,
       file_name : String? = nil,
       module_name : String? = nil,

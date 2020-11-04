@@ -51,14 +51,6 @@ module PlaceOS
       end
     end
 
-    module Destroy
-      # Destroys a {{ T.id }}
-      def destroy(id : String)
-        delete "#{base}/#{id}"
-        nil
-      end
-    end
-
     module Create(T)
       def create(**args) : T
         post base, body: from_args, as: T
@@ -68,6 +60,14 @@ module PlaceOS
     module Update(T)
       def update(id, **args) : T
         post "#{base}/#{id}", body: from_args, as: T
+      end
+    end
+
+    module Destroy
+      # Destroys a {{ T.id }}
+      def destroy(id : String)
+        delete "#{base}/#{id}"
+        nil
       end
     end
 

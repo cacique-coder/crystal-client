@@ -2,49 +2,13 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::Zones < Client::APIWrapper::Endpoint
+    # include Client::APIWrapper::Endpoint::Search(Zone)
     include Client::APIWrapper::Endpoint::Fetch(Zone)
+    # include Client::APIWrapper::Endpoint::Create(Zone)
+    # include Client::APIWrapper::Endpoint::Update(Zone)
     include Client::APIWrapper::Endpoint::Destroy
 
     getter base : String = "#{API_ROOT}/zones"
-
-    # Interaction
-    ###########################################################################
-
-    def execute(
-      id : String,
-      method : String,
-      module_name : String,
-      index : Int32 = 1,
-      args = nil
-    )
-      post "#{base}/#{id}/#{module_name}_#{index}/#{method}", body: args, as: Zone
-    end
-
-    # Management
-    ###########################################################################
-
-    # Creates a new zone.
-    def create(
-      name : String,
-      description : String? = nil,
-      tags : Array(String)? = nil,
-      settings : Settings? = nil,
-      triggers : Array(String)? = nil
-    )
-      post base, body: from_args, as: Zone
-    end
-
-    # Updates zone attributes or configuration.
-    def update(
-      id : String,
-      name : String? = nil,
-      description : String? = nil,
-      tags : Array(String)? = nil,
-      settings : Settings? = nil,
-      triggers : Array(String)? = nil
-    )
-      put "#{base}/#{id}", body: from_args, as: Zone
-    end
 
     # Search
     ###########################################################################
@@ -77,9 +41,48 @@ module PlaceOS
       get base, params: from_args, as: Array(Zone)
     end
 
+    # Management
+    ###########################################################################
+
+    # Creates a new zone.
+    def create(
+      name : String,
+      description : String? = nil,
+      tags : Array(String)? = nil,
+      settings : Settings? = nil,
+      triggers : Array(String)? = nil
+    )
+      post base, body: from_args, as: Zone
+    end
+
+    # Updates zone attributes or configuration.
+    def update(
+      id : String,
+      name : String? = nil,
+      description : String? = nil,
+      tags : Array(String)? = nil,
+      settings : Settings? = nil,
+      triggers : Array(String)? = nil
+    )
+      put "#{base}/#{id}", body: from_args, as: Zone
+    end
+
     # Unique Actions
     def trigger(id : String)
       get "#{base}/#{id}/triggers", as: Trigger
+    end
+
+    # Interaction
+    ###########################################################################
+
+    def execute(
+      id : String,
+      method : String,
+      module_name : String,
+      index : Int32 = 1,
+      args = nil
+    )
+      post "#{base}/#{id}/#{module_name}_#{index}/#{method}", body: args, as: Zone
     end
 
     private getter client

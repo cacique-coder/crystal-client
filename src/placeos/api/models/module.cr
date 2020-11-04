@@ -1,5 +1,5 @@
 require "./response"
-require "./role"
+require "./driver.cr"
 
 module PlaceOS::Client::API::Models
   struct Module < Response
@@ -41,7 +41,8 @@ module PlaceOS::Client::API::Models
     getter name : String?
 
     # The associated driver type.
-    getter role : Role?
+    @[JSON::Field(converter: PlaceOS::Client::API::Models::DriverRoleConverter)]
+    getter role : PlaceOS::Model::Driver::Role?
 
     # Flag for connectivity state.
     getter connected : Bool?
