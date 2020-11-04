@@ -1,5 +1,6 @@
 require "json"
 require "uri"
+require "placeos-models"
 
 module PlaceOS::Client::API::Models
   # :nodoc:

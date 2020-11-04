@@ -11,8 +11,7 @@ module PlaceOS
     def create(
       name : String,
       uri : String,
-      # This can be improved later
-      repo_type : Repository::Type,
+      repo_type : String,
       username : String? = "",
       password : String? = "",
       key : String? = "",
@@ -30,8 +29,7 @@ module PlaceOS
       key : String?,
       name : String?,
       uri : String?,
-      # This can be improved later
-      repo_type : Repository::Type?,
+      repo_type : String?,
       folder_name : String?,
       description : String?,
       commit_hash : String?

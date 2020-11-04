@@ -12,6 +12,18 @@ module PlaceOS::Client::API::Models
     getter description : String
     getter commit_hash : String
     getter branch : String
-    getter repo_type : Repository::Type
+
+    @[JSON::Field(converter: PlaceOS::Client::API::Models::RepositoryConverter)]
+    getter repo_type : PlaceOS::Model::Repository::Type
+  end
+
+  module RepositoryConverter
+    def self.from_json(pull : JSON::PullParser) : PlaceOS::Model::Repository::Type
+      PlaceOS::Model::Repository::Type.parse(pull.read_string)
+    end
+
+    def self.to_json
+      json.string(self)
+    end
   end
 end
