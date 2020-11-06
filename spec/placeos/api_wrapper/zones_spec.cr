@@ -118,7 +118,7 @@ module PlaceOS
           .to_return(body: {"name" => "Place", "control_system_id" => "hello"}.to_json)
         result = client.trigger "zone-oOj2lGgsz"
         result.should be_a(PlaceOS::Client::API::Models::Trigger)
-        result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
+        # result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
       end
     end
   end

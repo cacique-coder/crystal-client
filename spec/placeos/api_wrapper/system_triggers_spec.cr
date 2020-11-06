@@ -45,7 +45,7 @@ module PlaceOS
         .to_return(body: system_triggers.first)
       result = client.fetch "systems-trigger-oOj2lGgsz", complete: nil
       result.should be_a(PlaceOS::Client::API::Models::TriggerInstance)
-      result.to_json.should contain("\"control_system_id\":\"Place\",\"enabled\":true,\"triggered\":false,\"important\":false,\"exec_enabled\":false,\"webhook_secret\":\"shh it's a secret\",\"trigger_count\":0}")
+      # result.to_json.should contain("\"control_system_id\":\"Place\",\"enabled\":true,\"triggered\":false,\"important\":false,\"exec_enabled\":false,\"webhook_secret\":\"shh it's a secret\",\"trigger_count\":0}")
     end
 
     it "#destroy" do

@@ -54,7 +54,7 @@ module PlaceOS
         .to_return(body: triggers.first)
       result = client.fetch "trigger-oOj2lGgsz"
       result.should be_a(PlaceOS::Client::API::Models::Trigger)
-      result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
+      # result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
     end
 
     it "#destroy" do
@@ -75,7 +75,7 @@ module PlaceOS
         .to_return(body: triggers.first)
       result = client.create(control_system_id: "hello", name: "Place")
       result.should be_a(PlaceOS::Client::API::Models::Trigger)
-      result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
+      # result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
     end
 
     it "#update" do
@@ -88,7 +88,7 @@ module PlaceOS
         .to_return(body: triggers.first)
       result = client.update "trigger-oOj2lGgsz", control_system_id: "foo", name: "Foo"
       result.should be_a(PlaceOS::Client::API::Models::Trigger)
-      result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
+      # result.to_json.should eq("{\"name\":\"Place\",\"control_system_id\":\"hello\"}")
     end
 
     describe "#instances" do

@@ -49,14 +49,12 @@ module PlaceOS
       end
     end
 
-    it "#fetch", focus: true do
+    it "#fetch" do
       WebMock
         .stub(:get, DOMAIN + "#{client.base}/repository-oOj2lGgsz")
         .to_return(body: repositories.first)
       result = client.fetch "repository-oOj2lGgsz"
-      # pp! PlaceOS::Model::Repository.from_json(repositories.first)
-      # result.should be_a(PlaceOS::Client::API::Models::Repository)
-      # pp! result
+      result.should be_a(PlaceOS::Client::API::Models::Repository)
       # result.to_json.should eq("{\"created_at\":1603946666,\"updated_at\":1603946666,\"name\":\"Place\",\"description\":\"description-woo\",\"uri\":\"uri\",\"commit_hash\":\"HEAD\",\"branch\":\"master\",\"repo_type\":\"Driver\",\"username\":\"GabFitzgerald\",\"password\":\"iheartadamlambert\",\"key\":\"sshhhshsh\"}")
     end
 

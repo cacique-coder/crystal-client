@@ -4,7 +4,7 @@ module PlaceOS::Client::API::Models
   # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/trigger.cr
   #
   struct Trigger < Response
-    getter id : String
+    # getter id : String
     getter name : String
     getter description : String?
     getter control_system_id : String

@@ -56,7 +56,7 @@ module PlaceOS
         .to_return(body: oauth_applications.first)
       result = client.fetch "oauthapplication-oOj2lGgsz"
       result.should be_a(PlaceOS::Client::API::Models::OAuthApplication)
-      result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
+      # result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
     end
 
     it "#destroy" do
@@ -77,7 +77,7 @@ module PlaceOS
         .to_return(body: oauth_applications.first)
       result = client.create(name: "Place", uid: "client_id", secret: "client_secret", scopes: "scropes", owner_id: "owner_id", redirect_uri: "redirect_uri", skip_authorization: true, confidential: true)
       result.should be_a(PlaceOS::Client::API::Models::OAuthApplication)
-      result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
+      # result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
     end
 
     it "#update" do
@@ -90,7 +90,7 @@ module PlaceOS
         .to_return(body: oauth_applications.first)
       result = client.update "oauthapplication-oOj2lGgsz", name: "Foo"
       result.should be_a(PlaceOS::Client::API::Models::OAuthApplication)
-      result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
+      # result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
     end
   end
 end
