@@ -2,8 +2,8 @@ require "./endpoint"
 
 module PlaceOS
   class Client::APIWrapper::OAuthApplications < Client::APIWrapper::Endpoint
-    include Client::APIWrapper::Endpoint::Search(OAuthApplication)
-    include Client::APIWrapper::Endpoint::Fetch(OAuthApplication)
+    include Client::APIWrapper::Endpoint::Search(OAuthAuthentication)
+    include Client::APIWrapper::Endpoint::Fetch(OAuthAuthentication)
     # include Client::APIWrapper::Endpoint::Create
     # include Client::APIWrapper::Endpoint::Update
     include Client::APIWrapper::Endpoint::Destroy
@@ -21,7 +21,7 @@ module PlaceOS
       confidential : Bool? = nil,
       revoked_at : Time? = nil
     )
-      post base, body: from_args, as: OAuthApplication
+      post base, body: from_args, as: OAuthAuthentication
     end
 
     def update(
@@ -36,7 +36,7 @@ module PlaceOS
       confidential : Bool? = nil,
       revoked_at : Time? = nil
     )
-      put "#{base}/#{id}", body: from_args, as: OAuthApplication
+      put "#{base}/#{id}", body: from_args, as: OAuthAuthentication
     end
   end
 end

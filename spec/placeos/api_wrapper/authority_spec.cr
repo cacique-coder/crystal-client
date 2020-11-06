@@ -32,7 +32,7 @@ module PlaceOS
       authority.description.should eq(nil)
       authority.login_url.should eq("/login?continue={{url}}")
       authority.logout_url.should eq("/")
-      authority.config["universe"].as_i.should eq(42)
+      authority.config.not_nil!["universe"].as_i.should eq(42)
     end
   end
 end

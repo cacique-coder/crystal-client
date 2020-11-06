@@ -1,4 +1,4 @@
-require "../api/models/metadata"
+# require "../api/models/metadata"
 require "./endpoint"
 
 module PlaceOS

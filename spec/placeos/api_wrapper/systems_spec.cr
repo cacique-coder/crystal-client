@@ -17,7 +17,7 @@ module PlaceOS
         result = client.search
         result.size.should eq(3)
         system = result.first
-        system.should be_a(PlaceOS::Client::API::Models::System)
+        system.should be_a(PlaceOS::Client::API::Models::ControlSystem)
         system.name.should eq("Room 1")
       end
 
@@ -56,7 +56,7 @@ module PlaceOS
           )
           .to_return(body: systems.first)
         result = client.create name: "Foo", zones: ["a", "b", "c"]
-        result.should be_a(PlaceOS::Client::API::Models::System)
+        result.should be_a(PlaceOS::Client::API::Models::ControlSystem)
       end
     end
 
@@ -66,7 +66,7 @@ module PlaceOS
           .stub(:get, DOMAIN + "#{client.base}/sys-rJQQlR4Cn7")
           .to_return(body: systems.first)
         result = client.fetch "sys-rJQQlR4Cn7"
-        result.should be_a(PlaceOS::Client::API::Models::System)
+        result.should be_a(PlaceOS::Client::API::Models::ControlSystem)
       end
     end
 
@@ -80,7 +80,7 @@ module PlaceOS
           )
           .to_return(body: systems.first)
         result = client.update "sys-rJQQlR4Cn7", version: 2, name: "Foo"
-        result.should be_a(PlaceOS::Client::API::Models::System)
+        result.should be_a(PlaceOS::Client::API::Models::ControlSystem)
       end
     end
 

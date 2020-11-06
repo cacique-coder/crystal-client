@@ -35,7 +35,7 @@ module PlaceOS
           .to_return(body: oauth_applications_json)
         result = client.search
         result.size.should eq(1)
-        result.first.should be_a(PlaceOS::Client::API::Models::OAuthApplication)
+        result.first.should be_a(PlaceOS::Client::API::Models::OAuthAuthentication)
         result.first.name.should eq("Place")
       end
 
@@ -55,7 +55,7 @@ module PlaceOS
         .stub(:get, DOMAIN + "#{client.base}/oauthapplication-oOj2lGgsz")
         .to_return(body: oauth_applications.first)
       result = client.fetch "oauthapplication-oOj2lGgsz"
-      result.should be_a(PlaceOS::Client::API::Models::OAuthApplication)
+      result.should be_a(PlaceOS::Client::API::Models::OAuthAuthentication)
       # result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
     end
 
@@ -76,7 +76,7 @@ module PlaceOS
         )
         .to_return(body: oauth_applications.first)
       result = client.create(name: "Place", uid: "client_id", secret: "client_secret", scopes: "scropes", owner_id: "owner_id", redirect_uri: "redirect_uri", skip_authorization: true, confidential: true)
-      result.should be_a(PlaceOS::Client::API::Models::OAuthApplication)
+      result.should be_a(PlaceOS::Client::API::Models::OAuthAuthentication)
       # result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
     end
 
@@ -89,7 +89,7 @@ module PlaceOS
         )
         .to_return(body: oauth_applications.first)
       result = client.update "oauthapplication-oOj2lGgsz", name: "Foo"
-      result.should be_a(PlaceOS::Client::API::Models::OAuthApplication)
+      result.should be_a(PlaceOS::Client::API::Models::OAuthAuthentication)
       # result.to_json.should eq("{\"created_at\":1555995992,\"updated_at\":1555996000,\"id\":\"oauthapplication-oOj2lGgsz\",\"name\":\"Place\",\"uid\":\"client_id\",\"secret\":\"client_secret\",\"scopes\":\"scropes\",\"owner_id\":\"owner_id\",\"redirect_uri\":\"redirect_uri\",\"skip_authorization\":true,\"confidential\":true,\"revoked_at\":1555996000}")
     end
   end
