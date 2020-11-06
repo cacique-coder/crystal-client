@@ -1,13 +1,17 @@
 require "./response"
 
 module PlaceOS::Client::API::Models
+  # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/driver.cr
+  #
   struct Driver < Response
     include Timestamps
+    # A universally unique identifier for the driver.
+    getter id : String
     getter name : String
     getter description : String
 
-    getter default_uri : String
-    getter default_port : Int32
+    getter default_uri : String?
+    getter default_port : Int32?
 
     getter role : PlaceOS::Model::Driver::Role
 

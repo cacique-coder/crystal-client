@@ -2,6 +2,8 @@ require "./response"
 require "./trigger"
 
 module PlaceOS::Client::API::Models
+  # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/zone.cr
+  #
   struct Zone < Response
     include Timestamps
 
@@ -34,6 +36,8 @@ module PlaceOS::Client::API::Models
 
     # Map identifier, could be a URL or id
     getter map_id : String?
+
+    # getter parent_id : String?
 
     # Space seperated list of tags for categorizing the zone.
     getter tags : Array(String) = [] of String

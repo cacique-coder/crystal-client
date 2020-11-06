@@ -1,7 +1,10 @@
 require "./response"
 
 module PlaceOS::Client::API::Models
+  # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/trigger_instance.cr
+  #
   struct TriggerInstance < Response
+    getter id : String
     getter control_system_id : String? = nil
     getter trigger_id : String? = nil
     getter zone_id : String? = nil

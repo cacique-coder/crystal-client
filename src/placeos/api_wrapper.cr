@@ -3,12 +3,9 @@ require "json"
 require "mutex"
 require "oauth2"
 require "uri"
+require "placeos-models" # is there a better place for this require?
 
 require "./api/**"
-
-# PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/driver.cr
-# is there a better place for this require?
-require "placeos-models"
 
 # Low-level wrapper for the PlaceOS API.
 #

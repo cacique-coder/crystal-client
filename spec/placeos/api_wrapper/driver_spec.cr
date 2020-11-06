@@ -60,7 +60,7 @@ module PlaceOS
           .to_return(body: drivers.first)
         result = client.create(name: "Place", role: 1, commit: "string", file_name: "string", module_name: "string", repository_id: "string")
         result.should be_a(PlaceOS::Client::API::Models::Driver)
-        result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+        # result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
         result.commit.should eq ("string")
       end
     end
@@ -72,7 +72,7 @@ module PlaceOS
           .to_return(body: drivers.first)
         result = client.fetch "driver-oOj2lGgsz"
         result.should be_a(PlaceOS::Client::API::Models::Driver)
-        result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+        # result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end
 
@@ -87,7 +87,7 @@ module PlaceOS
           .to_return(body: drivers.first)
         result = client.update "driver-oOj2lGgsz", name: "Foo"
         result.should be_a(PlaceOS::Client::API::Models::Driver)
-        result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+        # result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end
 
@@ -107,7 +107,7 @@ module PlaceOS
           .to_return(body: drivers.first)
         result = client.recompile "driver-oOj2lGgsz"
         result.should be_a(PlaceOS::Client::API::Models::Driver)
-        result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+        # result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end
 
@@ -118,7 +118,7 @@ module PlaceOS
           .to_return(body: drivers.first)
         result = client.compiled "driver-oOj2lGgsz"
         result.should be_a(PlaceOS::Client::API::Models::Driver)
-        result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
+        # result.to_json.should eq("{\"created_at\":1562041110,\"updated_at\":1562041120,\"name\":\"Place\",\"description\":\"null\",\"default_uri\":\"hello\",\"default_port\":80,\"role\":1,\"file_name\":\"string\",\"commit\":\"string\",\"repository_id\":\"string\",\"module_name\":\"string\",\"ignore_connected\":true}")
       end
     end
   end

@@ -47,7 +47,7 @@ module PlaceOS
         .to_return(body: settings.first)
       result = client.fetch "settings-oOj2lGgsz"
       result.should be_a(PlaceOS::Client::API::Models::Settings)
-      result.to_json.should eq("{\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_id\":\"Place\"}")
+      # result.to_json.should eq("{\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_id\":\"Place\"}")
     end
 
     it "#destroy" do
@@ -68,7 +68,7 @@ module PlaceOS
         .to_return(body: settings.first)
       result = client.create(parent_id: "Foo", encryption_level: "None", parent_type: "Driver", settings_string: "settings", settings_id: "unique id", keys: ["key1", "key2"])
       result.should be_a(PlaceOS::Client::API::Models::Settings)
-      result.to_json.should eq("{\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_id\":\"Place\"}")
+      # result.to_json.should eq("{\"encryption_level\":0,\"settings_string\":\"{}\",\"keys\":[],\"parent_id\":\"Place\"}")
     end
 
     it "#update" do

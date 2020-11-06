@@ -1,6 +1,8 @@
 require "./response"
 
 module PlaceOS::Client::API::Models
+  # PlaceOS::Model GitHub Link: https://github.com/PlaceOS/models/blob/master/src/placeos-models/authority.cr
+  #
   # Metadata about the PlaceOS instance connected to.
   #
   # This provides information that may be of relevance for authentication or
