@@ -36,7 +36,7 @@ module PlaceOS
       WebMock
         .stub(:post, DOMAIN + client.base)
         .to_return(body: %({"created_at":1604030519,"updated_at":1604030519,"name":"1234","description":"This is a test domain","domain":"localhost","login_url":"localhost:1234/login","logout_url":"localhost:1234/logout","internals":{},"config":{},"id":"authority-G0S_7R1hW3R"}))
-      result = client.create name: "1234", updated_at: 0, description: "This is a test domain", domain: "localhost", login_url: "localhost:1234/login", logout_url: "localhost:1234/logout", version: 0
+      result = client.create name: "1234", description: "This is a test domain", domain: "localhost", login_url: "localhost:1234/login", logout_url: "localhost:1234/logout"
       result.should be_a(PlaceOS::Model::Authority)
     end
   end

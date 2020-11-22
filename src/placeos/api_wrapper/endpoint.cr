@@ -204,6 +204,35 @@ module PlaceOS
       {% key = arg.name.symbolize == :mod ? "module" : arg.name.stringify %}
       {{ yield key, arg.name, arg.default_value }}
     {% end %}
+    end
   end
+end
+
+macro __create_from_model__(model)
+  def create(
+    {% for name, opts in model.resolve.constant("FIELDS") %}
+      {% if opts[:mass_assign] == true && !%w(id updated_at created_at).includes?(name.id.stringify) %}
+        {{name.id}} : {{opts[:klass]}}? = nil,
+      {% end %}
+    {% end %}
+    )
+    post base, body: from_args, as: {{model}}
   end
+end
+
+macro __update_from_model__(model)
+  def update(
+    {% for name, opts in model.resolve.constant("FIELDS") %}
+      {% if opts[:mass_assign] == true && !%w(updated_at created_at).includes?(name.id.stringify) %}
+        {{name.id}} : {{opts[:klass]}}? = nil,
+      {% end %}
+    {% end %}
+  )
+    put "#{base}/#{id}", body: from_args, as: {{model}}
+  end
+end
+
+macro __create_update_from_model__(model)
+  __create_from_model__({{model}})
+  __update_from_model__({{model}})
 end
