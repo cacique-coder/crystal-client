@@ -22,6 +22,18 @@ module PlaceOS::Client::API::Models
     # Calendar URI that is associated with this system.
     getter email : String?
 
+    # an alternative to the full name that is easier to read.
+    getter display_name : String?
+
+    # the room identification code, like 3-04 etc.
+    getter code : String?
+
+    # the system type, like a small meeting room etc.
+    getter type : String?
+
+    # a map identifier that can be used to locate this system.
+    getter map_id : String?
+
     # Number of people that can be accommodated in this space.
     getter capacity : Int32
 
