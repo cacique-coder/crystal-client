@@ -3,7 +3,8 @@ require "./response"
 module PlaceOS::Client::API::Models
   # Metadata about the current user
   struct User < Response
-    include Timestamps
+    @[JSON::Field(converter: Time::EpochConverter)]
+    getter created_at : Time
 
     getter id : String
     getter email_digest : String
