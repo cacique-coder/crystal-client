@@ -7,18 +7,18 @@ module PlaceOS::Client::API::Models
 
     getter id : String
     getter email_digest : String
-    getter nickname : String
+    getter nickname : String?
     getter name : String
-    getter first_name : String
-    getter last_name : String
-    getter country : String
-    getter building : String
-    getter image : String
+    getter first_name : String?
+    getter last_name : String?
+    getter country : String?
+    getter building : String?
+    getter image : String?
 
     # Admin only fields
     getter sys_admin : Bool?
     getter support : Bool?
-    getter email : String?
+    getter email : String
     getter phone : String?
     getter ui_theme : String?
     getter metadata : String?
