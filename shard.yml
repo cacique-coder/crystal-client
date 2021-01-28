@@ -1,6 +1,5 @@
 name: placeos
-version: 2.1.9
-crystal: 0.35.1
+version: 2.2.0
 license: MIT
 
 description: |
