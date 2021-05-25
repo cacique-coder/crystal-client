@@ -1,20 +1,57 @@
-name: Specs
-
-on: [push]
+name: CI
+on:
+  push:
 
 jobs:
-  build:
-
+  format:
     runs-on: ubuntu-latest
-
     container:
       image: crystallang/crystal
+    steps:
+      - uses: actions/checkout@v1
+      - name: Format
+        run: crystal tool format --check
+      - name: Lint
+        uses: crystal-ameba/github-action@v0.2.12
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  spec:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        experimental: [false]
+        crystal:
+          - latest
+          - 1.0.0
+        include:
+          - crystal: nightly
+            experimental: true
+    container:
+      image: crystallang/crystal:${{ matrix.crystal }}
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
-      run: shards install
-    - name: Run tests
-      run: crystal spec
-    - name: Run static analysis
-      run: crystal bin/ameba.cr
+      run: shards install --ignore-crystal-version
+    - name: Tests
+      run: crystal spec -v --error-trace
+
+  publish:
+    if: ${{ github.ref == 'refs/head/master' }}
+    needs: spec
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run `crystal tool docs`
+        run: crystal tool docs
+      - name: Publish to GitHub Pages
+        uses: rayluo/github-pages-overwriter@v1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          source-directory: ./docs
+          target-branch: docs
