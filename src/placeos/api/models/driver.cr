@@ -4,6 +4,7 @@ require "./role"
 module PlaceOS::Client::API::Models
   struct Driver < Response
     include Timestamps
+
     getter name : String
     getter description : String
 
