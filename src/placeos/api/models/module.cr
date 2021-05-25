@@ -41,6 +41,7 @@ module PlaceOS::Client::API::Models
     getter name : String
 
     # The associated driver type.
+    @[JSON::Field(converter: Enum::ValueConverter(PlaceOS::Client::API::Models::Role))]
     getter role : Role
 
     # Flag for connectivity state.

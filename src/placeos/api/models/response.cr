@@ -6,17 +6,24 @@ module PlaceOS::Client::API::Models
   abstract struct Response
     include JSON::Serializable
 
-    macro extended
+    private module Init
       macro finished
-        # Initializer based off {{@type.id}} properties
-        def initialize(
-        {% for arg in @type.instance_vars %}
-          @{{arg.name}} : {{arg.type}}{% if arg.has_default_value? %} = {{arg.default_value.id}}{% end %},
-        {% end %}
-        )
+        macro included
+          # Initializer based off {{@type.id}} properties
+          def initialize(@name : String
+            {% for arg in @type.instance_vars.reject &.has_default_value? %}
+              @{{arg.name}} : {{arg.type}},
+            {% end %}
+            {% for arg in @type.instance_vars.select &.has_default_value? %}
+              @{{arg.name}} : {{arg.type}} = {{arg.default_value.id}},
+            {% end %}
+          )
+          end
         end
       end
     end
+
+    include Init
   end
 
   module Timestamps
