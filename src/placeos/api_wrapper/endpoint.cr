@@ -88,6 +88,11 @@ module PlaceOS
         {% end %}
       {% end %}
 
+      if host_header = client.host_header.presence
+        headers ||= HTTP::Headers.new
+        headers["Host"] = host_header
+      end
+
       # Exec the request
       response = client.connection &.{{method.id}}(path, headers, body)
       raise API::Error.from_response(response) unless response.success?
