@@ -88,9 +88,9 @@ module PlaceOS
         {% end %}
       {% end %}
 
-      if client.host_header
+      if host_header = client.host_header.presence
         headers ||= HTTP::Headers.new
-        headers["Host"] = client.host_header
+        headers["Host"] = host_header
       end
 
       # Exec the request
