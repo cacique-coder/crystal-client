@@ -44,10 +44,11 @@ module PlaceOS
       @client_secret : String? = nil,
       # Allow for a token to be used directly (proxying auth)
       @token : OAuth2::AccessToken? = nil,
-      @host_header : String? = nil
+      @host_header : String? = nil,
+      @insecure : Bool = false
     )
       @uri = base_uri.is_a?(String) ? URI.parse(base_uri) : base_uri
-      @api_wrapper = APIWrapper.new(@uri, @host_header) do |http|
+      @api_wrapper = APIWrapper.new(@uri, @host_header, @insecure) do |http|
         authenticate(http)
       end
     end
