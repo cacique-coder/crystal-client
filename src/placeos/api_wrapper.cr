@@ -21,23 +21,25 @@ module PlaceOS
     protected getter authenticate : HTTP::Client -> = ->(_client : HTTP::Client) {}
     protected getter uri : URI
     protected getter host_header : String?
+    protected getter insecure : Bool
 
     # TODO:
     # before_request
     # connect_timeout=
     # read_timeout=
 
-    def initialize(uri : URI | String, @host_header : String? = nil, &authenticate : HTTP::Client ->)
+    def initialize(uri : URI | String, @host_header : String? = nil, @insecure = false, &authenticate : HTTP::Client ->)
       @uri = uri.is_a?(String) ? URI.parse(uri) : uri
       @authenticate = authenticate
     end
 
-    def initialize(uri : URI | String, @host_header : String? = nil)
+    def initialize(uri : URI | String, @host_header : String? = nil, @insecure = false)
       @uri = uri.is_a?(String) ? URI.parse(uri) : uri
     end
 
     def connection
       HTTP::Client.new(uri) do |client|
+        client.tls?.try(&.verify_mode = :NONE) if insecure
         authenticate.call(client)
         yield client
       end
