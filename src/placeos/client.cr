@@ -55,8 +55,7 @@ module PlaceOS
     end
 
     def authenticated?
-      return true if @x_api_key
-      return true if @session
+      return true if @session || @x_api_key
       !(@email.nil? || @password.nil? || @client_id.nil? || @client_secret.nil?)
     end
 
