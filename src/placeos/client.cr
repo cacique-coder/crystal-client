@@ -46,7 +46,7 @@ module PlaceOS
       @token : OAuth2::AccessToken? = nil,
       @host_header : String? = nil,
       @insecure : Bool = false,
-      @x_api_key : String? = nil,
+      @x_api_key : String? = nil
     )
       @uri = base_uri.is_a?(String) ? URI.parse(base_uri) : base_uri
       @api_wrapper = APIWrapper.new(@uri, @host_header, @insecure) do |http|
