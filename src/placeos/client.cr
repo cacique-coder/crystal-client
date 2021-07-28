@@ -45,7 +45,8 @@ module PlaceOS
       # Allow for a token to be used directly (proxying auth)
       @token : OAuth2::AccessToken? = nil,
       @host_header : String? = nil,
-      @insecure : Bool = false
+      @insecure : Bool = false,
+      @x_api_key : String? = nil,
     )
       @uri = base_uri.is_a?(String) ? URI.parse(base_uri) : base_uri
       @api_wrapper = APIWrapper.new(@uri, @host_header, @insecure) do |http|
@@ -65,7 +66,11 @@ module PlaceOS
     protected def authenticate(client : HTTP::Client)
       # If a token is passed as part of client initialisation then we want
       # to use that as we are proxying the auth
-      if @token && @session.nil?
+      if x_api_key = @x_api_key
+        client.before_request do |request|
+          request.headers["X-API-Key"] = x_api_key
+        end
+      elsif @token && @session.nil?
         @token.try &.authenticate(client)
       else
         return unless authenticated?
