@@ -98,6 +98,12 @@ module PlaceOS
         token_uri: TOKEN_ENDPOINT,
       )
 
+      if @insecure && (uri.scheme.try(&.downcase) || "https") == "https"
+        tls = OpenSSL::SSL::Context::Client.new
+        tls.verify_mode = OpenSSL::SSL::VerifyMode::NONE
+        client.http_client = HTTP::Client.new(uri.host.as(String), uri.port, tls)
+      end
+
       token = client.get_access_token_using_resource_owner_credentials(
         @email.as(String),
         @password.as(String),
