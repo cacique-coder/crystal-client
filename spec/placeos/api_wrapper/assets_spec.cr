@@ -49,7 +49,6 @@ module PlaceOS
     describe "#create" do
       it "posts to the assets endpoint" do
         body = {name: "Place", purchase_date: Time.utc(2016, 2, 15, 10, 20, 30)}
-        puts body.to_json
         WebMock
           .stub(:post, DOMAIN + client.base)
           .with(
@@ -58,16 +57,6 @@ module PlaceOS
           )
           .to_return(body: assets.first)
         result = client.create(**body)
-        result.should be_a(Client::API::Models::Asset)
-      end
-    end
-
-    pending "#retrieve" do
-      it "inspects a assets metadata" do
-        WebMock
-          .stub(:get, DOMAIN + "#{client.base}/asset-oOj2lGgsz")
-          .to_return(body: assets.first)
-        result = client.fetch "asset-oOj2lGgsz"
         result.should be_a(Client::API::Models::Asset)
       end
     end
