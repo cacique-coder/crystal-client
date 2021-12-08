@@ -55,8 +55,7 @@ module PlaceOS
     def search(
       q : String? = nil,
       limit : Int = 20,
-      offset : Int = 0,
-      parent : String? = nil
+      offset : Int = 0
     )
       get base, params: from_args, as: Array(API::Models::AssetInstance)
     end
