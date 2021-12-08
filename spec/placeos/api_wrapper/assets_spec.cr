@@ -34,7 +34,6 @@ module PlaceOS
     JSON
 
     assets = Array(JSON::Any).from_json(assets_json).map &.to_json
-    instances = Array(JSON::Any).from_json(instances_json).map &.to_json
 
     describe "search" do
       it "enumerates all assets" do
