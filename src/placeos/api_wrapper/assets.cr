@@ -32,6 +32,10 @@ module PlaceOS
       put "#{base}/#{id}", body: from_args, as: API::Models::Asset
     end
 
+    def asset_instances(id : String)
+      get "#{base}/#{id}/asset_instances", as: Array(API::Models::AssetInstance)
+    end
+
     # Search
     ###########################################################################
 

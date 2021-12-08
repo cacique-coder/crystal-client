@@ -20,7 +20,21 @@ module PlaceOS
     ]
     JSON
 
+    instances_json = <<-JSON
+    [
+      {
+        "name": "Place",
+        "approval": false,
+        "usage_start": "2016-02-15T10:20:30Z",
+        "usage_end": "2016-02-15T10:21:30Z",
+        "asset_id": "asset-oOj2lGgsz",
+        "id":  "asset_instance-e1k5lEzo"
+      }
+    ]
+    JSON
+
     assets = Array(JSON::Any).from_json(assets_json).map &.to_json
+    instances = Array(JSON::Any).from_json(instances_json).map &.to_json
 
     describe "search" do
       it "enumerates all assets" do
@@ -81,6 +95,19 @@ module PlaceOS
           .stub(:delete, DOMAIN + "#{client.base}/asset-oOj2lGgsz")
         result = client.destroy "asset-oOj2lGgsz"
         result.should be_nil
+      end
+    end
+
+    describe "#show" do
+      it "gets all asset instances of asset" do
+        WebMock
+          .stub(:get, DOMAIN + "#{client.base}/asset-oOj2lGgsz/asset_instances")
+          .to_return(body: instances_json)
+        result = client.asset_instances("asset-oOj2lGgsz")
+        result.size.should eq(1)
+        instance = result.first
+        instance.should be_a(Client::API::Models::AssetInstance)
+        instance.id.should eq("asset_instance-e1k5lEzo")
       end
     end
   end
