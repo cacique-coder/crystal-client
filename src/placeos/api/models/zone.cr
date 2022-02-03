@@ -41,6 +41,9 @@ module PlaceOS::Client::API::Models
     # List of trigger ID's to be applied to all systems that associate with this zone.
     getter triggers : Array(String)
 
+    # Parent id
+    getter parent_id : String
+
     # Trigger data returned when param `complete` is `true`
     getter trigger_data : Array(Trigger)?
   end
