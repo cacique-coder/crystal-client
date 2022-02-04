@@ -8,6 +8,7 @@ module PlaceOS
     users_json = <<-JSON
     [
       {
+        "authority_id": "sgrp-1234",
         "id": "user-wJHShR4Ffa",
         "email": "john@example.com",
         "email_digest": "---",
