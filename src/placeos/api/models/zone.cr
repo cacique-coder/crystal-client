@@ -42,7 +42,7 @@ module PlaceOS::Client::API::Models
     getter triggers : Array(String)
 
     # Parent id
-    getter parent_id : String
+    getter parent_id : String?
 
     # Trigger data returned when param `complete` is `true`
     getter trigger_data : Array(Trigger)?
