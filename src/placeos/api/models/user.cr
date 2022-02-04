@@ -12,9 +12,14 @@ module PlaceOS::Client::API::Models
     getter name : String
     getter first_name : String?
     getter last_name : String?
+    getter groups : Array(String)?
     getter country : String?
     getter building : String?
     getter image : String?
+    getter authority_id : String
+    getter deleted : Bool?
+    getter department : String?
+    getter preferred_language : String?
 
     # Admin only fields
     getter sys_admin : Bool?
@@ -26,7 +31,7 @@ module PlaceOS::Client::API::Models
     getter login_name : String?
     getter staff_id : String?
     getter card_number : String?
-    getter groups : Array(String)?
+    getter misc : String?
   end
 
   struct ResourceToken < Response
