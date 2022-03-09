@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+
+jobs:
+  style:
+    uses: PlaceOS/.github/.github/workflows/crystal-style.yml@main
+
+  spec:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        experimental: [false]
+        crystal:
+          - 1.3.2
+          - latest
+        include:
+          - crystal: nightly
+            experimental: true
+    container:
+      image: crystallang/crystal:${{ matrix.crystal }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: shards install --ignore-crystal-version
+    - name: Tests
+      run: crystal spec -v --error-trace

@@ -1,7 +1,7 @@
 # PlaceOS Crystal SDK
 
 [![GitHub release](https://img.shields.io/github/release/placeos/crystal-client.svg)](https://github.com/placeos/crystal-client/releases)
-[![Build Status](https://travis-ci.com/placeos/crystal-client.svg?branch=master)](https://travis-ci.com/placeos/crystal-client)
+[![CI](https://github.com/PlaceOS/crystal-client/actions/workflows/ci.yml/badge.svg)](https://github.com/PlaceOS/crystal-client/actions/workflows/ci.yml)
 
 A library for building [crystal](crystal-lang.org/) applications that utilise PlaceOS.
 

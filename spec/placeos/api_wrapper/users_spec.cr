@@ -2,7 +2,7 @@ require "../../spec_helper"
 
 module PlaceOS
   describe Client::APIWrapper::Users do
-    api = PlaceOS::Client::APIWrapper.new DOMAIN
+    api = Client::APIWrapper.new DOMAIN
     client = Client::APIWrapper::Users.new api
 
     users_json = <<-JSON

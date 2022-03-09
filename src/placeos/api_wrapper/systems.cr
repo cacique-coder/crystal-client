@@ -126,8 +126,8 @@ module PlaceOS
 
     # Returns systems with a specified email address(es)
     #
-    def with_emails(in : Array(String) | String)
-      query = in.is_a?(Array) ? in.join(',') : in
+    def with_emails(list : Array(String) | String)
+      query = list.is_a?(Array) ? list.join(',') : list
 
       get "#{base}/with_emails", params: HTTP::Params{"in" => query}, as: Array(ControlSystem)
     end

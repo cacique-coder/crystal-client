@@ -1,6 +1,6 @@
 name: placeos
-version: 2.1.6
-crystal: 0.35.1
+version: 2.6.0
+crystal: ~> 1.0
 license: MIT
 
 description: |
@@ -13,12 +13,12 @@ authors:
 dependencies:
   placeos-models:
     github: placeos/models
-    version: ~> 4.2
+    version: ~> 7.0
 
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.12
+    version: ~> 0.14
   webmock:
     github: manastech/webmock.cr
     branch: master

@@ -43,16 +43,19 @@ module PlaceOS
       @client_id : String? = nil,
       @client_secret : String? = nil,
       # Allow for a token to be used directly (proxying auth)
-      @token : OAuth2::AccessToken? = nil
+      @token : OAuth2::AccessToken? = nil,
+      @host_header : String? = nil,
+      @insecure : Bool = false,
+      @x_api_key : String? = nil
     )
       @uri = base_uri.is_a?(String) ? URI.parse(base_uri) : base_uri
-      @api_wrapper = APIWrapper.new(@uri) do |http|
+      @api_wrapper = APIWrapper.new(@uri, @host_header, @insecure) do |http|
         authenticate(http)
       end
     end
 
     def authenticated?
-      return true if @session
+      return true if @session || @x_api_key
       !(@email.nil? || @password.nil? || @client_id.nil? || @client_secret.nil?)
     end
 
@@ -63,7 +66,11 @@ module PlaceOS
     protected def authenticate(client : HTTP::Client)
       # If a token is passed as part of client initialisation then we want
       # to use that as we are proxying the auth
-      if @token && @session.nil?
+      if x_api_key = @x_api_key
+        client.before_request do |request|
+          request.headers["X-API-Key"] = x_api_key
+        end
+      elsif @token && @session.nil?
         @token.try &.authenticate(client)
       else
         return unless authenticated?
@@ -91,6 +98,12 @@ module PlaceOS
         token_uri: TOKEN_ENDPOINT,
       )
 
+      if @insecure && (uri.scheme.try(&.downcase) || "https") == "https"
+        tls = OpenSSL::SSL::Context::Client.new
+        tls.verify_mode = OpenSSL::SSL::VerifyMode::NONE
+        client.http_client = HTTP::Client.new(uri.host.as(String), uri.port, tls)
+      end
+
       token = client.get_access_token_using_resource_owner_credentials(
         @email.as(String),
         @password.as(String),
@@ -104,7 +117,7 @@ module PlaceOS
       @session
     end
 
-    {% for component in %w(Authority Brokers Cluster Domains Drivers Metadata Modules OAuthApplications Repositories Root Settings SystemTriggers Systems Triggers Users Zones Ldap OAuth Saml) %}
+    {% for component in %w(ApiKeys Authority Cluster Domains Drivers Ldap Metadata Modules OAuth OAuthApplications Root Saml Settings Repositories Systems Users Systems Triggers SystemTriggers Users Zones) %}
     # Provide an object for managing {{component.id}}. See `PlaceOS::Client::APIWrapper::{{component.id}}`.
     def {{component.id.downcase}} : APIWrapper::{{component.id}}
       @{{component.id.downcase}} ||= APIWrapper::{{component.id}}.new(api_wrapper)
