@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="crystal_docs.project_version" content="2.6.0">
+<meta name="crystal_docs.project_name" content="placeos">
+
+
+
+<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../../js/doc.js"></script>
+
+  <meta name="repository-name" content="placeos">
+  <title>PlaceOS::Client::APIWrapper::AuthBase(Model) - placeos 2.6.0</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../../index.html">
+          placeos
+        </a>
+      </h1>
+
+      <span class="project-version">
+        2.6.0
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="placeos/PlaceOS" data-name="placeos">
+      <a href="../../../PlaceOS.html">PlaceOS</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="placeos/PlaceOS/Client" data-name="placeos::client">
+      <a href="../../../PlaceOS/Client.html">Client</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API" data-name="placeos::client::api">
+      <a href="../../../PlaceOS/Client/API.html">API</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Error" data-name="placeos::client::api::error">
+      <a href="../../../PlaceOS/Client/API/Error.html">Error</a>
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models" data-name="placeos::client::api::models">
+      <a href="../../../PlaceOS/Client/API/Models.html">Models</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/APIKey" data-name="placeos::client::api::models::apikey">
+      <a href="../../../PlaceOS/Client/API/Models/APIKey.html">APIKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Asset" data-name="placeos::client::api::models::asset">
+      <a href="../../../PlaceOS/Client/API/Models/Asset.html">Asset</a>
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/AssetInstance" data-name="placeos::client::api::models::assetinstance">
+      <a href="../../../PlaceOS/Client/API/Models/AssetInstance.html">AssetInstance</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/AssetInstance/Tracking" data-name="placeos::client::api::models::assetinstance::tracking">
+      <a href="../../../PlaceOS/Client/API/Models/AssetInstance/Tracking.html">Tracking</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Authority" data-name="placeos::client::api::models::authority">
+      <a href="../../../PlaceOS/Client/API/Models/Authority.html">Authority</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Cluster" data-name="placeos::client::api::models::cluster">
+      <a href="../../../PlaceOS/Client/API/Models/Cluster.html">Cluster</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Driver" data-name="placeos::client::api::models::driver">
+      <a href="../../../PlaceOS/Client/API/Models/Driver.html">Driver</a>
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Function" data-name="placeos::client::api::models::function">
+      <a href="../../../PlaceOS/Client/API/Models/Function.html">Function</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Function/Parameter" data-name="placeos::client::api::models::function::parameter">
+      <a href="../../../PlaceOS/Client/API/Models/Function/Parameter.html">Parameter</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Function/ParameterKind" data-name="placeos::client::api::models::function::parameterkind">
+      <a href="../../../PlaceOS/Client/API/Models/Function/ParameterKind.html">ParameterKind</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/LdapAuthentication" data-name="placeos::client::api::models::ldapauthentication">
+      <a href="../../../PlaceOS/Client/API/Models/LdapAuthentication.html">LdapAuthentication</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Metadata" data-name="placeos::client::api::models::metadata">
+      <a href="../../../PlaceOS/Client/API/Models/Metadata.html">Metadata</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Module" data-name="placeos::client::api::models::module">
+      <a href="../../../PlaceOS/Client/API/Models/Module.html">Module</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/OAuthApplication" data-name="placeos::client::api::models::oauthapplication">
+      <a href="../../../PlaceOS/Client/API/Models/OAuthApplication.html">OAuthApplication</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/OAuthAuthentication" data-name="placeos::client::api::models::oauthauthentication">
+      <a href="../../../PlaceOS/Client/API/Models/OAuthAuthentication.html">OAuthAuthentication</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Ping" data-name="placeos::client::api::models::ping">
+      <a href="../../../PlaceOS/Client/API/Models/Ping.html">Ping</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Repository" data-name="placeos::client::api::models::repository">
+      <a href="../../../PlaceOS/Client/API/Models/Repository.html">Repository</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/ResourceToken" data-name="placeos::client::api::models::resourcetoken">
+      <a href="../../../PlaceOS/Client/API/Models/ResourceToken.html">ResourceToken</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Role" data-name="placeos::client::api::models::role">
+      <a href="../../../PlaceOS/Client/API/Models/Role.html">Role</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/SamlAuthentication" data-name="placeos::client::api::models::samlauthentication">
+      <a href="../../../PlaceOS/Client/API/Models/SamlAuthentication.html">SamlAuthentication</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Settings" data-name="placeos::client::api::models::settings">
+      <a href="../../../PlaceOS/Client/API/Models/Settings.html">Settings</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/System" data-name="placeos::client::api::models::system">
+      <a href="../../../PlaceOS/Client/API/Models/System.html">System</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Timestamps" data-name="placeos::client::api::models::timestamps">
+      <a href="../../../PlaceOS/Client/API/Models/Timestamps.html">Timestamps</a>
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Trigger" data-name="placeos::client::api::models::trigger">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger.html">Trigger</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Actions" data-name="placeos::client::api::models::trigger::actions">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Actions.html">Actions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Actions/Email" data-name="placeos::client::api::models::trigger::actions::email">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Actions/Email.html">Email</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Actions/Function" data-name="placeos::client::api::models::trigger::actions::function">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Actions/Function.html">Function</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Conditions" data-name="placeos::client::api::models::trigger::conditions">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Conditions.html">Conditions</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Conditions/Comparison" data-name="placeos::client::api::models::trigger::conditions::comparison">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Conditions/Comparison.html">Comparison</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Conditions/Comparison/Constant" data-name="placeos::client::api::models::trigger::conditions::comparison::constant">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Conditions/Comparison/Constant.html">Constant</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Conditions/Comparison/StatusVariable" data-name="placeos::client::api::models::trigger::conditions::comparison::statusvariable">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Conditions/Comparison/StatusVariable.html">StatusVariable</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Conditions/Comparison/Value" data-name="placeos::client::api::models::trigger::conditions::comparison::value">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Conditions/Comparison/Value.html">Value</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Conditions/TimeDependent" data-name="placeos::client::api::models::trigger::conditions::timedependent">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Conditions/TimeDependent.html">TimeDependent</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Trigger/Conditions/TimeDependent/Type" data-name="placeos::client::api::models::trigger::conditions::timedependent::type">
+      <a href="../../../PlaceOS/Client/API/Models/Trigger/Conditions/TimeDependent/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/TriggerInstance" data-name="placeos::client::api::models::triggerinstance">
+      <a href="../../../PlaceOS/Client/API/Models/TriggerInstance.html">TriggerInstance</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/User" data-name="placeos::client::api::models::user">
+      <a href="../../../PlaceOS/Client/API/Models/User.html">User</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Version" data-name="placeos::client::api::models::version">
+      <a href="../../../PlaceOS/Client/API/Models/Version.html">Version</a>
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Websocket" data-name="placeos::client::api::models::websocket">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket.html">Websocket</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Request" data-name="placeos::client::api::models::websocket::request">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Request.html">Request</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Request/Type" data-name="placeos::client::api::models::websocket::request::type">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Request/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response" data-name="placeos::client::api::models::websocket::response">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response.html">Response</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Debug" data-name="placeos::client::api::models::websocket::response::debug">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Debug.html">Debug</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Debug/Level" data-name="placeos::client::api::models::websocket::response::debug::level">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Debug/Level.html">Level</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Error" data-name="placeos::client::api::models::websocket::response::error">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Error.html">Error</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Error/Code" data-name="placeos::client::api::models::websocket::response::error::code">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Error/Code.html">Code</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Meta" data-name="placeos::client::api::models::websocket::response::meta">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Meta.html">Meta</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Notify" data-name="placeos::client::api::models::websocket::response::notify">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Notify.html">Notify</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Success" data-name="placeos::client::api::models::websocket::response::success">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Success.html">Success</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Websocket/Response/Type" data-name="placeos::client::api::models::websocket::response::type">
+      <a href="../../../PlaceOS/Client/API/Models/Websocket/Response/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/API/Models/Zone" data-name="placeos::client::api::models::zone">
+      <a href="../../../PlaceOS/Client/API/Models/Zone.html">Zone</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="placeos/PlaceOS/Client/APIWrapper" data-name="placeos::client::apiwrapper">
+      <a href="../../../PlaceOS/Client/APIWrapper.html">APIWrapper</a>
+      
+        <ul>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/APIKeys" data-name="placeos::client::apiwrapper::apikeys">
+      <a href="../../../PlaceOS/Client/APIWrapper/APIKeys.html">APIKeys</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/AssetInstances" data-name="placeos::client::apiwrapper::assetinstances">
+      <a href="../../../PlaceOS/Client/APIWrapper/AssetInstances.html">AssetInstances</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Assets" data-name="placeos::client::apiwrapper::assets">
+      <a href="../../../PlaceOS/Client/APIWrapper/Assets.html">Assets</a>
+      
+    </li>
+  
+  <li class=" current" data-id="placeos/PlaceOS/Client/APIWrapper/AuthBase" data-name="placeos::client::apiwrapper::authbase(model)">
+      <a href="../../../PlaceOS/Client/APIWrapper/AuthBase.html">AuthBase</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Authority" data-name="placeos::client::apiwrapper::authority">
+      <a href="../../../PlaceOS/Client/APIWrapper/Authority.html">Authority</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Cluster" data-name="placeos::client::apiwrapper::cluster">
+      <a href="../../../PlaceOS/Client/APIWrapper/Cluster.html">Cluster</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Domains" data-name="placeos::client::apiwrapper::domains">
+      <a href="../../../PlaceOS/Client/APIWrapper/Domains.html">Domains</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Drivers" data-name="placeos::client::apiwrapper::drivers">
+      <a href="../../../PlaceOS/Client/APIWrapper/Drivers.html">Drivers</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Ldap" data-name="placeos::client::apiwrapper::ldap">
+      <a href="../../../PlaceOS/Client/APIWrapper/Ldap.html">Ldap</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Metadata" data-name="placeos::client::apiwrapper::metadata">
+      <a href="../../../PlaceOS/Client/APIWrapper/Metadata.html">Metadata</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Modules" data-name="placeos::client::apiwrapper::modules">
+      <a href="../../../PlaceOS/Client/APIWrapper/Modules.html">Modules</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/OAuth" data-name="placeos::client::apiwrapper::oauth">
+      <a href="../../../PlaceOS/Client/APIWrapper/OAuth.html">OAuth</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/OAuthApplications" data-name="placeos::client::apiwrapper::oauthapplications">
+      <a href="../../../PlaceOS/Client/APIWrapper/OAuthApplications.html">OAuthApplications</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Repositories" data-name="placeos::client::apiwrapper::repositories">
+      <a href="../../../PlaceOS/Client/APIWrapper/Repositories.html">Repositories</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Root" data-name="placeos::client::apiwrapper::root">
+      <a href="../../../PlaceOS/Client/APIWrapper/Root.html">Root</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Saml" data-name="placeos::client::apiwrapper::saml">
+      <a href="../../../PlaceOS/Client/APIWrapper/Saml.html">Saml</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Settings" data-name="placeos::client::apiwrapper::settings">
+      <a href="../../../PlaceOS/Client/APIWrapper/Settings.html">Settings</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Systems" data-name="placeos::client::apiwrapper::systems">
+      <a href="../../../PlaceOS/Client/APIWrapper/Systems.html">Systems</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/SystemTriggers" data-name="placeos::client::apiwrapper::systemtriggers">
+      <a href="../../../PlaceOS/Client/APIWrapper/SystemTriggers.html">SystemTriggers</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Triggers" data-name="placeos::client::apiwrapper::triggers">
+      <a href="../../../PlaceOS/Client/APIWrapper/Triggers.html">Triggers</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Users" data-name="placeos::client::apiwrapper::users">
+      <a href="../../../PlaceOS/Client/APIWrapper/Users.html">Users</a>
+      
+    </li>
+  
+  <li class=" " data-id="placeos/PlaceOS/Client/APIWrapper/Zones" data-name="placeos::client::apiwrapper::zones">
+      <a href="../../../PlaceOS/Client/APIWrapper/Zones.html">Zones</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">abstract class</span> PlaceOS::Client::APIWrapper::AuthBase(Model)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../PlaceOS/Client/APIWrapper/AuthBase.html">PlaceOS::Client::APIWrapper::AuthBase(Model)</a></li><li class="superclass">PlaceOS::Client::APIWrapper::Endpoint</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">PlaceOS::Client::APIWrapper::Endpoint::Destroy</li>
+    
+      <li class="other-type">PlaceOS::Client::APIWrapper::Endpoint::Fetch(Model)</li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct Known Subclasses
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../../../PlaceOS/Client/APIWrapper/Ldap.html">PlaceOS::Client::APIWrapper::Ldap</a></li>
+    
+      <li class="other-type"><a href="../../../PlaceOS/Client/APIWrapper/OAuth.html">PlaceOS::Client::APIWrapper::OAuth</a></li>
+    
+      <li class="other-type"><a href="../../../PlaceOS/Client/APIWrapper/Saml.html">PlaceOS::Client::APIWrapper::Saml</a></li>
+    
+  </ul>
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/PlaceOS/crystal-client/blob/v2.6.0/src/placeos/api_wrapper/auths/base.cr#L5" target="_blank">
+        placeos/api_wrapper/auths/base.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28client%3AAPIWrapper%29-class-method" class="signature"><strong>.new</strong>(client : APIWrapper)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#create%28%2A%2Aargs%29%3AModel-instance-method" class="signature"><strong>#create</strong>(**args) : Model</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#search%28q%3AString%3F%3Dnil%2Climit%3AInt%3D20%2Coffset%3AInt%3D0%2Cauthority_id%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#search</strong>(q : String? = <span class="n">nil</span>, limit : Int = <span class="n">20</span>, offset : Int = <span class="n">0</span>, authority_id : String? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>List or search.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#update%28%2A%2Aargs%29-instance-method" class="signature"><strong>#update</strong>(**args)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from module <code>PlaceOS::Client::APIWrapper::Endpoint::Destroy</code></h3>
+  
+  
+    <a href="../../../PlaceOS/Client/APIWrapper/Endpoint/Destroy.html#destroy%28id%3AString%29-instance-method" class="tooltip">
+      <span>destroy(id : String)</span>
+    destroy</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code>PlaceOS::Client::APIWrapper::Endpoint::Fetch(Model)</code></h3>
+  
+  
+    <a href="../../../PlaceOS/Client/APIWrapper/Endpoint/Fetch.html#fetch%28id%3AString%29-instance-method" class="tooltip">
+      <span>fetch(id : String)</span>
+    fetch</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from class <code>PlaceOS::Client::APIWrapper::Endpoint</code></h3>
+  
+  
+    <a href="../../../PlaceOS/Client/APIWrapper/Endpoint.html#base%3AString-instance-method" class="tooltip">
+      <span>base : String</span>
+    base</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code>PlaceOS::Client::APIWrapper::Endpoint</code></h3>
+  
+  
+    <a href="../../../PlaceOS/Client/APIWrapper/Endpoint.html#new%28client%3AAPIWrapper%29-class-method" class="tooltip">
+      <span>new(client : APIWrapper)</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(client:APIWrapper)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(client : <a href="../../../PlaceOS/Client/APIWrapper.html">APIWrapper</a>)
+
+        <a class="method-permalink" href="#new%28client%3AAPIWrapper%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/PlaceOS/crystal-client/blob/v2.6.0/src/placeos/api_wrapper/endpoint.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="create(**args):Model-instance-method">
+      <div class="signature">
+        
+        def <strong>create</strong>(**args) : Model
+
+        <a class="method-permalink" href="#create%28%2A%2Aargs%29%3AModel-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/PlaceOS/crystal-client/blob/v2.6.0/src/placeos/api_wrapper/auths/base.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="search(q:String?=nil,limit:Int=20,offset:Int=0,authority_id:String?=nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>search</strong>(q : String? = <span class="n">nil</span>, limit : Int = <span class="n">20</span>, offset : Int = <span class="n">0</span>, authority_id : String? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#search%28q%3AString%3F%3Dnil%2Climit%3AInt%3D20%2Coffset%3AInt%3D0%2Cauthority_id%3AString%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>List or search.</p>
+<p>Results maybe filtered by specifying a query - <em>q</em> - to search across
+attributes. A small query language is supported within this:</p>
+<p>Operator | Action
+-------- | ------
+<code>+</code>      | Matches both terms
+<code>|</code>      | Matches either terms
+<code>-</code>      | Negates a single token
+<code>&quot;</code>      | Wraps tokens to form a phrase
+<code>(</code>  <code>)</code> | Provides precedence
+<code>~N</code>     | Specifies edit distance (fuzziness) after a word
+<code>~N</code>     | Specifies slop amount (deviation) after a phrase</p>
+<p>Up to <em>limit</em> documents will be returned, with a paging based on <em>offset</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/PlaceOS/crystal-client/blob/v2.6.0/src/placeos/api_wrapper/auths/base.cr#L25" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="update(**args)-instance-method">
+      <div class="signature">
+        
+        def <strong>update</strong>(**args)
+
+        <a class="method-permalink" href="#update%28%2A%2Aargs%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/PlaceOS/crystal-client/blob/v2.6.0/src/placeos/api_wrapper/auths/base.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
