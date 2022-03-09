@@ -1,5 +1,5 @@
 name: placeos
-version: 2.5.1
+version: 2.6.0
 crystal: ~> 1.0
 license: MIT
 
@@ -13,7 +13,7 @@ authors:
 dependencies:
   placeos-models:
     github: placeos/models
-    version: ~> 6
+    version: ~> 7.0
 
 development_dependencies:
   ameba:
