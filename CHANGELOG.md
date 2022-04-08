@@ -1,3 +1,9 @@
+## v2.6.1 (2022-04-08)
+
+### Fix
+
+- looser restriction on models
+
 ## v2.6.0 (2022-03-09)
 
 ## v2.5.1 (2022-02-04)
@@ -90,11 +96,6 @@
 ### Fix
 
 - **root#signal**: pass channel argument
-
-## v4.2.3 (2020-08-11)
-
-### Fix
-
 - **spec**: metadata mock
 - **spec metadata**: use a hash instead of an Array
 
