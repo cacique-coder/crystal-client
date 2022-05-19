@@ -24,6 +24,17 @@ module PlaceOS
       put "#{base}/#{id}?#{params}", body: body, as: API::Models::Metadata
     end
 
+    def merge(
+      id : String,
+      name : String,
+      details : JSON::Any | Hash | NamedTuple | Array,
+      description : String? = nil
+    )
+      params = HTTP::Params{"name" => name}
+      body = {name: name, description: description, details: details, parent_id: id}
+      patch "#{base}/#{id}?#{params}", body: body, as: API::Models::Metadata
+    end
+
     def destroy(id : String, name : String)
       delete "#{base}/#{id}", params: from_args
       nil
