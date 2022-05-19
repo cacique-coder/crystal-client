@@ -65,6 +65,14 @@ module PlaceOS
       client.update("zone-oOj2lGgsz", "Place1", {name: "frodo"}, "metadata 1").should eq Client::API::Models::Metadata.from_json(mock_metadata["Place1"])
     end
 
+    it "merge" do
+      WebMock
+        .stub(:patch, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
+        .with(query: {"name" => "Place1"}, body: mock_metadata["Place1"])
+        .to_return(status: 200, body: mock_metadata["Place1"])
+      client.merge("zone-oOj2lGgsz", "Place1", {name: "frodo"}, "metadata 1").should eq Client::API::Models::Metadata.from_json(mock_metadata["Place1"])
+    end
+
     it "delete" do
       WebMock
         .stub(:delete, DOMAIN + "#{client.base}/zone-oOj2lGgsz")
