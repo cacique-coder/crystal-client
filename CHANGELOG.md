@@ -1,3 +1,9 @@
+## v2.7.0 (2022-05-19)
+
+### Feat
+
+- **`Metadata`**: add `merge` ([#30](https://github.com/PlaceOS/crystal-client/pull/30))
+
 ## v2.6.1 (2022-04-08)
 
 ### Fix
